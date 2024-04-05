@@ -1,6 +1,6 @@
 import React from 'react';
 
-import logo from './assets/Megawatt.svg';
+import logo from './assets/megawatt.svg';
 
 const Megawatt: React.FC = () => {
 

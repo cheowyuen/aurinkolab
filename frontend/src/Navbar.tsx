@@ -28,6 +28,9 @@ function Navbar() {
                         <Link to="about-section" smooth={true} duration={500}  offset={-80} className="cursor-pointer">About</Link>
                     </motion.div>
                     <motion.div variants={reveal} className="cursor-pointer">
+                        <Link to="partners-div" smooth={true} duration={500} offset={-80}className="cursor-pointer">Partners</Link>
+                    </motion.div>
+                    <motion.div variants={reveal} className="cursor-pointer">
                         <Link to="events-section" smooth={true} duration={500} offset={-80}className="cursor-pointer">Events</Link>
                     </motion.div>
                     <motion.div variants={reveal} className="cursor-pointer">
