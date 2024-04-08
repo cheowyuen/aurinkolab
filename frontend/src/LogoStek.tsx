@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './assets/03_STEK_Hankerahoitus_slogan_Powerpoint3.png';
+import logo from './assets/stek_logo.png';
 
 const Stek: React.FC = () => {
 
