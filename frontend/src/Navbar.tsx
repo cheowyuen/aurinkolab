@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { animationStart, reveal } from "./utils/animation";
 import LinkedinLogo from "./LogoLinkedin";
 import TiktokLogo from "./LogoTiktok";
+import { Link as RouterLink } from 'react-router-dom'; //Imported Link to route to Test page
 
 function Navbar() {
     return (
@@ -30,6 +31,7 @@ function Navbar() {
                     <motion.div variants={reveal} className="cursor-pointer">
                         <Link to="events-section" smooth={true} duration={500} offset={-80}className="cursor-pointer">Events</Link>
                     </motion.div>
+                    <RouterLink to="/entrytest">Engineering Test</RouterLink> {/* To route Engineering Test to Test page */}
                     <motion.div variants={reveal} className="cursor-pointer">
                         <Link to="FAQ-section" smooth={true} duration={500} offset={-80} className="cursor-pointer">FAQ</Link>
                     </motion.div>
