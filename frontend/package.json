@@ -8,7 +8,8 @@
     "build": "npx tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "clean": "rmdir /s /q dist"
+    "clean": "rmdir /s /q dist",
+    "test": "playwright test"
   },
   "dependencies": {
     "@types/react-router-dom": "^5.3.3",
@@ -20,6 +21,8 @@
     "react-scroll": "^1.9.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.42.1",
+    "@types/node": "^20.12.4",
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
     "@types/react-scroll": "^1.8.10",
