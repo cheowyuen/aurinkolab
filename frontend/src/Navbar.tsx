@@ -1,11 +1,28 @@
-import { Link } from 'react-scroll';
+//import { Link } from 'react-scroll';
 import Logo from "./Logo";
 import { motion } from "framer-motion";
 import { animationStart, reveal } from "./utils/animation";
 import LinkedinLogo from "./LogoLinkedin";
 import TiktokLogo from "./LogoTiktok";
+import { Link as RouterLink, useLocation } from 'react-router-dom'; //Imported Link to route to Test page
+import { useEffect } from 'react';
 
 function Navbar() {
+    const location = useLocation();
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+          if (location.state?.scrollTo) {
+            const section = document.getElementById(location.state.scrollTo);
+            if (section) {
+              section.scrollIntoView({ behavior: 'smooth' });
+            }
+          }
+        }, 100); 
+      
+        return () => clearTimeout(timer); 
+      }, [location.state]);
+
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -21,20 +38,28 @@ function Navbar() {
             }} className="w-full flex items-center justify-between h-80px fixed top-0" style={{ backgroundColor: '#505050', zIndex: 100 }}
             >
                 <motion.div variants={reveal}>
-                    <Link to="mission-section" smooth={true} duration={500} offset={-80} className="cursor-pointer"><Logo /></Link>
+                    {/* <Link to="mission-section" smooth={true} duration={500} offset={-80} className="cursor-pointer"><Logo /></Link> */}
+                    <RouterLink to={"/"} state={{ scrollTo: "mission-section" }}><Logo /></RouterLink>
                 </motion.div>
                 <div className="nav-bar">
                     <motion.div variants={reveal} className="cursor-pointer">
-                        <Link to="about-section" smooth={true} duration={500}  offset={-80} className="cursor-pointer">About</Link>
+                        {/* <Link to="about-section" smooth={true} duration={500}  offset={-80} className="cursor-pointer">About</Link> */}
+                        <RouterLink to={"/"} state={{ scrollTo: "about-section" }}>About</RouterLink>
                     </motion.div>
                     <motion.div variants={reveal} className="cursor-pointer">
-                        <Link to="events-section" smooth={true} duration={500} offset={-80}className="cursor-pointer">Events</Link>
+                        {/* <Link to="events-section" smooth={true} duration={500} offset={-80}className="cursor-pointer">Events</Link> */}
+                        <RouterLink to={"/"} state={{ scrollTo: "events-section" }}>Events</RouterLink>
                     </motion.div>
                     <motion.div variants={reveal} className="cursor-pointer">
-                        <Link to="FAQ-section" smooth={true} duration={500} offset={-80} className="cursor-pointer">FAQ</Link>
+                        <RouterLink to="/entrytest">Quiz</RouterLink> {/* Route to quiz page */}
                     </motion.div>
                     <motion.div variants={reveal} className="cursor-pointer">
-                        <Link to="contact-section" smooth={true} duration={500} offset={-80} className="cursor-pointer">Contact</Link>
+                        {/* <Link to="FAQ-section" smooth={true} duration={500} offset={-80} className="cursor-pointer">FAQ</Link> */}
+                        <RouterLink to={"/"} state={{ scrollTo: "FAQ-section" }}>FAQ</RouterLink>
+                    </motion.div>
+                    <motion.div variants={reveal} className="cursor-pointer">
+                        {/* <Link to="contact-section" smooth={true} duration={500} offset={-80} className="cursor-pointer">Contact</Link> */}
+                        <RouterLink to={"/"} state={{ scrollTo: "contact-section" }}>Contact</RouterLink>
                     </motion.div>
                     <motion.div variants={reveal} className="cursor-pointer">
                     <a href="https://www.linkedin.com/company/aurinkolab" target="_blank" rel="noopener noreferrer" className="cursor-pointer"><LinkedinLogo /></a>
@@ -45,7 +70,8 @@ function Navbar() {
                 </div>     
                 <div className="apply-button">
                     <motion.span variants={reveal} className="cursor-pointer">
-                        <Link to="events-section" smooth={true} duration={500} offset={-80} className="cursor-pointer">Apply Now</Link>
+                        {/* <Link to="events-section" smooth={true} duration={500} offset={-80} className="cursor-pointer">Apply Now</Link> */}
+                        <RouterLink to={"/"} state={{ scrollTo: "events-section" }}>Apply Now</RouterLink>
                     </motion.span>
                 </div>
             </motion.div>
