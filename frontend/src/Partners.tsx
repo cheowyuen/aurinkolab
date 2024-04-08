@@ -1,6 +1,9 @@
 import Valtteri from "./LogoValtteri";
 import Elvene from "./LogoElvene";
-import Megawatt from "./LogoMegawatt"
+import Megawatt from "./LogoMegawatt";
+import Aalto from "./LogoAalto";
+import Stek from "./LogoStek"
+
 
 /**
  * 
@@ -18,6 +21,14 @@ function PartnersSection(): JSX.Element {
             
         <div>
         <a ><Valtteri /></a>
+        </div> 
+
+        <div>
+        <a ><Stek /></a>
+        </div> 
+
+        <div>
+        <a ><Aalto /></a>
         </div> 
 
         <div>
