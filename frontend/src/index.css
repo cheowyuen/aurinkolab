@@ -293,7 +293,7 @@ body {
   }
 }
 
-//styling for Engineering Test page
+//styling for Quiz page
 .page-title {
   color: #FFFFFF;
   font-family: "Roboto Slab", sans-serif;
@@ -324,6 +324,10 @@ body {
   font-size: 1.3rem;
   color: #666666;
   font-family: "Poppins", sans-serif;
+}
+
+.individual-question {
+  margin-bottom: 1rem;
 }
 
 .answers {

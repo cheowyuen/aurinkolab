@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
+import allQuestions from '../src/data/questions';
 
-interface Question {
+export interface Question {
     questionId: number;
     questionNo: number;
     question: string;
@@ -14,14 +15,14 @@ interface Answer {
 }
 
 /** List of questions and respective list of answers */
-const questionsAnswers: Question[] = [
+/*const questionsAnswers: Question[] = [
     {questionId: 1, questionNo: 1, question: 'Which of these is not a renewable energy source?', answers: [{answerId: 1, answer: 'Hydropower', isCorrect: true}, {answerId: 2, answer: 'Coal', isCorrect: false}, {answerId: 3, answer: 'Solar energy', isCorrect: false}, {answerId: 4, answer: 'Windy energy', isCorrect: false}]},
     {questionId: 2, questionNo: 2, question: 'Several solar panels can be wired together to form a ...', answers: [{answerId: 5, answer: 'Solar assemby', isCorrect: false}, {answerId: 6, answer: 'Solar plexus', isCorrect: true}, {answerId: 7, answer: 'Solar array', isCorrect: false}, {answerId: 8, answer: 'Solarium', isCorrect: false}]},
     {questionId: 3, questionNo: 3, question: 'Fast chargers for electric cars run on ...', answers: [{answerId: 9, answer: 'AC power', isCorrect: false}, {answerId: 10, answer: 'BC power', isCorrect: false}, {answerId: 11, answer: 'CC power', isCorrect: true}, {answerId: 12, answer: 'DC power', isCorrect: false}]},
     {questionId: 4, questionNo: 4, question: 'When the phontons in sunlight hit the solar panels, electricity is produced via the ______ effect.', answers: [{answerId: 13, answer: 'Solar assemby', isCorrect: false}, {answerId: 14, answer: 'Solar plexus', isCorrect: false}, {answerId: 15, answer: 'Solar array', isCorrect: false}, {answerId: 16, answer: 'Solarium', isCorrect: true}]},
     {questionId: 5, questionNo: 5, question: 'Which energy source releases the most climate-altering carbon pollution?', answers: [{answerId: 17, answer: 'Oil', isCorrect: false}, {answerId: 18, answer: 'Coal', isCorrect: true}, {answerId: 19, answer: 'Natual Gas', isCorrect: false}, {answerId: 20, answer: 'Solar', isCorrect: true}]}
 
-];
+];*/
 
 /** 
  * Set questions for each page
@@ -42,7 +43,7 @@ const EntryTest = () => {
 
     /** On page load, set questions of each page */
     useEffect(() => {
-        setQuestions(chunkArray(questionsAnswers, 2)); /** Second parameter is to set number of questions per page */
+        setQuestions(chunkArray(allQuestions, 5)); /** Second parameter is to set number of questions per page */
     }, [])
 
     /** On Next button click, if it's not the last page, go to next page */
@@ -67,7 +68,7 @@ const EntryTest = () => {
     return (
         <div>
             <div className='page-title'>
-                <p>Test</p>
+                <p>Quiz</p>
             </div>
 
             <div className='page-number'>
@@ -77,7 +78,7 @@ const EntryTest = () => {
             <div className='questions'>
                 {/* Loop through questions of current page */}
                 {questions[pageIndex] ? questions[pageIndex].map((question) => (
-                    <div key={question.questionId}>
+                    <div key={question.questionId} className='individual-question'>
                         <p>{`${question.questionNo}. ${question.question}`}</p>
                         {/* Loop through answers per question */}
                         {question.answers.map((answer) => (
