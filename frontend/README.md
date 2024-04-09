@@ -5,12 +5,12 @@
 
 ## 1.Technology Stack
 
--Vite
--React
--typeScript
--Docker
--ESLint
--WindiCSS
+- Vite
+- React
+- typeScript
+- Docker
+- ESLint
+- WindiCSS
 
 ## 2.Build
 
