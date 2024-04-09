@@ -21,20 +21,20 @@ function PartnersSection(): JSX.Element {
             
         <div>
         <a ><Valtteri /></a>
-        </div> 
+        </div>
 
         <div>
         <a ><Stek /></a>
         </div> 
 
         <div>
+        <a ><Megawatt /></a>
+        </div>
+
+        <div>
         <a ><Aalto /></a>
         </div> 
 
-        <div>
-        <a ><Megawatt /></a>
-        </div> 
-       
         <div>
         <a ><Elvene /></a>
         </div>

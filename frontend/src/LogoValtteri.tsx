@@ -6,7 +6,7 @@ import logo from './assets/valterin.png';
 const Valtterin: React.FC = () => {
   
   return (
-    <div>
+    <div className='my-div'>
      
       <img src={logo} alt="Logo" width="300px" height="300px" />
       
