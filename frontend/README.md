@@ -1,11 +1,11 @@
 # simple website
 
 
-#AurinkoLab
+# AurinkoLab
 
 
 
-##1.Technology Stack
+## 1.Technology Stack
 
 Vite
 React
@@ -14,7 +14,7 @@ Docker
 ESLint
 WindiCSS
 
-##2.Build
+## 2.Build
 
 To build and run this application locally, follow these steps:
 
@@ -39,7 +39,7 @@ npm run build
 ```
 
 
-##3.Test Cases and Reports
+## 3.Test Cases and Reports
 
 Test cases cover:
 
@@ -54,5 +54,5 @@ To run the test with playwright:
 npm run test
 ```
 
-##4.Source Control
+## 4.Source Control
 This project is hosted on GitHub for version control, collaboration, and code review purposes.
