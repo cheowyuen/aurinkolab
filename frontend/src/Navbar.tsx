@@ -47,6 +47,9 @@ function Navbar() {
                         <RouterLink to={"/"} state={{ scrollTo: "about-section" }}>About</RouterLink>
                     </motion.div>
                     <motion.div variants={reveal} className="cursor-pointer">
+                        <RouterLink to="partners-div" smooth={true} duration={500} offset={-80}className="cursor-pointer">Partners</RouterLink>
+                    </motion.div>
+                    <motion.div variants={reveal} className="cursor-pointer">
                         {/* <Link to="events-section" smooth={true} duration={500} offset={-80}className="cursor-pointer">Events</Link> */}
                         <RouterLink to={"/"} state={{ scrollTo: "events-section" }}>Events</RouterLink>
                     </motion.div>
