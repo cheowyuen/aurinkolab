@@ -34,6 +34,9 @@ function Navbar() {
                         <Link to="events-section" smooth={true} duration={500} offset={-80}className="cursor-pointer">Events</Link>
                     </motion.div>
                     <motion.div variants={reveal} className="cursor-pointer">
+                        <RouterLink to="/entrytest">Quiz</RouterLink> {/* Route to quiz page */}
+                    </motion.div>
+                    <motion.div variants={reveal} className="cursor-pointer">
                         <Link to="FAQ-section" smooth={true} duration={500} offset={-80} className="cursor-pointer">FAQ</Link>
                     </motion.div>
                     <motion.div variants={reveal} className="cursor-pointer">
