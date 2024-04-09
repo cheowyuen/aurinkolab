@@ -1,5 +1,3 @@
-# simple website
-
 
 # AurinkoLab
 
