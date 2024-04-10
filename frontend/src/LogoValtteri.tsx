@@ -8,7 +8,7 @@ const Valtterin: React.FC = () => {
   return (
     <div className='my-div'>
      
-      <img src={logo} alt="Logo" width="300px" height="300px" />
+      <img src={logo} alt="Logo" width="500px" height="400px" />
       
     </div>
   );

@@ -7,7 +7,7 @@ const Megawatt: React.FC = () => {
   return (
     <div className='my-div'>
      
-      <img src={logo} alt="Logo" width="250px" height="200px"  />
+      <img src={logo} alt="Logo" width="130px" height="100px"  />
       
     </div>
   );
