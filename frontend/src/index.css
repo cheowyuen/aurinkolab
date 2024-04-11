@@ -328,11 +328,11 @@ body {
 .page-title {
   color: #FFFFFF;
   font-family: "Roboto Slab", sans-serif;
-  background-color: #0A85C3;
+  background-color: #285078;
   padding-top: 100px;
   padding-bottom: 30px;
   text-align: center;
-  font-size: 5rem;
+  font-size: 4rem;
   font-weight: bold;
 }
 
@@ -343,7 +343,7 @@ body {
 }
 
 .page-number span {
-  background: #BCBCBC;
+  background: #C8C8C8;
   color:#FFFFFF;
   border-radius: 30px;
   padding: 1rem 3rem;
@@ -352,6 +352,7 @@ body {
 
 .questions {
   margin-left: 10rem;
+  margin-right: 10rem;
   font-size: 1.3rem;
   color: #666666;
   font-family: "Poppins", sans-serif;
@@ -375,7 +376,7 @@ body {
 }
 
 .buttons {
-  background-color: #9FC5E8;
+  background-color: #285078;
   border-radius: 30px;
   color: #FFFFFF;
   font-family: "Poppins", sans-serif;
@@ -384,4 +385,104 @@ body {
   margin-bottom: 5rem;
   margin-left: 1rem;
   margin-right: 1rem;
+}
+
+.unanswered-question {
+  border-style: solid;
+  border-radius: 2rem;
+  border-width: 0.1rem;
+  border-color: red;
+  color: red;
+  padding: 0.3rem;
+  font-size: 0.7rem;
+  vertical-align: middle;
+  margin: 1rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.correct-answer {
+  border-style: solid;
+  border-radius: 2rem;
+  border-width: 0.1rem;
+  border-color: #F0A078;
+  color: white;
+  background-color: #F0A078;
+  padding: 0.3rem;
+  font-size: 0.7rem;
+  vertical-align: middle;
+  margin: 1rem;
+}
+
+.incorrect-answer {
+  border-style: solid;
+  border-radius: 2rem;
+  border-width: 0.1rem;
+  border-color: #285078;
+  color: white;
+  background-color: #285078;
+  padding: 0.3rem;
+  font-size: 0.7rem;
+  vertical-align: middle;
+  margin: 1rem;
+}
+
+/** Quiz Result page */
+.page-styling {
+  font-family: "Roboto Slab", sans-serif;
+  text-align: center;
+}
+
+.page-styling img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 10%;
+  height: auto;
+}
+
+.page-heading {
+  padding-top: 2rem;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.result {
+  font-size: 1.5rem;
+  color: gray;
+}
+
+/** Error/info message notificaton */
+.error {
+  font-family: "Poppins", sans-serif;
+  color: red;
+  font-size: 1.3rem;
+  border-style: solid;
+  border-radius: 2rem;
+  border-width: 0.1rem;
+  border-color: red;
+  padding: 2rem;
+  margin-top: 3.5rem;
+  margin-left: 10rem;
+  margin-bottom: 2rem;
+  margin-right: 10rem;
+  text-align: center;
+}
+
+.notification {
+  font-family: "Poppins", sans-serif;
+  color: #285078;
+  font-size: 1.3rem;
+  border-style: solid;
+  border-radius: 2rem;
+  border-width: 0.1rem;
+  border-color: #285078;
+  padding: 2rem;
+  margin-top: 3.5rem;
+  margin-left: 10rem;
+  margin-bottom: 2rem;
+  margin-right: 10rem;
+  text-align: center;
 }

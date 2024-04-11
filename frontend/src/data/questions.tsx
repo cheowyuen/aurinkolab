@@ -72,7 +72,7 @@ const allQuestions: Question[] = [
             },
             {
                 answerId: 11,
-                answer: "c. Light intensity",
+                answer: "c.  Ligh intensity",
                 isCorrect: false
             },
             {
@@ -972,7 +972,7 @@ const allQuestions: Question[] = [
                 isCorrect: true
             }
         ]
-    },
+    }
 ];
 
 export default allQuestions;

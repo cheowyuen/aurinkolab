@@ -1,5 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import allQuestions from '../src/data/questions';
+import Notification from '../src/Notification';
+import popper from '/src/assets/popper.png';
+import goodTry from '/src/assets/logo_sun.png';
 
 export interface Question {
     questionId: number;
@@ -12,17 +15,7 @@ interface Answer {
     answerId: number;
     answer: string;
     isCorrect: boolean;
-}
-
-/** List of questions and respective list of answers */
-/*const questionsAnswers: Question[] = [
-    {questionId: 1, questionNo: 1, question: 'Which of these is not a renewable energy source?', answers: [{answerId: 1, answer: 'Hydropower', isCorrect: true}, {answerId: 2, answer: 'Coal', isCorrect: false}, {answerId: 3, answer: 'Solar energy', isCorrect: false}, {answerId: 4, answer: 'Windy energy', isCorrect: false}]},
-    {questionId: 2, questionNo: 2, question: 'Several solar panels can be wired together to form a ...', answers: [{answerId: 5, answer: 'Solar assemby', isCorrect: false}, {answerId: 6, answer: 'Solar plexus', isCorrect: true}, {answerId: 7, answer: 'Solar array', isCorrect: false}, {answerId: 8, answer: 'Solarium', isCorrect: false}]},
-    {questionId: 3, questionNo: 3, question: 'Fast chargers for electric cars run on ...', answers: [{answerId: 9, answer: 'AC power', isCorrect: false}, {answerId: 10, answer: 'BC power', isCorrect: false}, {answerId: 11, answer: 'CC power', isCorrect: true}, {answerId: 12, answer: 'DC power', isCorrect: false}]},
-    {questionId: 4, questionNo: 4, question: 'When the phontons in sunlight hit the solar panels, electricity is produced via the ______ effect.', answers: [{answerId: 13, answer: 'Solar assemby', isCorrect: false}, {answerId: 14, answer: 'Solar plexus', isCorrect: false}, {answerId: 15, answer: 'Solar array', isCorrect: false}, {answerId: 16, answer: 'Solarium', isCorrect: true}]},
-    {questionId: 5, questionNo: 5, question: 'Which energy source releases the most climate-altering carbon pollution?', answers: [{answerId: 17, answer: 'Oil', isCorrect: false}, {answerId: 18, answer: 'Coal', isCorrect: true}, {answerId: 19, answer: 'Natual Gas', isCorrect: false}, {answerId: 20, answer: 'Solar', isCorrect: true}]}
-
-];*/
+} 
 
 /** 
  * Set questions for each page
@@ -38,32 +31,129 @@ const chunkArray = (array: Question[], chunkSize: number): Question[][] => {
 } 
 
 const EntryTest = () => {
-    const [ questions, setQuestions ] = useState<Question[][]>([]); /** two dimensional array where nested array consists of questions per page */
-    const [ pageIndex, setPageIndex ] = useState<number>(0); /** indicate index of current page */
+    const [ questions, setQuestions ] = useState<Question[][]>([]); /** Two dimensional array where nested array consists of questions per page */
+    const [ pageIndex, setPageIndex ] = useState<number>(0); /** Indicate index of current page */
+    const [ participantAnswers, setParticipantAnswers ] = useState<Array<{ questionId: number, answerId: number, isCorrect: boolean }>>([]); /** To store participant's answers */
+    //const [ skippedQuestions, setSkippedQuestions ] = useState<number[]>([]); /** To store questions skipped by participant */
+    const [ message, setMessage ] = useState<string>(''); /** To display message, e.g. when questions are skipped */
+    const [ currentButton, setCurrentButton ] = useState<string>('Submit'); 
+    const [ quizCompleted, setQuizCompleted] = useState<boolean>(false);
+    const [ score, setScore ] = useState(0);
+    const [ resultMessage, setResultMessage ] = useState('');
+
+    const notificationRef = useRef<HTMLDivElement | null>(null); /** Create a ref */
 
     /** On page load, set questions of each page */
     useEffect(() => {
-        setQuestions(chunkArray(allQuestions, 5)); /** Second parameter is to set number of questions per page */
+        setQuestions(chunkArray(allQuestions, 1)); /** Second parameter is to set number of questions per page */
     }, [])
 
-    /** On Next button click, if it's not the last page, go to next page */
-    const handleNextButtonClick = () =>{
-        if (pageIndex < questions.length - 1) { 
-            setPageIndex(prevPageIndex => prevPageIndex + 1);
+    useEffect(() => {
+        if (message !== '') { 
+            if (notificationRef.current) {
+                const topPosition = notificationRef.current.getBoundingClientRect().top + window.scrollY - 100; /** Subtract 100 pixels to account for the navbar height */
+                
+                window.scrollTo({
+                    top: topPosition,
+                    behavior: 'smooth',
+                });
+            }
+        }
+      }, [message]);
+
+    /** 
+     * Save/Update participant's answers
+     * @param {number} questionId - Question ID 
+     * @param {number} answerId - Answer ID
+     * @param {boolean} isCorrect - True indicates correct answer and otherwise
+     * */
+    const handleAnswerChange = (questionId: number, answerId: number, isCorrect: boolean) => {
+        /** Find if an answer for the question already exists */
+        const existingAnswerIndex = participantAnswers.findIndex(answer => answer.questionId === questionId);
+        
+        /** If it exists, update it, otherwise add a new entry */
+        if (existingAnswerIndex !== -1) {
+            /** Copy existing answers and update the specific answer */
+            const updatedAnswers = [...participantAnswers];
+            updatedAnswers[existingAnswerIndex] = { questionId, answerId, isCorrect };
+            setParticipantAnswers(updatedAnswers);
+        } else {
+            /** Add a new answer */
+            setParticipantAnswers([...participantAnswers, { questionId, answerId, isCorrect}]);
         }
     };
 
-    /** On Previous button click, if it's not the first page, go to previous page */
-    const handlePreviousButtonClick = () => {
-        if (pageIndex > 0) { 
-            setPageIndex(prevPageIndex => prevPageIndex - 1);
+    /** On Next button click, go to next page */
+    const handleNextButtonClick = () =>{
+        if (pageIndex < questions.length - 1) { 
+            setPageIndex(currentPageIndex => currentPageIndex + 1);
+            setCurrentButton('Submit');
+            setMessage('');
+
+            /** Scroll to the top of the page */
+            window.scrollTo({
+            top: 0,
+            behavior: 'smooth', 
+        });
         }
-    };   
+    }; 
     
-    /** Submit answers */
+    /** Submit answers for a specific page */
     const handleSubmitButtonClick = () => {
-        console.log('submit');
+        /** Create a set of answered question IDs for fast lookup */
+        const answeredQuestionIds = new Set(participantAnswers.map(answer => answer.questionId));
+
+        /** Filter questions of current page that haven't been answered */
+        const skippedQuestionsNos = questions[pageIndex]
+            .filter(question => !answeredQuestionIds.has(question.questionId))
+            .map(question => question.questionNo);
+
+        /** Update skipped question IDs */
+        if (skippedQuestionsNos.length > 0) {
+            /*setSkippedQuestions(skippedQuestionsNos);
+
+            const totalQuestions = skippedQuestionsNos.length === 1? 'one question' : 'a few questions';
+            const questionsNos = skippedQuestionsNos.join(', ');
+            setMessage(`Your quiz isn't complete, just ${totalQuestions} left: Question no. ${questionsNos}`);*/
+            setMessage('Please select an answer to proceed.');
+        }
+        else {
+            //setMessage('Good try!');
+
+            if (pageIndex === questions.length - 1) {
+                setCurrentButton('Result');
+            } else {
+                setCurrentButton('Next');
+            }
+        }
     };
+
+    /** Final submit for all answers */
+    const handleResultButtonClick = () => {
+        let localScore = 0;
+        for(const answer of participantAnswers ) {
+            if (answer.isCorrect === true) {
+                localScore += 1;
+            }
+        }
+
+        setScore(localScore);
+        const grade = localScore / allQuestions.length * 10;
+        setResultMessage(grade >= 8.7 ? "Congratulations! You have passed the quiz" : "Close effort! Let's try again.");
+        setQuizCompleted(true)
+    };
+
+    /** Reset all */
+    const handleRetakeQuizButtonClick = () => {
+        setQuizCompleted(false);
+        setPageIndex(0);
+        setMessage("");
+        //setSkippedQuestions([]);
+        setCurrentButton("Submit");
+        setParticipantAnswers([]);
+        setScore(0);
+        setResultMessage('');
+    }
       
     return (
         <div>
@@ -71,38 +161,89 @@ const EntryTest = () => {
                 <p>Quiz</p>
             </div>
 
-            <div className='page-number'>
-                <span>Page {pageIndex +1 }/{questions.length}</span> {/* Show page number */}
-            </div>
-
-            <div className='questions'>
-                {/* Loop through questions of current page */}
-                {questions[pageIndex] ? questions[pageIndex].map((question) => (
-                    <div key={question.questionId} className='individual-question'>
-                        <p>{`${question.questionNo}. ${question.question}`}</p>
-                        {/* Loop through answers per question */}
-                        {question.answers.map((answer) => (
-                            <label key={answer.answerId} className='answers'>
-                                <input type="radio" name={`question_${question.questionId}`} value={answer.answerId} /> {/* name is to group radio buttons */}
-                                {answer.answer}
-                            </label>
-                        ))}
-                        <br/>
+            {!quizCompleted ? (
+                <>
+                    <div className='page-number'>
+                        <span>Page {pageIndex +1 }/{questions.length}</span> {/* Show page number */}
                     </div>
-                )) : <p>Loading questions...</p>} {/* If data is not populated yet */}
-            </div>
 
-            <div className='all-buttons'>
-                {pageIndex > 0 && (
-                    <button className='buttons' onClick={handlePreviousButtonClick}>Previous</button> 
-                )} {/* Show Previous button only if it's not the first page */}
-                {pageIndex < (questions.length - 1) && (
-                    <button className='buttons' onClick={handleNextButtonClick}>Next</button> 
-                )} {/* Show Next button only if it's not the last page */}
-                {pageIndex === (questions.length - 1) && (
-                    <button className='buttons' onClick={handleSubmitButtonClick}>Submit</button> 
-                )} {/* Show Submit button on last page */}
-            </div>
+                    <Notification ref={notificationRef} message={message} />
+
+                    <div className='questions'>
+                        {/* Loop through questions of current page */}
+                        {questions[pageIndex] ? questions[pageIndex].map((question) => (
+                            <div key={question.questionId} className='individual-question'>
+                                <p>{`${question.questionNo}. ${question.question}`} 
+                                    {/* <span className={`unanswered-question ${(skippedQuestions.includes(question.questionNo) && currentButton === "Submit") ? '' : 'hidden'}`}> 
+                                        {skippedQuestions.includes(question.questionNo) ? 'Unanswered' : '' }
+                                    </span> */}
+                                </p>
+                                {/* Loop through answers per question */}
+                                {question.answers.map((answer) => (
+                                    <label key={answer.answerId} className='answers'>
+                                        <input 
+                                            type="radio" 
+                                            name={`question_${question.questionId}`} 
+                                            value={answer.answerId} 
+                                            disabled={currentButton != 'Submit'}
+                                            checked={participantAnswers.some(pa => pa.questionId === question.questionId && pa.answerId === answer.answerId)} 
+                                            onChange={(e) => handleAnswerChange(question.questionId, parseInt(e.target.value), answer.isCorrect)} 
+                                        /> {/* Save/Update answer on change */}
+                                        {answer.answer}
+                                         {/* Show "Your answer" only if the answer is incorrect and it's selected */}
+                                         <span className={`correct-answer ${(!answer.isCorrect 
+                                            && participantAnswers.some(pa => pa.questionId === question.questionId && pa.answerId === answer.answerId) 
+                                            && currentButton !== "Submit") ? '' : 'hidden'}`}> 
+                                            Your answer
+                                        </span>
+                                        {/* Show which is "Correct answer" if the answer is incorrect */}
+                                        <span className={`incorrect-answer ${(answer.isCorrect && currentButton != "Submit") ? '' : 'hidden'}`}> 
+                                            {answer.isCorrect ? 'Correct answer' : '' }
+                                        </span>
+                                    </label>
+                                ))}
+                                <br/>
+                            </div>
+                        )) : <p>Loading questions...</p>} {/* If data is not populated yet */}
+                    </div>
+
+                    <div className='all-buttons'>
+                        {/* {pageIndex > 0 && (
+                            <button className='buttons' onClick={handlePreviousButtonClick}>Previous</button> 
+                        )} */}
+                        {currentButton === 'Submit' && (
+                            <button className='buttons' onClick={handleSubmitButtonClick}>Submit</button> 
+                        )}
+                        {currentButton === 'Next' && (
+                            <button className='buttons' onClick={handleNextButtonClick}>Next</button> 
+                        )} {/* Show Next button only if it's not the last page */}
+                        {currentButton === 'Result' && (
+                            <button className='buttons' onClick={handleResultButtonClick}>Result</button> 
+                        )} {/* Show Result button on last page */}
+                    </div>
+
+                    {/* <iframe src="https://quizlet.com/902790814/test/embed?i=4ew41k&x=1jj1" height="500" width="100%" style={{ border: "0" }}></iframe> */}
+                </>
+            ) : (
+                <div className='page-styling'> {/* Show Quiz Result page after final submit */}
+                    <p className='page-heading'>Quiz Result</p>
+                    <img src={resultMessage.includes("Congratulations") ? popper : goodTry} alt="Result Logo" />
+                    <br/>
+                    <p className="result">{resultMessage}</p>
+                    <br/> <br/>
+                    <p className="result">Score: {score}/{allQuestions.length}</p>
+                    {resultMessage.includes("Congratulations") && (
+                        <p className="result">Grade: {(score / allQuestions.length * 10).toFixed(1)}</p>
+                    )}
+                    <br/><br/>
+                    {resultMessage.includes("Congratulations") && (
+                        <button className="buttons">Continue</button>
+                    )}
+                    {!resultMessage.includes("Congratulations") && (
+                        <button className="buttons" onClick={handleRetakeQuizButtonClick}>Retake Quiz</button>
+                    )}
+                </div>
+            )}
         </div>
     );
 }
