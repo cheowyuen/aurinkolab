@@ -32,7 +32,7 @@ function PartnersSection(): JSX.Element {
 
               <div>
                   <a ><Aalto /></a>
-              </div><br/>
+              </div>
           </div>
         <div className="partners-section">
               <div>
