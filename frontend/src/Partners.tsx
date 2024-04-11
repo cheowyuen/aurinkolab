@@ -17,29 +17,29 @@ import Stek from "./LogoStek"
 function PartnersSection(): JSX.Element {
     return (
      <div className= "partners-div">  <p className= "partners-text">Our Partners</p>
-    <div id="partners-section" className="partners-section">
-            
-        <div>
-        <a ><Valtteri /></a>
+          <div id="partners-section" className="partners-section">
+              <div>
+                  <a ><Elvene /></a>
+              </div>
+
+              <div>
+                  <a ><Stek /></a>
+              </div> 
+
+              <div>
+                  <a ><Megawatt /></a>
+              </div>
+
+              <div>
+                  <a ><Aalto /></a>
+              </div>
+          </div>
+        <div className="partners-section">
+              <div>
+                <a><Valtteri /></a>
+              </div>
+
         </div>
-
-        <div>
-        <a ><Stek /></a>
-        </div> 
-
-        <div>
-        <a ><Megawatt /></a>
-        </div>
-
-        <div>
-        <a ><Aalto /></a>
-        </div> 
-
-        <div>
-        <a ><Elvene /></a>
-        </div>
-        
-  </div>
   </div> 
     );
   }

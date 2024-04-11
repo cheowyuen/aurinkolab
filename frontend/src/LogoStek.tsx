@@ -6,7 +6,7 @@ const Stek: React.FC = () => {
   return (
     <div className='my-div'>
      
-      <img src={logo} alt="Logo" width="300px" height="300px"  />
+      <img src={logo} alt="Logo" width="270px" height="300px"  />
       
     </div>
   );

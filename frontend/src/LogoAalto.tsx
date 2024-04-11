@@ -7,7 +7,7 @@ const Aalto: React.FC = () => {
   return (
     <div className='my-div'>
      
-      <img src={logo} alt="Logo" width="200px" height="100px"  />
+      <img src={logo} alt="Logo" width="110px" height="100px"  />
       
     </div>
   );
