@@ -3,6 +3,8 @@ import allQuestions from '../src/data/questions';
 import Notification from '../src/Notification';
 import popper from '/src/assets/popper.png';
 import goodTry from '/src/assets/logo_sun.png';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export interface Question {
     questionId: number;
@@ -30,7 +32,7 @@ const chunkArray = (array: Question[], chunkSize: number): Question[][] => {
     return result;
 } 
 
-const EntryTest = () => {
+const EntryTest: React.FC = () => {
     const [ questions, setQuestions ] = useState<Question[][]>([]); /** Two dimensional array where nested array consists of questions per page */
     const [ pageIndex, setPageIndex ] = useState<number>(0); /** Indicate index of current page */
     const [ participantAnswers, setParticipantAnswers ] = useState<Array<{ questionId: number, answerId: number, isCorrect: boolean }>>([]); /** To store participant's answers */
@@ -42,6 +44,7 @@ const EntryTest = () => {
     const [ resultMessage, setResultMessage ] = useState('');
 
     const notificationRef = useRef<HTMLDivElement | null>(null); /** Create a ref */
+    const navigate = useNavigate();
 
     /** On page load, set questions of each page */
     useEffect(() => {
@@ -157,7 +160,7 @@ const EntryTest = () => {
       
     return (
         <div>
-            <div className='page-title'>
+            <div className='quiz-title'>
                 <p>Quiz</p>
             </div>
 
@@ -237,7 +240,7 @@ const EntryTest = () => {
                     )}
                     <br/><br/>
                     {resultMessage.includes("Congratulations") && (
-                        <button className="buttons">Continue</button>
+                        <button className="buttons" onClick={() => navigate('/events')}>Continue</button>
                     )}
                     {!resultMessage.includes("Congratulations") && (
                         <button className="buttons" onClick={handleRetakeQuizButtonClick}>Retake Quiz</button>
