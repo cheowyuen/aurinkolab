@@ -293,16 +293,64 @@ body {
   }
 }
 
-//styling for Quiz page
-.page-title {
+//styling for Quiz and Events page
+.quiz-title, .events-title, .event-title {
   color: #FFFFFF;
   font-family: "Roboto Slab", sans-serif;
-  background-color: #285078;
   padding-top: 100px;
   padding-bottom: 30px;
   text-align: center;
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: bold;
+}
+
+.quiz-title {
+  background-color: #285078;
+}
+
+.events-title {
+  background-color: #7878A0;
+}
+
+.event-title {
+  background-color: #785050;
+}
+
+.events-page {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.7rem;
+}
+
+.event-page {
+  font-family: "Poppins", sans-serif;
+}
+
+.event-container:hover .overlay {
+  opacity: 0.1; 
+}
+
+.icon {
+  vertical-align: middle; 
+  height: auto; 
+  width: 1.2rem;
+}
+
+.icon-text {
+  display: inline-flex; 
+  align-items: center; 
+  gap: 1rem; 
+}
+
+.icon-details {
+  display: block;
+}
+
+.title-font {
+  font-family: "Roboto Slab", sans-serif;
+}
+
+.page-font-color {
+  color: #505050;
 }
 
 .page-number {
@@ -354,6 +402,15 @@ body {
   margin-bottom: 5rem;
   margin-left: 1rem;
   margin-right: 1rem;
+}
+
+.button-small {
+  background-color: #505050;
+  border-radius: 30px;
+  color: #FFFFFF;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  padding: 1rem 3rem;
 }
 
 .unanswered-question {
