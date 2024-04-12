@@ -200,6 +200,15 @@ body {
   justify-content: center;
 }
 
+.partners-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  text-align: justify;
+  background:  var(--color-4);
+}
+
 .contact-section {
   display: flex;
   flex-direction: column;
@@ -240,6 +249,21 @@ body {
   padding: 1rem;
   color: var(--color-4);
   background: var(--color-8);
+}
+
+
+.partners-div {
+  padding: 1rem;
+  color: var(--color-4);
+  background: var(--color-4);
+}
+.partners-text{
+  font-size: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  margin-left: 0rem;
+  color: var(--color-2);
+  
 }
 
 @media only screen and (max-width: 768px) {
@@ -291,6 +315,13 @@ body {
   .middle-text {
     padding: 0.5rem;
   }
+
+  .my-div {
+    width: 300px;
+    height: 200px;
+    text-align: center
+}
+
 }
 
 //styling for Quiz and Events page
