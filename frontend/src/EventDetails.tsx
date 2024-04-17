@@ -23,16 +23,16 @@ function EventDetails() {
 
     return (
         <div>
-            <div className='event-title'>
+            <div className='event-title' data-testid="event-details-title">
                 <p>{event.eventName}</p>
             </div>
 
             <div className="flex flex-wrap md:flex-nowrap">
-                <div className="flex-1 p-15">
-                    <img src={event_img} alt="Vehicle" className="max-w-full h-auto rounded-lg shadow-md" />
+                <div className="flex-1 event-image-container">
+                    <img src={event_img} alt="Vehicle" className="max-w-full h-auto rounded-lg shadow-md vehicle-image" />
                 </div>
 
-                <div className="flex-1 p-15 text-xl">
+                <div className="flex-1 text-xl event-text-container">
                     <p className="text-3xl title-font">Event Details</p><br/>
                     <span className="icon-text">
                         <img src={date_icon} alt="Date" className="icon" />

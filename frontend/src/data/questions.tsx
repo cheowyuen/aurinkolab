@@ -72,7 +72,7 @@ const allQuestions: Question[] = [
             },
             {
                 answerId: 11,
-                answer: "c.  Ligh intensity",
+                answer: "c. Ligh intensity",
                 isCorrect: false
             },
             {
@@ -82,7 +82,7 @@ const allQuestions: Question[] = [
             }
         ]
     },
-    {
+    /*{
         questionId: 4,
         questionNo: 4,
         question: "Who introduced the concept of tension and in what context?",
@@ -972,7 +972,7 @@ const allQuestions: Question[] = [
                 isCorrect: true
             }
         ]
-    }
+    }*/
 ];
 
 export default allQuestions;
