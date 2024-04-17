@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import allQuestions from '../src/data/questions';
 import Notification from '../src/Notification';
-import popper from '/src/assets/popper.png';
-import goodTry from '/src/assets/logo_sun.png';
+import popper from './assets/popper.png';
+import goodTry from './assets/logo_sun.png';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -160,13 +160,13 @@ const EntryTest: React.FC = () => {
       
     return (
         <div>
-            <div className='quiz-title'>
+            <div className='quiz-title' data-testid="quiz-page-title">
                 <p>Quiz</p>
             </div>
 
             {!quizCompleted ? (
                 <>
-                    <div className='page-number'>
+                    <div className='page-number' data-testid="quiz-page-number">
                         <span>Page {pageIndex +1 }/{questions.length}</span> {/* Show page number */}
                     </div>
 
@@ -187,20 +187,22 @@ const EntryTest: React.FC = () => {
                                         <input 
                                             type="radio" 
                                             name={`question_${question.questionId}`} 
+                                            data-testid={`answer_${answer.answerId}`} 
                                             value={answer.answerId} 
                                             disabled={currentButton != 'Submit'}
                                             checked={participantAnswers.some(pa => pa.questionId === question.questionId && pa.answerId === answer.answerId)} 
                                             onChange={(e) => handleAnswerChange(question.questionId, parseInt(e.target.value), answer.isCorrect)} 
                                         /> {/* Save/Update answer on change */}
-                                        {answer.answer}
+                                        <span>{answer.answer}</span>
                                          {/* Show "Your answer" only if the answer is incorrect and it's selected */}
                                          <span className={`correct-answer ${(!answer.isCorrect 
                                             && participantAnswers.some(pa => pa.questionId === question.questionId && pa.answerId === answer.answerId) 
-                                            && currentButton !== "Submit") ? '' : 'hidden'}`}> 
+                                            && currentButton !== "Submit") ? '' : 'hidden'}`}
+                                            data-testid={`wrong_answer_${answer.answerId}`}> 
                                             Your answer
                                         </span>
                                         {/* Show which is "Correct answer" if the answer is incorrect */}
-                                        <span className={`incorrect-answer ${(answer.isCorrect && currentButton != "Submit") ? '' : 'hidden'}`}> 
+                                        <span className={`incorrect-answer ${(answer.isCorrect && currentButton != "Submit") ? '' : 'hidden'}`} data-testid={`correct_answer_${answer.answerId}`}> 
                                             {answer.isCorrect ? 'Correct answer' : '' }
                                         </span>
                                     </label>
@@ -215,13 +217,13 @@ const EntryTest: React.FC = () => {
                             <button className='buttons' onClick={handlePreviousButtonClick}>Previous</button> 
                         )} */}
                         {currentButton === 'Submit' && (
-                            <button className='buttons' onClick={handleSubmitButtonClick}>Submit</button> 
+                            <button className='buttons' data-testid="submit_button" onClick={handleSubmitButtonClick}>Submit</button> 
                         )}
                         {currentButton === 'Next' && (
-                            <button className='buttons' onClick={handleNextButtonClick}>Next</button> 
+                            <button className='buttons' data-testid="next_button" onClick={handleNextButtonClick}>Next</button> 
                         )} {/* Show Next button only if it's not the last page */}
                         {currentButton === 'Result' && (
-                            <button className='buttons' onClick={handleResultButtonClick}>Result</button> 
+                            <button className='buttons' data-testid="result_button" onClick={handleResultButtonClick}>Result</button> 
                         )} {/* Show Result button on last page */}
                     </div>
 
@@ -233,12 +235,12 @@ const EntryTest: React.FC = () => {
                     <img src={resultMessage.includes("Congratulations") ? popper : goodTry} alt="Result Logo" />
                     <br/>
                     <p className="result">{resultMessage}</p>
-                    <br/> <br/>
+                    <br/> 
                     <p className="result">Score: {score}/{allQuestions.length}</p>
                     {resultMessage.includes("Congratulations") && (
                         <p className="result">Grade: {(score / allQuestions.length * 10).toFixed(1)}</p>
                     )}
-                    <br/><br/>
+                    <br/>
                     {resultMessage.includes("Congratulations") && (
                         <button className="buttons" onClick={() => navigate('/events')}>Continue</button>
                     )}

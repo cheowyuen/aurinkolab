@@ -10,7 +10,7 @@ const Notification = forwardRef<HTMLDivElement, NotificationProps>(({ message },
   }
 
   return (
-    <div ref={ref} className='notification'>
+    <div ref={ref} className='notification' data-testid="notification">
       {message}
     </div>
   );

@@ -7,7 +7,6 @@ import AboutAurinkoLab from "./AboutAurinkoLab";
 import FAQ from "./FAQ";
 import Contact from "./Contact";
 import Partners from "./Partners";
-import Events from "./Events";
 
 function Home() {
     return (
@@ -18,7 +17,6 @@ function Home() {
         <Mission />
         <AboutAurinkoLab />
         <FAQ />
-        <Events />
         <Partners />
         <Contact />
         <FooterText />
