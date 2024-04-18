@@ -677,20 +677,59 @@ body {
 }
 
 .education-box-2{
+  
   width: 100%;
-  flex:-1;
+  
   padding:15px;
   text-size-adjust: x1;
 
 }
 
+.header-focused{
+  font-size: 5rem;
+  padding-top: 1rem;
+  margin-left: 1rem;
+  color: var(--color-2);
+  text-align: center;
+  
+}
+.header-content-steps{
+  align-items: center;
+  background-color: #285078;
+  border-radius: 30px;
+  color: #FFFFFF;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  padding: 1rem 2rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.header-content-steps:hover {
+  background-color: #285078;
+  opacity: 50%;
+}
+.steps{
+  width: 100%;
+  text-align: center;
+  align-items: center;
+  padding:1px;
+
+}
+
+.conatiner-text-content{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+
+
 .options-label{
   padding: 1rem;
-
-
   margin-left: 0rem;
-
-
 }
 
 .options{
