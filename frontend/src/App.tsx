@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'; //Imported thes
 import EntryTest from "./EntryTest"; //Imported EntryTest component
 import AllEvents from "./AllEvents";
 import EventDetails from "./EventDetails";
+import EducationCenters from "./EducationCenters";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/entrytest" element={<EntryTest />} />
         <Route path="/events" element={<AllEvents />} />
         <Route path="/events/:eventId" element={<EventDetails />} />
+        <Route path="/educationcenters" element={<EducationCenters />} />
       </Routes>
       </div>
     </BrowserRouter>

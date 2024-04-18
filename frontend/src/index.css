@@ -343,7 +343,7 @@ body {
 
 }
 
-//styling for Quiz and Events page
+/**styling for Quiz and Events page*/
 .quiz-title, .events-title, .event-title {
   color: #FFFFFF;
   font-family: "Roboto Slab", sans-serif;
@@ -636,6 +636,158 @@ body {
   .event-image-container, .event-text-container{
     padding: 1.5rem;
   }
+}
+
+/** Education center page style */
+.partners-title {
+  color: #FFFFFF;
+  font-family: "Roboto Slab", sans-serif;
+  padding-top: 100px;
+  padding-bottom: 30px;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+  background-color: #285078;
+}
+
+
+
+.container-form{
+
+  margin-top: 1rem;
+  margin: 1rem auto 10rem;
+  margin-bottom: 0rem;
+  width: 80%;
+  text-align: left;
+
+}
+
+ .container-education-centers{
+  background-color: #EBE5CE ;
+}
+
+.education-box-1{
+  width:100%;
+  flex:-1;
+  padding:15px;
+  text-size-adjust: x1;
+  text-align: center;
+
+
+}
+
+.education-box-2{
+  width: 100%;
+  flex:-1;
+  padding:15px;
+  text-size-adjust: x1;
+
+}
+
+.options-label{
+  padding: 1rem;
+
+
+  margin-left: 0rem;
+
+
+}
+
+.options{
+  color: #285078;
+  border: solid 1px #285078;
+  margin-right: 2px;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+}
+
+.options2{
+  color: #285078;
+  border: solid 1px #285078;
+  margin-right: 2px;
+  margin-top: 1rem;
+  margin-left: 3rem;
+  margin-bottom: 1rem;
+  width: 80%;
+}
+
+fieldset{
+  flex: 1;
+  margin: 2vw 0; 
+  padding: 1em 2vw; 
+  border: solid 1px #285078;
+  border-radius: 6px;
+  min-width: 200px;
+  max-width: 100%;
+  box-sizing: border-box; 
+}
+
+
+.container-fieldset{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+legend{
+  font-size: 1.25em;
+  margin-left: 25px;
+}
+
+
+.apply-education-center {
+  align-items: center;
+  background-color: #285078;
+  border-radius: 30px;
+  color: #FFFFFF;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  padding: 1rem 2rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+
+
+}
+
+.container-buttom{
+
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+  text-align: center;
+}
+
+.input-text-form{
+
+  padding: 1rem;
+  margin-top: 0rem;
+  margin-left: 2rem;
+  height: 30px;
+  width: 50;
+}
+
+.input-text-form2{
+
+  padding: 0rem;
+  margin-top: 0rem;
+  margin-left: 2rem;
+  width: 65;
+  float: right;
+}
+
+
+.form-box-1{
+  width: 65%;
+
+
+  display: flex;
+  flex-direction: column;
+
 }
 
 
