@@ -5,9 +5,8 @@ function ContactSection(): JSX.Element {
   return (
     <div id="contact-section" className="contact-section">
       <div className="contact-header-content">
-        <span>***************************************************************</span>
-      </div>
-      <div className="contact-us-section">
+    </div>
+    <div className="contact-us-section">
         <span className="contact-text">
           Contacts:<br/>
           email: <a href={`mailto:${email}`}>{email}</a><br/><br/>
@@ -22,8 +21,7 @@ function ContactSection(): JSX.Element {
             width="100%"
             height="300px"
           >
-          </iframe>
-          <br/>
+          </iframe><br/>
         </div>
       </div>
     </div>
