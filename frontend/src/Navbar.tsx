@@ -55,6 +55,7 @@ function Navbar() {
                     <div className="absolute top-full left-0 w-full py-3 px-5 md:hidden dropdown-menu">
                         <RouterLink to={"/"} state={{ scrollTo: "about-section" }} onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">About</RouterLink>
                         <RouterLink to={"/"} state={{ scrollTo: "partners-section" }} onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Partners</RouterLink>
+                        <RouterLink to="/educationcenters" onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Education Centers</RouterLink>
                         <RouterLink to="/events" onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Events</RouterLink>
                         <RouterLink to="/entrytest" onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Quiz</RouterLink>
                         <RouterLink to={"/"} state={{ scrollTo: "FAQ-section" }} onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">FAQ</RouterLink>
