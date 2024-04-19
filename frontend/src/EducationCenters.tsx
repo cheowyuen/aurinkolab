@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 /**
  * @date 17.04.2024
@@ -21,7 +21,7 @@ function EducationCentersForm() {
     const [isVisibleStep2, setIsVisibleStep2] = useState(false);
     const [isVisibleStep3, setIsVisibleStep3] = useState(false);
   
-    const toggleVisibility = (stepNumber) => {
+    const toggleVisibility = (stepNumber: number) => {
       switch (stepNumber) {
         case 1:
           setIsVisibleStep1(!isVisibleStep1);
