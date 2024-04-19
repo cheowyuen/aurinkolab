@@ -5,6 +5,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 describe("HeroText Component", () => {
     beforeEach(() => {
+        window.scrollTo = jest.fn();
+        
         render(
             <BrowserRouter>
                 <Home />
@@ -13,8 +15,6 @@ describe("HeroText Component", () => {
     });
 
     test('renders hero text correctly', async () => {
-        window.scrollTo = jest.fn();
-
         /** Hero */
         expect(screen.getByText("AurinkoLab: 20-Hour Hackathon for Engineers")).toBeInTheDocument();
         expect(screen.getByText("Crafting Electric-Solar or Hydrogen-Powered Multimodal Vehicles")).toBeInTheDocument();

@@ -40,7 +40,7 @@ function EventDetails() {
                     </span><br/><br/>
                     <span className="icon-text">
                         <img src={edu_centre_icon} alt="Education Centre" className="icon" />
-                        <span className="icon-details"><span className="font-bold">Education Centre</span>: {event.educationCentre}</span>
+                        <span className="icon-details"><span className="font-bold">Education Center</span>: {event.educationCentre}</span>
                     </span><br/><br/>
                     <span className="icon-text">
                         <img src={place_icon} alt="Place" className="icon" />
