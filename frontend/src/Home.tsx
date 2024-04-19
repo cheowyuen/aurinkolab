@@ -16,8 +16,11 @@ function Home() {
         <MiddleText />
         <Mission />
         <AboutAurinkoLab />
-        <FAQ />
+        {/* Mariaro: hided for a main page. TODO: delete after 28.04.2024 */}
+        {/* <FAQ /> */}
+        <MiddleText />
         <Partners />
+        <MiddleText />
         <Contact />
         <FooterText />
     </>

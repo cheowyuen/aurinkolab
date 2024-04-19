@@ -68,29 +68,25 @@ function Navbar() {
 
                 <div className="nav-bar hidden md:flex">
                     <motion.div variants={reveal} className="cursor-pointer">
-                        {/* <Link to="about-section" smooth={true} duration={500}  offset={-80} className="cursor-pointer">About</Link> */}
-                        <RouterLink to={"/"} state={{ scrollTo: "about-section" }}>About</RouterLink>
-                    </motion.div>
-                    <motion.div variants={reveal} className="cursor-pointer">
-                        {/* <Link to="events-section" smooth={true} duration={500} offset={-80}className="cursor-pointer">Events</Link> */}
-                        <RouterLink to={"/"} state={{ scrollTo: "partners-section" }}>Partners</RouterLink>
-                    </motion.div>
-                    <motion.div variants={reveal} className="cursor-pointer">
-                        {/* <Link to="about-section" smooth={true} duration={500}  offset={-80} className="cursor-pointer">About</Link> */}
-                        <RouterLink to={"/educationcenters"} >Education Centers</RouterLink>
-                    </motion.div>
-                    <motion.div variants={reveal} className="cursor-pointer">
                         <RouterLink to="/events">Events</RouterLink>
                     </motion.div>
                     <motion.div variants={reveal} className="cursor-pointer">
                         <RouterLink to="/entrytest">Quiz</RouterLink> {/* Route to quiz page */}
                     </motion.div>
                     <motion.div variants={reveal} className="cursor-pointer">
-                        {/* <Link to="FAQ-section" smooth={true} duration={500} offset={-80} className="cursor-pointer">FAQ</Link> */}
-                        <RouterLink to={"/"} state={{ scrollTo: "FAQ-section" }}>FAQ</RouterLink>
+                        <RouterLink to={"/"} state={{ scrollTo: "about-section" }}>About</RouterLink>
                     </motion.div>
                     <motion.div variants={reveal} className="cursor-pointer">
-                        {/* <Link to="contact-section" smooth={true} duration={500} offset={-80} className="cursor-pointer">Contact</Link> */}
+                        <RouterLink to={"/"} state={{ scrollTo: "partners-section" }}>Partners</RouterLink>
+                    </motion.div>
+                    {/* TODO: 'apply' button. Mariaro: hided until 'apply' button is work */}
+                    {/* <motion.div variants={reveal} className="cursor-pointer">
+                        <RouterLink to={"/educationcenters"} >Education Centers</RouterLink>
+                    </motion.div> */}
+                    {/* <motion.div variants={reveal} className="cursor-pointer">
+                        <RouterLink to={"/"} state={{ scrollTo: "FAQ-section" }}>FAQ</RouterLink>
+                    </motion.div> */}
+                    <motion.div variants={reveal} className="cursor-pointer">
                         <RouterLink to={"/"} state={{ scrollTo: "contact-section" }}>Contact</RouterLink>
                     </motion.div>
                     <motion.div variants={reveal} className="cursor-pointer">
