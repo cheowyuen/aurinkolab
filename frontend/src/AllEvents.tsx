@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import event_img_1 from '/src/assets/aalto-design-factory.jpeg';
+import event_img_1 from '/src/assets/Aalto.png';
 import event_img_2 from '/src/assets/Sigulda.png';
 import event_img_3 from '/src/assets/Helsinki.png';
 
