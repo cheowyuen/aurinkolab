@@ -1,15 +1,18 @@
 import { useNavigate } from 'react-router-dom';
-import event_img from '/src/assets/aalto-design-factory.jpeg';
+import event_img_1 from '/src/assets/aalto-design-factory.jpeg';
+import event_img_2 from '/src/assets/Sigulda.png';
+import event_img_3 from '/src/assets/Helsinki.png';
 
 const AllEvents = () => {   
     const navigate = useNavigate();
 
     const events = [
-        {image: event_img, place: "Espoo", date: "Apr - May 2024", eventId: 1},
-        {image: event_img, place: "Espoo", date: "Aug - Dec 2024", eventId: 2},
-        {image: event_img, place: "Espoo", date: "Jan - Jun 2025", eventId: 3},
-        {image: event_img, place: "Espoo", date: "TBA", eventId: 4},
-        {image: event_img, place: "Espoo", date: "TBA", eventId: 5},
+        {image: event_img_1, place: "Espoo, Finand", date: "Apr - May 2024", eventId: 1},
+        {image: event_img_2, place: "Sigulda, Latvia", date: "May 2024", eventId: 2},
+        {image: event_img_3, place: "Helsinki, Finland", date: "1st June 2024", eventId: 3},
+        {image: event_img_3, place: "Helsinki, Finland", date: "Aug 2024", eventId: 4},
+        {image: event_img_1, place: "Espoo, Finland", date: "Sep 2024", eventId: 5},
+        {image: event_img_3, place: "Helsinki, Finland", date: "Sep - Oct 2024", eventId: 6},
     ]
 
     const handleEventClick = (eventId: number) => {
@@ -19,7 +22,7 @@ const AllEvents = () => {
     return (
         <div>
             <div className='events-title' data-testid="events-page-title">
-                <p>Events</p>
+                <p>Upcoming Events</p>
             </div>
 
             <div className="flex justify-center p-16 events-page">
