@@ -2,9 +2,7 @@ import HeroText from "./HeroText";
 import BoatVideo from "./BoatVideo";
 import FooterText from "./FooterText";
 import MiddleText from "./MiddleText";
-import Mission from "./Mission";
 import AboutAurinkoLab from "./AboutAurinkoLab";
-import FAQ from "./FAQ";
 import Contact from "./Contact";
 import Partners from "./Partners";
 
@@ -14,7 +12,6 @@ function Home() {
         <HeroText />
         <BoatVideo />
         <MiddleText />
-        <Mission />
         <AboutAurinkoLab />
         {/* Mariaro: hided for a main page. TODO: delete after 28.04.2024 */}
         {/* <FAQ /> */}
