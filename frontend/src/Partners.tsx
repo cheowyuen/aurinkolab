@@ -16,7 +16,7 @@ import Stek from "./LogoStek"
 
 function PartnersSection(): JSX.Element {
     return (
-     <div className= "partners-div">  <p className= "partners-text">Our Partners</p>
+     <div className= "partners-div">  <p className= "partners-text">Aurinko Partners :</p>
           <div id="partners-section" className="partners-section">
               <div>
                   <a ><Elvene /></a>

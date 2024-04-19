@@ -41,10 +41,8 @@ function Navbar() {
             }} className="w-full flex items-center justify-between h-80px fixed top-0" style={{ backgroundColor: '#505050', zIndex: 100 }}
             >
                 <motion.div variants={reveal}>
-                    {/* <Link to="mission-section" smooth={true} duration={500} offset={-80} className="cursor-pointer"><Logo /></Link> */}
                     <RouterLink to={"/"} onClick={() => setIsOpen(false)} state={{ scrollTo: "mission-section" }}><Logo /></RouterLink>
                 </motion.div>
-
                 <button onClick={toggleDropdown} className="md:hidden">
                     <svg className="w-8 h-8 hamburger-menu" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M3 5h14a1 1 0 010 2H3a1 1 0 110-2zm0 6h14a1 1 0 010 2H3a1 1 0 010-2zm0 6h14a1 1 0 010 2H3a1 1 0 110-2z" clipRule="evenodd" />
@@ -79,10 +77,11 @@ function Navbar() {
                     <motion.div variants={reveal} className="cursor-pointer">
                         <RouterLink to={"/"} state={{ scrollTo: "partners-section" }}>Partners</RouterLink>
                     </motion.div>
-                    {/* TODO: 'apply' button. Mariaro: hided until 'apply' button is work */}
+                    {/* Mariaro: TODO: 'apply' button. Hided until 'apply' button is work */}
                     {/* <motion.div variants={reveal} className="cursor-pointer">
                         <RouterLink to={"/educationcenters"} >Education Centers</RouterLink>
                     </motion.div> */}
+                    {/* Mariaro TODO: to fins a better place */}
                     {/* <motion.div variants={reveal} className="cursor-pointer">
                         <RouterLink to={"/"} state={{ scrollTo: "FAQ-section" }}>FAQ</RouterLink>
                     </motion.div> */}
@@ -98,7 +97,6 @@ function Navbar() {
                 </div>     
                 <div className="apply-button hidden md:flex">
                     <motion.span variants={reveal} className="cursor-pointer">
-                        {/* <Link to="events-section" smooth={true} duration={500} offset={-80} className="cursor-pointer">Apply Now</Link> */}
                         <RouterLink to="/events">Apply Now</RouterLink>
                     </motion.span>
                 </div>
