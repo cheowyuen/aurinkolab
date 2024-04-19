@@ -1,0 +1,11 @@
+services:
+  database:
+    container_name: aurinkolab-database
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - project.env
+
+volumes:
+  postgres_data:
