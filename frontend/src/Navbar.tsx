@@ -1,4 +1,3 @@
-//import { Link } from 'react-scroll';
 import Logo from "./Logo";
 import { motion } from "framer-motion";
 import { animationStart, reveal } from "./utils/animation";
@@ -51,13 +50,14 @@ function Navbar() {
 
                 {isOpen && (
                     <div className="absolute top-full left-0 w-full py-3 px-5 md:hidden dropdown-menu">
-                        <RouterLink to={"/"} state={{ scrollTo: "about-section" }} onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">About</RouterLink>
-                        <RouterLink to={"/"} state={{ scrollTo: "partners-section" }} onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Partners</RouterLink>
-                        <RouterLink to="/educationcenters" onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Education Centers</RouterLink>
                         <RouterLink to="/events" onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Events</RouterLink>
                         <RouterLink to="/entrytest" onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Quiz</RouterLink>
-                        <RouterLink to={"/"} state={{ scrollTo: "FAQ-section" }} onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">FAQ</RouterLink>
-                        <RouterLink to={"/"} state={{ scrollTo: "contact-section" }} onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Contact</RouterLink>
+                        <RouterLink to={"/"} state={{ scrollTo: "about-section" }} onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">About</RouterLink>
+                        <RouterLink to={"/"} state={{ scrollTo: "partners-section" }} onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Partners</RouterLink>
+                        {/* 20240420 Mariaro: "Hidden until the buttons are functional */}
+                        {/* <RouterLink to="/educationcenters" onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Education Centers</RouterLink> */}
+                        {/* <RouterLink to={"/"} state={{ scrollTo: "FAQ-section" }} onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">FAQ</RouterLink> */}
+                        <RouterLink to={"/"} state={{ scrollTo: "contact-section" }} onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Contacts</RouterLink>
                         <a href="https://www.linkedin.com/company/aurinkolab" target="_blank" rel="noopener noreferrer" className="cursor-pointer py-4 px-4 container"><LinkedinLogo /></a>
                         <a href="https://www.tiktok.com/@aurinkolab?_t=8kJWgknKlHN&_r=1" target="_blank" rel="noopener noreferrer" className="cursor-pointer py-4 px-4 container"><TiktokLogo /></a>
                         <RouterLink to="/events" onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Apply Now</RouterLink>
@@ -77,11 +77,10 @@ function Navbar() {
                     <motion.div variants={reveal} className="cursor-pointer">
                         <RouterLink to={"/"} state={{ scrollTo: "partners-section" }}>Partners</RouterLink>
                     </motion.div>
-                    {/* Mariaro: TODO: 'apply' button. Hided until 'apply' button is work */}
+                    {/* 20240420 Mariaro: "Hidden until the buttons are functional */}
                     {/* <motion.div variants={reveal} className="cursor-pointer">
                         <RouterLink to={"/educationcenters"} >Education Centers</RouterLink>
                     </motion.div> */}
-                    {/* Mariaro TODO: to fins a better place */}
                     {/* <motion.div variants={reveal} className="cursor-pointer">
                         <RouterLink to={"/"} state={{ scrollTo: "FAQ-section" }}>FAQ</RouterLink>
                     </motion.div> */}
