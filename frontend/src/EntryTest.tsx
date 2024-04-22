@@ -36,7 +36,7 @@ const EntryTest: React.FC = () => {
     const [ questions, setQuestions ] = useState<Question[][]>([]); /** Two dimensional array where nested array consists of questions per page */
     const [ pageIndex, setPageIndex ] = useState<number>(0); /** Indicate index of current page */
     const [ participantAnswers, setParticipantAnswers ] = useState<Array<{ questionId: number, answerId: number, isCorrect: boolean }>>([]); /** To store participant's answers */
-    //const [ skippedQuestions, setSkippedQuestions ] = useState<number[]>([]); /** To store questions skipped by participant */
+    const [ skippedQuestions, setSkippedQuestions ] = useState<number[]>([]); /** To store questions skipped by participant */
     const [ message, setMessage ] = useState<string>(''); /** To display message, e.g. when questions are skipped */
     const [ currentButton, setCurrentButton ] = useState<string>('Submit'); 
     const [ quizCompleted, setQuizCompleted] = useState<boolean>(false);
@@ -48,7 +48,7 @@ const EntryTest: React.FC = () => {
 
     /** On page load, set questions of each page */
     useEffect(() => {
-        setQuestions(chunkArray(allQuestions, 1)); /** Second parameter is to set number of questions per page */
+        setQuestions(chunkArray(allQuestions, 6)); /** Second parameter is to set number of questions per page */
     }, [])
 
     useEffect(() => {
@@ -113,12 +113,12 @@ const EntryTest: React.FC = () => {
 
         /** Update skipped question IDs */
         if (skippedQuestionsNos.length > 0) {
-            /*setSkippedQuestions(skippedQuestionsNos);
+            setSkippedQuestions(skippedQuestionsNos);
 
             const totalQuestions = skippedQuestionsNos.length === 1? 'one question' : 'a few questions';
             const questionsNos = skippedQuestionsNos.join(', ');
-            setMessage(`Your quiz isn't complete, just ${totalQuestions} left: Question no. ${questionsNos}`);*/
-            setMessage('Please select an answer to proceed.');
+            setMessage(`Your quiz isn't complete, just ${totalQuestions} left: Question no. ${questionsNos}`);
+            //setMessage('Please select an answer to proceed.');
         }
         else {
             //setMessage('Good try!');
@@ -177,9 +177,9 @@ const EntryTest: React.FC = () => {
                         {questions[pageIndex] ? questions[pageIndex].map((question) => (
                             <div key={question.questionId} className='individual-question'>
                                 <p>{`${question.questionNo}. ${question.question}`} 
-                                    {/* <span className={`unanswered-question ${(skippedQuestions.includes(question.questionNo) && currentButton === "Submit") ? '' : 'hidden'}`}> 
+                                    <span className={`unanswered-question ${(skippedQuestions.includes(question.questionNo) && currentButton === "Submit") ? '' : 'hidden'}`}> 
                                         {skippedQuestions.includes(question.questionNo) ? 'Unanswered' : '' }
-                                    </span> */}
+                                    </span>
                                 </p>
                                 {/* Loop through answers per question */}
                                 {question.answers.map((answer) => (
