@@ -347,7 +347,7 @@ body {
 }
 
 /**styling for Quiz and Events page*/
-.quiz-title, .events-title, .event-title {
+.quiz-title, .events-title, .event-title, .tutors-title {
   color: #FFFFFF;
   font-family: "Roboto Slab", sans-serif;
   padding-top: 100px;
@@ -363,17 +363,24 @@ body {
   background-color: #285078;
 }
 
-.events-title {
-  background-color: #7878A0;
+.event-title, .events-title {
+  background-color: #785050;
 }
 
-.event-title {
-  background-color: #785050;
+.tutors-title {
+  background-color: #78A0C8;
+}
+
+.parent-container { 
+  display: flex;
+  flex-direction: column;
+  height: 100vh; 
 }
 
 .events-page {
   font-family: "Poppins", sans-serif;
   font-size: 1.7rem;
+  flex: 1; 
 }
 
 .event-page {
@@ -468,6 +475,16 @@ body {
   font-family: "Poppins", sans-serif;
   font-size: 1.5rem;
   padding: 1rem 3rem;
+}
+
+.button-tiny {
+  background-color: #505050;
+  border-radius: 30px;
+  color: #FFFFFF;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.3rem;
+  padding: 0.5rem 1.2rem;
+
 }
 
 .unanswered-question {
@@ -849,3 +866,5 @@ legend{
   display: flex;
   justify-content: flex-end;
 }
+
+
