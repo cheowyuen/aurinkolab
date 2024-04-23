@@ -1,3 +1,5 @@
+import Logo from "./Logo";
+
 function Tutors() {
     const tutors = [
         {image: "/src/assets/tony.jpeg", name: "Tony", email: "tony.poppel@gmail.com", completedVehicles: "300", isEstimate: true, isCertified: true, tutorId: 1},
@@ -27,17 +29,26 @@ function Tutors() {
                                         <img src={tutor.image} alt={tutor.name} className="rounded-full object-cover h-full w-full shadow-md" />
                                     </div>
                                 </div>
-                                <div className="px-6 mt-16">
-                                    <h1 className="font-bold text-3xl text-center mb-1">{tutor.name}</h1>
-                                    <p className="text-gray-800 text-sm text-center">{tutor.isCertified ? "AurinkoLab-certified tutor" : ""}</p>
-                                    <p className="text-center text-gray-600 text-base pt-3 font-normal">Completed {tutor.completedVehicles}{tutor.isEstimate ? "+" : ""} multimodal green energy vehicles.</p>
-                                    <div className="w-full flex justify-center pt-5 pb-5 text-base text-gray-600">
+                                <div className="mt-16">
+                                    <h1 className="font-bold text-3xl text-center mb-1 px-6">{tutor.name}</h1>
+                                    <p className="text-center text-gray-600 text-base pt-3 font-normal px-6">Completed {tutor.completedVehicles}{tutor.isEstimate ? "+" : ""} multimodal green energy vehicles.</p>
+                                    <div className="w-full flex justify-center pt-5 pb-5 px-6 text-base text-gray-600">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#718096" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" className="feather feather-mail mr-2">
                                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                                             <polyline points="22,6 12,13 2,6"></polyline>
                                         </svg>
                                         {tutor.email}
                                     </div>
+                                    {tutor.isCertified ?
+                                        (<div className="text-base certified">
+                                            <div className="logo-container"><Logo width="36px" height="36px" /></div>
+                                            AurinkoLab-certified tutor
+                                        </div>)
+                                    :
+                                        (<div className="text-base certified-empty">
+                                            <div className="empty-container"></div>
+                                        </div>)
+                                    }
                                 </div>
                             </div>
                         </div>
