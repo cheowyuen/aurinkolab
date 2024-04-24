@@ -111,7 +111,6 @@ body {
 }
 
 .description-text,
-.faq-text,
 .schedule-meeting-text {
   display: flex;
   width: 90%;
@@ -123,11 +122,6 @@ body {
   flex-direction: column;
 }
 
-.faq-section {
-  background: var(--color-4);
-}
-
-.faq-header-content,
 .contact-header-content {
   font-size: 2rem;
   padding-top: 2rem;
@@ -292,14 +286,12 @@ body {
   }
 
   .description-section,
-  .faq-section,
   .contact-section {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
   }
 
 
-  .faq-header-content,
   .contact-header-content {
     font-size: 1.5rem;
     margin-left: 0.5rem;
