@@ -210,6 +210,7 @@ body {
   align-items: center;
   text-align: justify;
   background:  var(--color-4);
+  padding: 1cm;
 }
 
 .contact-section {
@@ -255,7 +256,7 @@ body {
 }
 
 .partners-div {
-  padding: 1rem;
+  padding: 0rem;
   color: var(--color-4);
   background: var(--color-4);
 }

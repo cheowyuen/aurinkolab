@@ -4,7 +4,7 @@ function AboutAurinkoLabSection() {
   return (
     <div id="about-section" className="header-section">
       <div className="header-content">
-        <span>About AurinkoLab</span>
+        <span>AurinkoLab :</span>
       </div>
       <div className="description-section">
         <div className="about-content-wrapper">
