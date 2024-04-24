@@ -70,9 +70,6 @@ function Navbar() {
                         <RouterLink to="/events">Events</RouterLink>
                     </motion.div>
                     <motion.div variants={reveal} className="cursor-pointer">
-                        <RouterLink to={"/tutors"} >Tutors</RouterLink>
-                    </motion.div>
-                    <motion.div variants={reveal} className="cursor-pointer">
                         <RouterLink to="/entrytest">Quiz</RouterLink> {/* Route to quiz page */}
                     </motion.div>
                     <motion.div variants={reveal} className="cursor-pointer">
@@ -88,6 +85,9 @@ function Navbar() {
                     {/* <motion.div variants={reveal} className="cursor-pointer">
                         <RouterLink to={"/"} state={{ scrollTo: "FAQ-section" }}>FAQ</RouterLink>
                     </motion.div> */}
+                    <motion.div variants={reveal} className="cursor-pointer">
+                        <RouterLink to={"/tutors"} >Tutors</RouterLink>
+                    </motion.div>
                     <motion.div variants={reveal} className="cursor-pointer">
                         <RouterLink to={"/"} state={{ scrollTo: "contact-section" }}>Contact</RouterLink>
                     </motion.div>
