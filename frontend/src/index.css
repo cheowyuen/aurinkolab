@@ -569,19 +569,16 @@ body {
 
 /** Error/info message notificaton */
 .error {
-  font-family: "Poppins", sans-serif;
-  color: red;
-  font-size: 1.3rem;
+  color: #c92e2e;
+  font-size: 1.2rem;
   border-style: solid;
   border-radius: 2rem;
   border-width: 0.1rem;
-  border-color: red;
-  padding: 2rem;
-  margin-top: 3.5rem;
-  margin-left: 10rem;
-  margin-bottom: 2rem;
-  margin-right: 10rem;
+  border-color: #c92e2e;
+  padding: 1.5rem;
+  margin-top: 2rem;
   text-align: center;
+  display: inline-block;
 }
 
 .notification {
@@ -597,6 +594,10 @@ body {
   margin-left: 10rem;
   margin-bottom: 2rem;
   margin-right: 10rem;
+  text-align: center;
+}
+
+.notification-container {
   text-align: center;
 }
 
@@ -909,4 +910,8 @@ legend{
 
 .bg-lightblue {
   background: var(--color-1); 
+}
+
+.border-red {
+  border-color: #c92e2e;
 }

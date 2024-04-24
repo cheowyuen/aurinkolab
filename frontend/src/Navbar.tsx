@@ -50,13 +50,8 @@ function Navbar() {
 
                 {isOpen && (
                     <div className="absolute top-full left-0 w-full py-3 px-5 md:hidden dropdown-menu">
-<<<<<<< HEAD
-                        <RouterLink to={"/"} state={{ scrollTo: "about-section" }} onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">About</RouterLink>
-                        <RouterLink to={"/"} state={{ scrollTo: "partners-section" }} onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Partners</RouterLink>
-                        <RouterLink to="/tutors" onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Tutors</RouterLink>
-=======
->>>>>>> main
                         <RouterLink to="/events" onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Events</RouterLink>
+                        <RouterLink to="/tutors" onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Tutors</RouterLink>
                         <RouterLink to="/entrytest" onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Quiz</RouterLink>
                         <RouterLink to={"/"} state={{ scrollTo: "about-section" }} onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">About</RouterLink>
                         <RouterLink to={"/"} state={{ scrollTo: "partners-section" }} onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Partners</RouterLink>
@@ -72,22 +67,10 @@ function Navbar() {
 
                 <div className="nav-bar hidden md:flex">
                     <motion.div variants={reveal} className="cursor-pointer">
-<<<<<<< HEAD
-                        {/* <Link to="about-section" smooth={true} duration={500}  offset={-80} className="cursor-pointer">About</Link> */}
-                        <RouterLink to={"/"} state={{ scrollTo: "about-section" }}>About</RouterLink>
-                    </motion.div>
-                    <motion.div variants={reveal} className="cursor-pointer">
-                        {/* <Link to="events-section" smooth={true} duration={500} offset={-80}className="cursor-pointer">Events</Link> */}
-                        <RouterLink to={"/"} state={{ scrollTo: "partners-section" }}>Partners</RouterLink>
-                    </motion.div>
-                    <motion.div variants={reveal} className="cursor-pointer">
-                        {/* <Link to="about-section" smooth={true} duration={500}  offset={-80} className="cursor-pointer">About</Link> */}
-                        <RouterLink to={"/tutors"} >Tutors</RouterLink>
-                    </motion.div>
-                    <motion.div variants={reveal} className="cursor-pointer">
-=======
->>>>>>> main
                         <RouterLink to="/events">Events</RouterLink>
+                    </motion.div>
+                    <motion.div variants={reveal} className="cursor-pointer">
+                        <RouterLink to={"/tutors"} >Tutors</RouterLink>
                     </motion.div>
                     <motion.div variants={reveal} className="cursor-pointer">
                         <RouterLink to="/entrytest">Quiz</RouterLink> {/* Route to quiz page */}
