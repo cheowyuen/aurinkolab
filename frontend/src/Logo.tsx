@@ -1,10 +1,14 @@
+interface LogoProps {
+    width?: string;
+    height?: string;
+}
 
-function Logo() {
+function Logo({ width = '80px', height = '80px' }: LogoProps) {
     const strWidth = 20;
     const color2 = "#EBE5CE";
     return (
         <div style={{ display: 'flex', justifyContent: 'left', paddingTop: '0px', paddingLeft: '0px', backgroundColor: '#505050'  }}>
-            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="80px" height="80px" viewBox="0 0 1024 1024" enable-background="new 0 0 1024 1024" xmlSpace="preserve">
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width={width} height={height} viewBox="0 0 1024 1024" enable-background="new 0 0 1024 1024" xmlSpace="preserve">
             {/* outter arc */}
             <path fill={color2} opacity="q.000000" stroke={color2} strokeWidth={strWidth}
                 d="

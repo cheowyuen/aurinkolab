@@ -5,6 +5,7 @@ import EntryTest from "./EntryTest"; //Imported EntryTest component
 import AllEvents from "./AllEvents";
 import EventDetails from "./EventDetails";
 import EducationCenters from "./EducationCenters";
+import Tutors from "./Tutors";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/events" element={<AllEvents />} />
         <Route path="/events/:eventId" element={<EventDetails />} />
         <Route path="/educationcenters" element={<EducationCenters />} />
+        <Route path="/tutors" element={<Tutors />} />
       </Routes>
       </div>
     </BrowserRouter>

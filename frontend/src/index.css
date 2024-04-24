@@ -348,7 +348,7 @@ body {
 }
 
 /**styling for Quiz and Events page*/
-.quiz-title, .events-title, .event-title {
+.quiz-title, .events-title, .event-title, .tutors-title {
   color: #FFFFFF;
   font-family: "Roboto Slab", sans-serif;
   padding-top: 100px;
@@ -364,17 +364,24 @@ body {
   background-color: #285078;
 }
 
-.events-title {
-  background-color: #7878A0;
+.event-title, .events-title {
+  background-color: #785050;
 }
 
-.event-title {
-  background-color: #785050;
+.tutors-title {
+  background-color: #78A0C8;
+}
+
+.parent-container { 
+  display: flex;
+  flex-direction: column;
+  height: 100vh; 
 }
 
 .events-page {
   font-family: "Poppins", sans-serif;
   font-size: 1.7rem;
+  flex: 1; 
 }
 
 .event-page {
@@ -469,6 +476,16 @@ body {
   font-family: "Poppins", sans-serif;
   font-size: 1.5rem;
   padding: 1rem 3rem;
+}
+
+.button-tiny {
+  background-color: #505050;
+  border-radius: 30px;
+  color: #FFFFFF;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.3rem;
+  padding: 0.5rem 1.2rem;
+
 }
 
 .unanswered-question {
@@ -827,7 +844,6 @@ legend{
   float: right;
 }
 
-
 .form-box-1{
   width: 65%;
 
@@ -837,7 +853,6 @@ legend{
 
 }
 
-
 .dropdown-menu {
   font-size: 2rem;
   background: var(--color-2);
@@ -846,7 +861,40 @@ legend{
   text-align: right;
   item-align: right;
 }
+
 .container {
   display: flex;
   justify-content: flex-end;
+}
+
+.certified {
+  display: flex;          
+  align-items: center;    
+  justify-content: center;
+  background: var(--color-2);  
+  color: white;
+  padding: 0.3rem; 
+  margin-top: 0.5rem;   
+  color: var(--color-4);        
+}
+
+.logo-container {
+  margin-right: 0.5em;    
+}
+
+.certified-empty {
+  display: flex;          
+  align-items: center;    
+  justify-content: center;
+  background: white;  
+  color: white;
+  padding: 0.3rem; 
+  margin-top: 0.5rem;   
+  color: var(--color-4); 
+}
+
+.empty-container {
+  width: 100%;
+  height: 36px;
+  background: white;
 }
