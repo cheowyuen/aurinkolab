@@ -52,12 +52,12 @@ function Navbar() {
                     <div className="absolute top-full left-0 w-full py-3 px-5 md:hidden dropdown-menu">
                         <RouterLink to="/events" onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Events</RouterLink>
                         <RouterLink to="/tutors" onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Tutors</RouterLink>
-                        <RouterLink to="/entrytest" onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Quiz</RouterLink>
                         <RouterLink to={"/"} state={{ scrollTo: "about-section" }} onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">About</RouterLink>
                         <RouterLink to={"/"} state={{ scrollTo: "partners-section" }} onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Partners</RouterLink>
                         {/* 20240420 Mariaro: "Hidden until the buttons are functional */}
                         {/* <RouterLink to="/educationcenters" onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Education Centers</RouterLink> */}
                         {/* <RouterLink to={"/"} state={{ scrollTo: "FAQ-section" }} onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">FAQ</RouterLink> */}
+                        <RouterLink to="/entrytest" onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Quiz</RouterLink>
                         <RouterLink to={"/"} state={{ scrollTo: "contact-section" }} onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">Contacts</RouterLink>
                         <a href="https://www.linkedin.com/company/aurinkolab" target="_blank" rel="noopener noreferrer" className="cursor-pointer py-4 px-4 container"><LinkedinLogo /></a>
                         <a href="https://www.tiktok.com/@aurinkolab?_t=8kJWgknKlHN&_r=1" target="_blank" rel="noopener noreferrer" className="cursor-pointer py-4 px-4 container"><TiktokLogo /></a>
@@ -68,9 +68,6 @@ function Navbar() {
                 <div className="nav-bar hidden md:flex">
                     <motion.div variants={reveal} className="cursor-pointer">
                         <RouterLink to="/events">Events</RouterLink>
-                    </motion.div>
-                    <motion.div variants={reveal} className="cursor-pointer">
-                        <RouterLink to="/entrytest">Quiz</RouterLink> {/* Route to quiz page */}
                     </motion.div>
                     <motion.div variants={reveal} className="cursor-pointer">
                         <RouterLink to={"/"} state={{ scrollTo: "about-section" }}>About</RouterLink>
@@ -90,6 +87,9 @@ function Navbar() {
                     </motion.div>
                     <motion.div variants={reveal} className="cursor-pointer">
                         <RouterLink to={"/"} state={{ scrollTo: "contact-section" }}>Contact</RouterLink>
+                    </motion.div>
+                    <motion.div variants={reveal} className="cursor-pointer">
+                        <RouterLink to="/entrytest">Quiz</RouterLink> {/* Route to quiz page */}
                     </motion.div>
                     <motion.div variants={reveal} className="cursor-pointer">
                     <a href="https://www.linkedin.com/company/aurinkolab" target="_blank" rel="noopener noreferrer" className="cursor-pointer"><LinkedinLogo /></a>
