@@ -1,6 +1,5 @@
 import { useState, useRef } from 'react';
 import Notification from '../src/Notification';
-import { isNullOrUndefined } from 'util';
 
 const Signup = () => {
     const [ message, setMessage ] = useState<string>('');
