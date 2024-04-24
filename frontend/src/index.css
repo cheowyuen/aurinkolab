@@ -115,7 +115,7 @@ body {
 .schedule-meeting-text {
   display: flex;
   width: 90%;
-  font-size: 1rem;
+  font-size: 1.5vw;
   line-height: 1.5;
   color: var(--color-2);
   margin-right: 1rem;
@@ -298,14 +298,6 @@ body {
     margin-right: 0.5rem;
   }
 
-  .description-text,
-  .faq-text,
-  .contact-text,
-  .schedule-meeting-text {
-    font-size: 0.9rem;
-    margin-right: 0;
-    margin-left: 0;
-  }
 
   .faq-header-content,
   .contact-header-content {
