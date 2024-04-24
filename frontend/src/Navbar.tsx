@@ -75,7 +75,7 @@ function Navbar() {
                         <RouterLink to={"/"} state={{ scrollTo: "about-section" }}>About</RouterLink>
                     </motion.div>
                     <motion.div variants={reveal} className="cursor-pointer">
-                        <RouterLink to={"/"} state={{ scrollTo: "partners-section" }}>Partners</RouterLink>
+                        <RouterLink to={"/"} state={{ scrollTo: "partners-container" }}>Partners</RouterLink>
                     </motion.div>
                     {/* 20240420 Mariaro: "Hidden until the buttons are functional */}
                     {/* <motion.div variants={reveal} className="cursor-pointer">
