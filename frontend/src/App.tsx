@@ -6,6 +6,7 @@ import AllEvents from "./AllEvents";
 import EventDetails from "./EventDetails";
 import EducationCenters from "./EducationCenters";
 import Tutors from "./Tutors";
+import Signup from "./Signup";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/events/:eventId" element={<EventDetails />} />
         <Route path="/educationcenters" element={<EducationCenters />} />
         <Route path="/tutors" element={<Tutors />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
       </div>
     </BrowserRouter>
