@@ -19,5 +19,14 @@ services:
     env_file:
       - project.env
 
+  frontend:
+    container_name: frontend
+    build: ./frontend
+    ports:
+      - "5173:5173"  
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules 
+
 volumes:
   postgres_data:
