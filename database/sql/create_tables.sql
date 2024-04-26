@@ -21,14 +21,14 @@ CREATE TABLE tutors (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255),
-    email VARCHAR(255) NOT NULL,
+    email VARCHAR(255),
     password VARCHAR(255),
     contact_no VARCHAR(30),
     role VARCHAR(255),
     has_certificate BOOLEAN DEFAULT false,
     image TEXT,
     education_center_id INT NOT NULL REFERENCES education_centers(id),
-    completed_vehicles INT NOT NULL DEFAULT 0,
+    completed_vehicles NUMERIC(5,1) NOT NULL DEFAULT 0,
     is_estimate BOOLEAN NOT NULL DEFAULT false,
     display_on_website BOOLEAN NOT NULL DEFAULT false
 );

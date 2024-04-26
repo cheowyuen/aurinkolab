@@ -12,7 +12,7 @@ function Tutors() {
     return (
         <div className="parent-container">
             <div className='tutors-title' data-testid="event-details-title">
-                <p>Tutors</p>
+                <p>Aurinko Tutors</p>
             </div>
 
             <div className="flex justify-center mx-auto pt-12 pb-6 bg-gray-100 w-full">
