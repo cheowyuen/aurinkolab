@@ -5,7 +5,7 @@ const tutorsController = {
   getAll: async (req: Request, res: Response) => {
     try {
       let data = await pool.query(
-        `SELECT * FROM tutors where display_on_website = true;`
+        `SELECT id, first_name, email, has_certificate, image, completed_vehicles, is_estimate FROM tutors where display_on_website = true;`
       );
       res.json(data.rows);
     } catch (e) {

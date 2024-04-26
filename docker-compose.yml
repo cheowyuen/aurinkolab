@@ -28,5 +28,15 @@ services:
       - ./frontend:/app
       - /app/node_modules 
 
+  flyway:
+    image: flyway/flyway:7.3.0-alpine
+    env_file:
+      - project.env
+    depends_on:
+      - database
+    volumes:
+      - ./flyway/sql:/flyway/sql
+    command: -connectRetries=60 -baselineOnMigrate=true migrate
+
 volumes:
   postgres_data:

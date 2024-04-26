@@ -25,7 +25,7 @@ CREATE TABLE tutors (
     password VARCHAR(255),
     contact_no VARCHAR(30),
     role VARCHAR(255),
-    has_certificate BOOLEAN DEFAULT false,
+    has_certificate BOOLEAN NOT NULL DEFAULT false,
     image TEXT,
     education_center_id INT NOT NULL REFERENCES education_centers(id),
     completed_vehicles NUMERIC(5,1) NOT NULL DEFAULT 0,
