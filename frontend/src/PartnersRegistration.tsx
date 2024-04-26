@@ -86,7 +86,7 @@ const Signup = () => {
         <div className="flex justify-center items-center min-h-screen"> 
             <div className="w-full max-w-4xl p-6 bg-white rounded">
                 <div className="signup-title">
-                    <p>Download the Presentation for Partners</p>
+                    <p>Sponsorship Opportunities</p>
                 </div>
                 <div>
                     <p className="text-center">To download the presentation, please submit the form below and we will e-mail you the presentaion file.</p>
