@@ -1,4 +1,16 @@
 services:
+  app:
+    container_name: backend
+    build: ./app
+    ports:
+      - 3001:3001
+    volumes:
+      - ./app:/app
+    depends_on:
+      - database
+    env_file:
+      - project.env
+
   database:
     container_name: aurinkolab-database
     image: postgres

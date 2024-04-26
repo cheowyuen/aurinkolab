@@ -2,9 +2,9 @@ import { Event } from "../EventDetails";
 
 const allEvents: Event[] = [
     {
-        eventId: 1, 
-        eventName: "Visit to Keravan Energia's Solar Plant", 
-        dates: "04 Apr 2024", 
+        id: 1, 
+        name: "Visit to Keravan Energia's Solar Plant", 
+        date: "04 Apr 2024", 
         educationCenter: "Aurinko Lab",
         place: "Kerava, Finland", 
         vehicle: "N/A",
@@ -15,9 +15,9 @@ const allEvents: Event[] = [
         image: "/src/assets/Kerava.jpg"
     },
     {
-        eventId: 2, 
-        eventName: "Engineering Hackathon-1", 
-        dates: "Apr - May 2024", 
+        id: 2, 
+        name: "Engineering Hackathon-1", 
+        date: "Apr - May 2024", 
         educationCenter: "Aurinko Lab",
         place: "Keran Hallit, Aalto Design Factory", 
         vehicle: "Blue Boat",
@@ -28,9 +28,9 @@ const allEvents: Event[] = [
         image: "/src/assets/Aalto.jpeg"
     },
     {
-        eventId: 3, 
-        eventName: "Engineering Hackathon-2", 
-        dates: "Apr - May 2024", 
+        id: 3, 
+        name: "Engineering Hackathon-2", 
+        date: "Apr - May 2024", 
         educationCenter: "Aurinko Lab",
         place: "Keran Hallit, Aalto Design Factory", 
         vehicle: "Orange Boat",
@@ -41,9 +41,9 @@ const allEvents: Event[] = [
         image: "/src/assets/Aalto.jpeg"
     },
     {
-        eventId: 4, 
-        eventName: "Engineering Hackathon-3", 
-        dates: "Apr - May 2024", 
+        id: 4, 
+        name: "Engineering Hackathon-3", 
+        date: "Apr - May 2024", 
         educationCenter: "Aurinko Lab",
         place: "Sigulda, Latvia", 
         vehicle: "Green Boat",
@@ -54,9 +54,9 @@ const allEvents: Event[] = [
         image: "/src/assets/Sigulda.png"
     },
     {
-        eventId: 5, 
-        eventName: "Solar Regatta", 
-        dates: "01 Jun 2024", 
+        id: 5, 
+        name: "Solar Regatta", 
+        date: "01 Jun 2024", 
         educationCenter: "Aurinko Lab",
         place: "Helsinki, Finland", 
         vehicle: "Boat",
@@ -67,9 +67,9 @@ const allEvents: Event[] = [
         image: "/src/assets/Helsinki.png"
     },
     {
-        eventId: 6, 
-        eventName: "Training for Tutors", 
-        dates: "28 - 29 Aug 2024", 
+        id: 6, 
+        name: "Training for Tutors", 
+        date: "28 - 29 Aug 2024", 
         educationCenter: "Aurinko Lab",
         place: "Online", 
         vehicle: "Boat",
@@ -80,9 +80,9 @@ const allEvents: Event[] = [
         image: "/src/assets/Aalto.jpeg"
     },
     {
-        eventId: 7, 
-        eventName: "Engineering Hackathon-4", 
-        dates: "Sep - Oct 2024", 
+        id: 7, 
+        name: "Engineering Hackathon-4", 
+        date: "Sep - Oct 2024", 
         educationCenter: "Aurinko Lab",
         place: "Keran Hallit, Aalto Design Factory", 
         vehicle: "Go-karts",
@@ -93,9 +93,9 @@ const allEvents: Event[] = [
         image: "/src/assets/Aalto.jpeg"
     },
     {
-        eventId: 8, 
-        eventName: "Engineering Hackathon-5", 
-        dates: "Sep - Oct 2024", 
+        id: 8, 
+        name: "Engineering Hackathon-5", 
+        date: "Sep - Oct 2024", 
         educationCenter: "Aurinko Lab",
         place: "Keran Hallit, Aalto Design Factory", 
         vehicle: "Go-karts",
@@ -106,13 +106,13 @@ const allEvents: Event[] = [
         image: "/src/assets/Aalto.jpeg"
     },
     {
-        eventId: 9, 
-        eventName: "Solar Race", 
-        dates: "26 Oct 2024", 
+        id: 9, 
+        name: "Solar Race", 
+        date: "26 Oct 2024", 
         educationCenter: "Aurinko Lab",
         place: "Vantaa, Finland", 
         vehicle: "Go-karts",
-        engine: "Solar-engine",
+        engine: "Solar-electric",
         tutor: "",
         schedule: "",
         status: "upcoming", 

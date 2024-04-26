@@ -10,9 +10,9 @@ import tutor_icon from '/src/assets/tutor.png';
 import schedule_icon from '/src/assets/schedule.png';
 
 export interface Event {
-    eventId: number;
-    eventName: string;
-    dates: string;
+    id: number;
+    name: string;
+    date: string;
     educationCenter: string;
     place: string;
     vehicle: string;
@@ -32,7 +32,7 @@ function EventDetails() {
         setEvents(allEvents); 
     }, [])
 
-    const event = events.find(e => e.eventId === Number(eventId))
+    const event = events.find(e => e.id === Number(eventId))
 
     if (!event) {
         return <div>No event found</div>;
@@ -57,10 +57,10 @@ function EventDetails() {
                 </div>
 
                 <div className="flex-1 text-xl event-text-container">
-                    <p className="text-3xl title-font">{event.eventName}</p><br/>
+                    <p className="text-3xl title-font">{event.name}</p><br/>
                     <span className="icon-text">
                         <img src={date_icon} alt="Date" className="icon" />
-                        <span className="icon-details"><span className="font-bold">Dates</span>: {event.dates}</span>
+                        <span className="icon-details"><span className="font-bold">Dates</span>: {event.date}</span>
                     </span><br/><br/>
                     <span className="icon-text">
                         <img src={edu_centre_icon} alt="Education Centre" className="icon" />
