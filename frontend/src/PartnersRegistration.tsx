@@ -12,7 +12,7 @@ const Signup = () => {
     });
 
     const [errors, setErrors] = useState({
-        CompanyName: false,
+        companyName: false,
         emailAddress: false,
     });
 
@@ -103,7 +103,7 @@ const Signup = () => {
                                 <label className="block tracking-wide mb-2">
                                     Company Name*
                                 </label>
-                                <input onChange={handleInputChange} value={fields.companyName} className={`appearance-none block w-full border ${errors.CompanyName ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="companyName" type="text" />
+                                <input onChange={handleInputChange} value={fields.companyName} className={`appearance-none block w-full border ${errors.companyName ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="companyName" type="text" />
                             </div>
                             <div className="w-full md:w-1/2 px-3">
                                 <label className="block tracking-wide text mb-2">
