@@ -8,7 +8,7 @@ VALUES
     ('Training for Tutors', '28 - 29 Aug 2024', 'Online', 'Boat', 'Hydrogen-driven and solar-electric', NULL, NULL, 1, '2024-08-28', '2024-08-29', '/src/assets/Aalto.jpeg'),
     ('Engineering Hackathon-4', 'Sep - Oct 2024', 'Espoo, Finland', 'Go-karts', 'Solar-electric', NULL, 1, 1, '2024-09-01', '2024-10-31', '/src/assets/Aalto.jpeg'),
     ('Engineering Hackathon-5', 'Sep - Oct 2024', 'Espoo, Finland', 'Go-karts', 'Solar-electric', NULL, 1, 1, '2024-09-01', '2024-10-31', '/src/assets/Aalto.jpeg'),
-    ('Solar Race', '26 Oct 2024', 'Vantaa, Finland', 'Go-karts', 'Solar-electric', NULL, NULL, 1, '2024-10-26', '2024-10-26', '/src/assets/Vantaa.jpg'),
+    ('Solar Race', '26 Oct 2024', 'Vantaa, Finland', 'Go-karts', 'Solar-electric', NULL, NULL, 1, '2024-10-26', '2024-10-26', '/src/assets/Vantaa.jpg');
 
 INSERT INTO education_centers (name, address, email, contact_no)
 VALUES

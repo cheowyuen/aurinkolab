@@ -4,12 +4,13 @@ import { Request, Response } from 'express';
 const tutorsController = {
   getAll: async (req: Request, res: Response) => {
     try {
-      let data = await pool.query(
+      const { rows } = await pool.query(
         `SELECT id, first_name, email, has_certificate, image, completed_vehicles, is_estimate FROM tutors where display_on_website = true;`
       );
-      res.json(data.rows);
-    } catch (e) {
-      console.log(e);
+      res.json(rows);
+    } catch (error) {
+      console.error('Database error:', error); 
+      res.status(500).json({ message: "An error occurred while retrieving tutors data" });
     }
   }
 };
