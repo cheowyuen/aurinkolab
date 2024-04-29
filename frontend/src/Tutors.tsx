@@ -60,7 +60,7 @@ const Tutors = () => {
                                     {tutor.has_certificate ?
                                         (<div className="text-base certified">
                                             <div className="logo-container"><Logo width="36px" height="36px" /></div>
-                                            AurinkoLab-certified tutor
+                                            certified by AurinkoLab
                                         </div>)
                                     :
                                         (<div className="text-base certified-empty">
@@ -73,6 +73,14 @@ const Tutors = () => {
                     ))}
                 </div>
             </div>
+
+            {/* 20240424 Mariaro833: Unhidded when backend is ready */}
+            {/* <div className="flex justify-center mx-auto pt-12 pb-6 bg-gray-100 w-full">
+                <div className="flex flex-col items-center">
+                    <h1 className="xl:text-4xl text-3xl text-center text-gray-800 font-extrabold pb-6 mx-auto">Interested in being an AurinkoTutor?</h1>
+                    <button className="button-tiny">Register</button>
+                </div>
+            </div> */}
         </div>
     );
 }
