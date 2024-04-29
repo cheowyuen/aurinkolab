@@ -1,38 +1,35 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import allEvents from '../src/data/allEvents';
+import { getEvent } from '../src/services/eventService';
+import { EventDetails as EventDetailsType} from "../src/types";
+//import allEvents from '../src/data/allEvents';
+
 import date_icon from '/src/assets/date-icon.png';
 import edu_centre_icon from '/src/assets/education-centre.png';
 import place_icon from '/src/assets/location.png';
 import vehicle_icon from '/src/assets/boat-icon.png';
 import engine_icon from '/src/assets/engine.png';
 import tutor_icon from '/src/assets/tutor.png';
-import schedule_icon from '/src/assets/schedule.png';
+//import schedule_icon from '/src/assets/schedule.png';
 
-export interface Event {
-    id: number;
-    name: string;
-    date: string;
-    educationCenter: string;
-    place: string;
-    vehicle: string;
-    engine: string;
-    tutor: string;
-    schedule: string;
-    status: string;
-    image: string;
-}
-
-function EventDetails() {
+const EventDetails = () => {
     const { eventId } = useParams(); 
-    const [ events, setEvents ] = useState<Event[]>([]);
+    const [ event, setEvent ] = useState<EventDetailsType>({id: 0, name: "", date: "", educationCenter: "", place: "", vehicle: "", engine: "", tutor: "", status: "", image: ""});
     let title = "Ongoing Event";
 
     useEffect(() => {
-        setEvents(allEvents); 
-    }, [])
+        if (eventId) {
+            getEvent(eventId).then(data => {
+                setEvent(data);
+            }).catch(error => {
+                console.error('Failed to load event:', error);
+            });
+        } else {
+            console.error('Event ID is undefined');
+        }
+    }, [eventId])
 
-    const event = events.find(e => e.id === Number(eventId))
+    //const event = events.find(e => e.id === Number(eventId))
 
     if (!event) {
         return <div>No event found</div>;
@@ -86,10 +83,10 @@ function EventDetails() {
                             </span><br/><br/>
                         </>
                     )}   
-                    <span className="icon-text">
+                    {/* <span className="icon-text">
                         <img src={schedule_icon} alt="Schedule" className="icon" />
                         <span className="icon-details"><span className="font-bold">Schedule</span>: </span>
-                    </span><br/><br/>
+                    </span><br/><br/> */}
                     {/* <button className="button-small">Apply</button> */}
                 </div>
             </div>

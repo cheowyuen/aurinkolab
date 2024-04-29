@@ -1,12 +1,12 @@
 import Logo from "./Logo";
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Tutor } from "../src/types";
 import { getAllTutors } from '../src/services/tutorService';
 
 const Tutors = () => {
     const [tutors, setTutors] = useState<Tutor[]>([]);
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     
     /*const tutors = [
         {image: "/src/assets/tony.jpeg", name: "Tony", email: "tony.poppel@gmail.com", completedVehicles: "300", isEstimate: true, isCertified: true, tutorId: 1},
@@ -16,13 +16,8 @@ const Tutors = () => {
     useEffect(() => {
         getAllTutors().then(data => {
           setTutors(data);
-          console.log(data);
         })
     }, [])
-
-    function removeTrailingDotZero(value: number): string {
-        return value.replace(/\.0$/, '');
-    }
 
     return (
         <div className="parent-container">
