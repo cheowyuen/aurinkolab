@@ -10,8 +10,10 @@ const Notification = forwardRef<HTMLDivElement, NotificationProps>(({ message },
   }
 
   return (
-    <div ref={ref} className='notification' data-testid="notification">
-      {message}
+    <div className="notification-container">
+      <div ref={ref} className={`${!message.includes("quiz") ? "error" : "notification"}`} data-testid="notification">
+        {message}
+      </div>
     </div>
   );
 });

@@ -121,7 +121,7 @@ const EntryTest: React.FC = () => {
             //setMessage('Please select an answer to proceed.');
         }
         else {
-            //setMessage('Good try!');
+            setMessage('');
 
             if (pageIndex === questions.length - 1) {
                 setCurrentButton('Result');
