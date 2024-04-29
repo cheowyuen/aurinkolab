@@ -200,7 +200,7 @@ body {
 .partners-section {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   text-align: justify;
   background:  var(--color-4);
