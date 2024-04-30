@@ -24,12 +24,12 @@ CREATE TABLE tutors (
 
 INSERT INTO education_centers (name, address, email, contact_no)
 VALUES
-    ('Aurinko Lab', 'Espoo, Finland', 'info@aurinkolab.fi', '+35845312338');
+    ('Aurinko Lab', 'Espoo, Finland', 'info@aurinkolab.fi', '+35845312338')
 ON CONFLICT (email) DO NOTHING;
 
 INSERT INTO tutors (first_name, email, has_certificate, image, education_center_id, completed_vehicles, is_estimate, display_on_website)
 VALUES 
     ('Tony', 'tony.poppel@gmail.com', true, '/src/assets/tony.jpeg', 1, 300, true, true),
     ('Olga', 'olgakairova@gmail.com', true, '/src/assets/olga.jpeg', 1, 2, false, true),
-    ('Rostislav', 'N/A', false, '/src/assets/boat-icon.png', 1, 0.5, false, true);
+    ('Rostislav', 'N/A', false, '/src/assets/boat-icon.png', 1, 0.5, false, true)
 ON CONFLICT (email) DO NOTHING;

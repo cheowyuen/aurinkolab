@@ -14,6 +14,17 @@ CREATE TABLE events (
     CONSTRAINT unique_event_details UNIQUE (name, start_date, end_date)
 );
 
+CREATE TABLE students (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    contact_no VARCHAR(30),
+    passedQuiz BOOLEAN NOT NULL DEFAULT false,
+    education_center_id INT NOT NULL REFERENCES education_centers(id)
+);
+
 CREATE TABLE quiz (
     id SERIAL PRIMARY KEY,
     student_id INT NOT NULL REFERENCES students(id),
