@@ -105,6 +105,8 @@ const Signup = () => {
             setErrorMessage('');
         }
 
+        
+
         /** Reset fields after successful submission */
         setFields({
             firstName: "",

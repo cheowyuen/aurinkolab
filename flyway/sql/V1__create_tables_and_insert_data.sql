@@ -10,7 +10,7 @@ CREATE TABLE tutors (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255),
-    email VARCHAR(255) UNIQUE,
+    email VARCHAR(255),
     password VARCHAR(255),
     contact_no VARCHAR(30),
     role VARCHAR(255),
@@ -19,7 +19,8 @@ CREATE TABLE tutors (
     education_center_id INT NOT NULL REFERENCES education_centers(id),
     completed_vehicles NUMERIC(5,1) NOT NULL DEFAULT 0,
     is_estimate BOOLEAN NOT NULL DEFAULT false,
-    display_on_website BOOLEAN NOT NULL DEFAULT false
+    display_on_website BOOLEAN NOT NULL DEFAULT false,
+    CONSTRAINT unique_tutor_details UNIQUE (first_name, email)
 );
 
 INSERT INTO education_centers (name, address, email, contact_no)
@@ -32,4 +33,4 @@ VALUES
     ('Tony', 'tony.poppel@gmail.com', true, '/src/assets/tony.jpeg', 1, 300, true, true),
     ('Olga', 'olgakairova@gmail.com', true, '/src/assets/olga.jpeg', 1, 2, false, true),
     ('Rostislav', 'N/A', false, '/src/assets/boat-icon.png', 1, 0.5, false, true)
-ON CONFLICT (email) DO NOTHING;
+ON CONFLICT (first_name, email) DO NOTHING;
