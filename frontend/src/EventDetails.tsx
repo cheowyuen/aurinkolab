@@ -14,7 +14,7 @@ import tutor_icon from '/src/assets/tutor.png';
 
 const EventDetails = () => {
     const { eventId } = useParams(); 
-    const [ event, setEvent ] = useState<EventDetailsType>({id: 0, name: "", date: "", educationCenter: "", place: "", vehicle: "", engine: "", tutor: "", status: "", image: ""});
+    const [ event, setEvent ] = useState<EventDetailsType>({id: 0, name: "", date: "", education_center: "", place: "", vehicle: "", engine: "", tutor: "", status: "", image: ""});
     let title = "Ongoing Event";
 
     useEffect(() => {
@@ -61,7 +61,7 @@ const EventDetails = () => {
                     </span><br/><br/>
                     <span className="icon-text">
                         <img src={edu_centre_icon} alt="Education Centre" className="icon" />
-                        <span className="icon-details"><span className="font-bold">Education Center</span>: {event.educationCenter}</span>
+                        <span className="icon-details"><span className="font-bold">Education Center</span>: {event.education_center}</span>
                     </span><br/><br/>
                     <span className="icon-text">
                         <img src={place_icon} alt="Place" className="icon" />

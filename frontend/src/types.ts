@@ -21,11 +21,18 @@ export interface EventDetails {
     id: number;
     name: string;
     date: string;
-    educationCenter: string;
+    education_center: string;
     place: string;
     vehicle: string;
     engine: string;
     tutor: string;
     status: string;
     image: string;
+}
+
+export interface Quiz {
+    student_id: number;
+    score: number;
+    totalquestions: number;
+    grade: number;
 }
