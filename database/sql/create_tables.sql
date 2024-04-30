@@ -20,14 +20,17 @@ CREATE TABLE students (
 CREATE TABLE tutors (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    contact_no VARCHAR(30) NOT NULL,
-    role VARCHAR(255) NOT NULL,
-    has_certificate BOOLEAN DEFAULT false,
-    image TEXT NOT NULL,
-    education_center_id INT NOT NULL REFERENCES education_centers(id)
+    last_name VARCHAR(255),
+    email VARCHAR(255),
+    password VARCHAR(255),
+    contact_no VARCHAR(30),
+    role VARCHAR(255),
+    has_certificate BOOLEAN NOT NULL DEFAULT false,
+    image TEXT,
+    education_center_id INT NOT NULL REFERENCES education_centers(id),
+    completed_vehicles NUMERIC(5,1) NOT NULL DEFAULT 0,
+    is_estimate BOOLEAN NOT NULL DEFAULT false,
+    display_on_website BOOLEAN NOT NULL DEFAULT false
 );
 
 CREATE TABLE events (
@@ -35,13 +38,14 @@ CREATE TABLE events (
     name VARCHAR(255) NOT NULL,
     date VARCHAR(255) NOT NULL,
     place VARCHAR(255) NOT NULL,
-    vehicle VARCHAR(255) NOT NULL,
-    engine VARCHAR(255) NOT NULL,
-    schedule TEXT NOT NULL,
-    isActive BOOLEAN DEFAULT false,
-    event_type VARCHAR(255) NOT NULL,
-    tutor_id INT NOT NULL REFERENCES tutors(id),
-    education_center_id INT NOT NULL REFERENCES education_centers(id)
+    vehicle VARCHAR(255),
+    engine VARCHAR(255),
+    schedule TEXT,
+    tutor_id INT REFERENCES tutors(id),
+    education_center_id INT NOT NULL REFERENCES education_centers(id),
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    image VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE events_students (
