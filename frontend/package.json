@@ -13,8 +13,10 @@
     "test:jest": "jest"
   },
   "dependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.6.8",
+    "bcrypt": "^5.1.1",
     "framer-motion": "^10.18.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -36,3 +36,14 @@ export interface Quiz {
     totalquestions: number;
     grade: number;
 }
+
+export interface TutorSignup {
+    first_name: string;
+    last_name: string;
+    email: string;
+    contact_no: string;
+    password: string;
+    education_center_id: number;
+    role: string;
+    display_on_website: boolean;
+}

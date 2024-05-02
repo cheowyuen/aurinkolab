@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Notification from '../src/Notification';
+import { saveTutorSignup } from '../src/services/tutorSignupService';
+import bcrypt from 'bcrypt';
 
 const Signup = () => {
     const [errorMessage, setErrorMessage] = useState("");
@@ -55,7 +57,7 @@ const Signup = () => {
         return phoneRegex.test(number);
     };    
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         setSubmitCount(prevCount => prevCount + 1);
@@ -106,6 +108,29 @@ const Signup = () => {
         }
 
         
+
+        const passwordHash = await bcrypt.hash(fields.password, 10)
+
+        try {
+            /** Save tutor data */
+            await saveTutorSignup(
+                fields.firstName, 
+                fields.lastName, 
+                fields.email, 
+                fields.contact_no, 
+                passwordHash, 
+                1,
+                fields.role,
+                false
+            );
+    
+            /** If no error was thrown, data was saved successfully */
+            
+        } catch (error) {
+            /** Handle any errors that might have occurred during saveQuiz */
+            console.error("Error registering tutor:", error);
+            setErrorMessage("An error occurred during registration. Please try again.");
+        }
 
         /** Reset fields after successful submission */
         setFields({
