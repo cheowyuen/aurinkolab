@@ -11,7 +11,7 @@ const Signup = () => {
     const [isAgreed, setIsAgreed] = useState(false);
     const [display_on_website, setDisplay_on_website] = useState(false);
     const [educationCenters, setEducationCenters] = useState<EducationCenter[]>([]);
-    const [educationCenterId, setEducationCenterId] = useState(1);
+    const [educationCenterId, setEducationCenterId] = useState(0);
 
     const [fields, setFields] = useState({
         firstName: "",
@@ -37,6 +37,9 @@ const Signup = () => {
     useEffect(() => {
         getAllEducationCenters().then(data => {
           setEducationCenters(data);
+          if (data.length > 0) {
+            setEducationCenterId(data[0].id)
+          }
         })
     }, [])
 
@@ -131,6 +134,15 @@ const Signup = () => {
             setErrorMessage('');
         }
 
+        /** Check if education center id is valid */
+        if (educationCenterId === 0) {
+            setErrorMessage("Invalid education center. Please contact administrator.");
+            console.error("Please select a valid education center.");
+            return;
+        } else {
+            setErrorMessage('');
+        }
+
         /** Check if privacy policy checkbox is ticked */
         if (!isAgreed) {
             setErrorMessage('Please read and agree to our Privacy Policy to continue.');
@@ -141,7 +153,7 @@ const Signup = () => {
 
         //const passwordHash = await bcrypt.hash(fields.password, 10)
 
-        //try {
+        try {
             /** Save tutor data */
             await saveTutorSignup(
                 fields.firstName, 
@@ -155,12 +167,23 @@ const Signup = () => {
             );
     
             /** If no error was thrown, data was saved successfully */
-            //console.error("Successfully registered tutor");
-        //} catch (error) {
+            console.error("Successfully registered tutor");
+        } catch (error) {
             /** Handle any errors that might have occurred during saveQuiz */
-            /*console.error("Error registering tutor:", error);
-            setErrorMessage("An error occurred during registration. Please try again.");
-        }*/
+            console.error("Error registering tutor:", error);
+            if (error instanceof Error) { /** Type-checking to ensure `error.message` is accessible */
+                if (error.message === 'Email already in use') {
+                    setErrorMessage("This email address is already registered."); 
+                    return;
+                } else {
+                    setErrorMessage("An error occurred during registration. Please try again."); 
+                    return;
+                }
+            } else {
+                setErrorMessage("An unexpected error occurred. Please try again."); 
+                return;
+            }
+        }
 
         /** Reset fields after successful submission */
         setFields({
@@ -172,6 +195,10 @@ const Signup = () => {
             confirmPassword: "",
             role: ""
         });
+
+        setEducationCenterId(educationCenters[0].id);
+        setDisplay_on_website(false);
+        setIsAgreed(false);
     };
 
     return (
@@ -236,7 +263,7 @@ const Signup = () => {
                                 <label className="block tracking-wide mb-2">
                                     Education Center*
                                 </label>
-                                <select onChange={educationCenterChange} className="block w-full border border-gray-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="education_center">
+                                <select onChange={educationCenterChange} value={educationCenterId} className="block w-full border border-gray-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="education_center">
                                     {educationCenters.map((center) => (
                                         <option key={center.id} value={center.id}>{center.name}</option>
                                     ))}
@@ -254,11 +281,11 @@ const Signup = () => {
                         <div className="flex flex-wrap -mx-3 mb-6">
                             <div className="w-full px-3">
                                 <label className="block tracking-wide mb-2">
-                                    <input type="checkbox" name="display_on_website" value="no" className="mr-3" onChange={displayOnWebsiteChange} />
+                                    <input type="checkbox" name="display_on_website" className="mr-3" checked={display_on_website} onChange={displayOnWebsiteChange} />
                                     By checking this box, you agree to have your information displayed on the website.
                                 </label>
                                 <label className="block tracking-wide mb-2">
-                                    <input type="checkbox" name="privacy_policy" value="no" className="mr-3" onChange={handleCheckboxChange} />
+                                    <input type="checkbox" name="privacy_policy" className="mr-3" checked={isAgreed} onChange={handleCheckboxChange} />
                                     By creating an account, you agree to the <a href="" className="underline">Privacy Policy</a>.
                                 </label>
                             </div>
