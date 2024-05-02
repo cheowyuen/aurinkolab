@@ -2,10 +2,16 @@ import { useState, useEffect, useRef } from 'react';
 import Notification from '../src/Notification';
 import { saveTutorSignup } from '../src/services/tutorSignupService';
 import bcrypt from 'bcrypt';
+import { getAllEducationCenters } from '../src/services/educationCenterService';
+import { EducationCenter } from "../src/types";
 
 const Signup = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const [submitCount, setSubmitCount] = useState(0);
+    const [isAgreed, setIsAgreed] = useState(false);
+    const [display_on_website, setDisplay_on_website] = useState(false);
+    const [educationCenters, setEducationCenters] = useState<EducationCenter[]>([]);
+    const [educationCenterId, setEducationCenterId] = useState(0);
 
     const [fields, setFields] = useState({
         firstName: "",
@@ -27,6 +33,12 @@ const Signup = () => {
     });
 
     const notificationRef = useRef<HTMLDivElement | null>(null); /** Create a ref */
+
+    useEffect(() => {
+        getAllEducationCenters().then(data => {
+          setEducationCenters(data);
+        })
+    }, [])
 
     useEffect(() => {
         if (errorMessage !== '') { 
@@ -55,7 +67,19 @@ const Signup = () => {
         /** Allows optional country code, spaces, dashes, and parentheses */
         const phoneRegex = /^(\+?\d{1,3})?[-. ]?(\(?\d{1,3}\)?)?[-. ]?\d{3}[-. ]?\d{4}$/;
         return phoneRegex.test(number);
-    };    
+    };   
+
+    const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setIsAgreed(event.target.checked);
+    };
+
+    const displayOnWebsiteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setDisplay_on_website(event.target.checked);
+    };
+
+    const educationCenterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setEducationCenterId(Number(event.target.value));
+    };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -107,7 +131,13 @@ const Signup = () => {
             setErrorMessage('');
         }
 
-        
+        /** Check if privacy policy checkbox is ticked */
+        if (!isAgreed) {
+            setErrorMessage('Passwords do not match.');
+            return;
+        } else {
+            setErrorMessage('');
+        }
 
         const passwordHash = await bcrypt.hash(fields.password, 10)
 
@@ -121,7 +151,7 @@ const Signup = () => {
                 passwordHash, 
                 1,
                 fields.role,
-                false
+                display_on_website
             );
     
             /** If no error was thrown, data was saved successfully */
@@ -206,9 +236,10 @@ const Signup = () => {
                                 <label className="block tracking-wide mb-2">
                                     Education Center*
                                 </label>
-                                <select className="block w-full border border-gray-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="education_center">
-                                    <option value="Aurinko Lab">Aurinko Lab</option>
-                                    <option value="Aalto University">Aalto University</option>
+                                <select onChange={educationCenterChange} className="block w-full border border-gray-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="education_center">
+                                    {educationCenters.map((center) => (
+                                        <option key={center.id} value={center.id}>{center.name}</option>
+                                    ))}
                                 </select>
                             </div>
                         </div>
@@ -223,11 +254,11 @@ const Signup = () => {
                         <div className="flex flex-wrap -mx-3 mb-6">
                             <div className="w-full px-3">
                                 <label className="block tracking-wide mb-2">
-                                    <input type="checkbox" name="display_on_website" value="no" className="mr-3" />
+                                    <input type="checkbox" name="display_on_website" value="no" className="mr-3" onChange={displayOnWebsiteChange} />
                                     By checking this box, you agree to have your information displayed on the website.
                                 </label>
                                 <label className="block tracking-wide mb-2">
-                                    <input type="checkbox" name="privacy_policy" value="no" className="mr-3" />
+                                    <input type="checkbox" name="privacy_policy" value="no" className="mr-3" onChange={handleCheckboxChange} />
                                     By creating an account, you agree to the <a href="" className="underline">Privacy Policy</a>.
                                 </label>
                             </div>

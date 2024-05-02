@@ -47,3 +47,8 @@ export interface TutorSignup {
     role: string;
     display_on_website: boolean;
 }
+
+export interface EducationCenter {
+    id: number;
+    name: number;
+}
