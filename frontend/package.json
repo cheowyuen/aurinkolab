@@ -14,15 +14,14 @@
   "dependencies": {
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.6.8",
+    "chromedriver": "^124.0.0",
     "framer-motion": "^10.18.0",
     "mocha": "10.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3",
     "react-scripts": "^5.0.1",
-    "react-scroll": "^1.9.0",
-    "selenium-webdriver": "^4.20.0",
-    "chromedriver": "^124.0.0"
+    "react-scroll": "^1.9.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.24.4",
@@ -42,7 +41,6 @@
     "@typescript-eslint/eslint-plugin": "^7.0.1",
     "@typescript-eslint/parser": "^7.0.1",
     "@vitejs/plugin-react": "^4.2.1",
-   
     "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
@@ -62,7 +60,6 @@
     ],
     "testPathIgnorePatterns": [
       "/node_modules/"
-      
     ],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|svg)$": "<rootDir>/mocks/fileMock.js",
