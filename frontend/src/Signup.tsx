@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Notification from '../src/Notification';
 import { saveTutorSignup } from '../src/services/tutorSignupService';
-import bcrypt from 'bcrypt';
+//import bcrypt from 'bcrypt';
 import { getAllEducationCenters } from '../src/services/educationCenterService';
 import { EducationCenter } from "../src/types";
 
@@ -11,7 +11,7 @@ const Signup = () => {
     const [isAgreed, setIsAgreed] = useState(false);
     const [display_on_website, setDisplay_on_website] = useState(false);
     const [educationCenters, setEducationCenters] = useState<EducationCenter[]>([]);
-    const [educationCenterId, setEducationCenterId] = useState(0);
+    const [educationCenterId, setEducationCenterId] = useState(1);
 
     const [fields, setFields] = useState({
         firstName: "",
@@ -133,34 +133,34 @@ const Signup = () => {
 
         /** Check if privacy policy checkbox is ticked */
         if (!isAgreed) {
-            setErrorMessage('Passwords do not match.');
+            setErrorMessage('Please read and agree to our Privacy Policy to continue.');
             return;
         } else {
             setErrorMessage('');
         }
 
-        const passwordHash = await bcrypt.hash(fields.password, 10)
+        //const passwordHash = await bcrypt.hash(fields.password, 10)
 
-        try {
+        //try {
             /** Save tutor data */
             await saveTutorSignup(
                 fields.firstName, 
                 fields.lastName, 
                 fields.email, 
                 fields.contact_no, 
-                passwordHash, 
-                1,
+                fields.password, 
+                educationCenterId,
                 fields.role,
                 display_on_website
             );
     
             /** If no error was thrown, data was saved successfully */
-            
-        } catch (error) {
+            //console.error("Successfully registered tutor");
+        //} catch (error) {
             /** Handle any errors that might have occurred during saveQuiz */
-            console.error("Error registering tutor:", error);
+            /*console.error("Error registering tutor:", error);
             setErrorMessage("An error occurred during registration. Please try again.");
-        }
+        }*/
 
         /** Reset fields after successful submission */
         setFields({

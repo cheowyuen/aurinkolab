@@ -1,7 +1,7 @@
 import { TutorSignup } from "../types";
 import config from '../../config';
 
-const baseUrl = `${config.API_BASE_URL}/tutorSignup`;
+const baseUrl = `${config.API_BASE_URL}/signup`;
 
 export const saveTutorSignup = async (
     first_name: string, last_name: string, email: string, contact_no: string, password: string, education_center_id: number, role: string, display_on_website: boolean
