@@ -1,5 +1,6 @@
 import { pool } from "../database/database";
 import { Request, Response } from 'express';
+import bcrypt from 'bcrypt';
 
 const tutorSignupController = {
   saveData: async (req: Request, res: Response) => {
@@ -13,11 +14,13 @@ const tutorSignupController = {
         /** Email exists, cannot proceed with registration */
         res.status(409).json({ message: "Email already in use" });
       } else {
+        const passwordHash = await bcrypt.hash(password, 10);
+
         // Insert new tutor details into the database
         const query = `
           INSERT INTO tutors (first_name, last_name, email, contact_no, password, education_center_id, role, display_on_website)
           VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
-        const result = await pool.query(query, [first_name, last_name, email, contact_no, password, education_center_id, role, display_on_website]);
+        const result = await pool.query(query, [first_name, last_name, email, contact_no, passwordHash, education_center_id, role, display_on_website]);
 
         if (result.rowCount && result.rowCount > 0) {
           res.status(201).json({ message: "Tutor registration is successful" });

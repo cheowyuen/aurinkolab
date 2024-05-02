@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import Notification from '../src/Notification';
 import { saveTutorSignup } from '../src/services/tutorSignupService';
-//import bcrypt from 'bcrypt';
 import { getAllEducationCenters } from '../src/services/educationCenterService';
 import { EducationCenter } from "../src/types";
 
@@ -150,8 +149,6 @@ const Signup = () => {
         } else {
             setErrorMessage('');
         }
-
-        //const passwordHash = await bcrypt.hash(fields.password, 10)
 
         try {
             /** Save tutor data */
