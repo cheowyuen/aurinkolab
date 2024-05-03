@@ -9,13 +9,14 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "clean": "rmdir /s /q dist",
-    "test": "playwright test",
-    "test:jest": "jest"
+    "test": "jest"
   },
   "dependencies": {
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.6.8",
+    "chromedriver": "^124.0.0",
     "framer-motion": "^10.18.0",
+    "mocha": "10.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3",
@@ -63,7 +64,8 @@
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|svg)$": "<rootDir>/mocks/fileMock.js",
       "\\.(css|less|scss|sass)$": "<rootDir>/mocks/fileMock.js",
-      "\\.(mp4)$": "<rootDir>/mocks/fileMock.js"
+      "\\.(mp4)$": "<rootDir>/mocks/fileMock.js",
+      "^axios$": "axios/dist/node/axios.cjs"
     }
   },
   "overrides": {
