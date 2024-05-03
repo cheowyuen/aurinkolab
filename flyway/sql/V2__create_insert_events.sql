@@ -1,3 +1,39 @@
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    date VARCHAR(255) NOT NULL,
+    place VARCHAR(255) NOT NULL,
+    vehicle VARCHAR(255),
+    engine VARCHAR(255),
+    schedule TEXT,
+    tutor_id INT REFERENCES tutors(id),
+    education_center_id INT NOT NULL REFERENCES education_centers(id),
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    image VARCHAR(255) NOT NULL,
+    CONSTRAINT unique_event_details UNIQUE (name, start_date, end_date)
+);
+
+CREATE TABLE students (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    contact_no VARCHAR(30),
+    passedQuiz BOOLEAN NOT NULL DEFAULT false,
+    education_center_id INT NOT NULL REFERENCES education_centers(id)
+);
+
+CREATE TABLE quiz (
+    id SERIAL PRIMARY KEY,
+    student_id INT NOT NULL REFERENCES students(id),
+    score INT NOT NULL,
+    totalquestions INT NOT NULL,
+    grade DECIMAL(3,1) NOT NULL,
+    datetime TIMESTAMP WITH TIME ZONE NOT NULL
+);
+
 INSERT INTO events (name, date, place, vehicle, engine, schedule, tutor_id, education_center_id, start_date, end_date, image)
 VALUES
     ('Visit to Keravan Energia''s Solar Plant', '04 Apr 2024', 'Kerava, Finland', 'N/A', 'N/A', NULL, NULL, 1, '2024-04-04', '2024-04-04', '/src/assets/Kerava.jpg'),
@@ -8,18 +44,5 @@ VALUES
     ('Training for Tutors', '28 - 29 Aug 2024', 'Online', 'Boat', 'Hydrogen-driven and solar-electric', NULL, NULL, 1, '2024-08-28', '2024-08-29', '/src/assets/Aalto.jpeg'),
     ('Engineering Hackathon-4', 'Sep - Oct 2024', 'Espoo, Finland', 'Go-karts', 'Solar-electric', NULL, 1, 1, '2024-09-01', '2024-10-31', '/src/assets/Aalto.jpeg'),
     ('Engineering Hackathon-5', 'Sep - Oct 2024', 'Espoo, Finland', 'Go-karts', 'Solar-electric', NULL, 1, 1, '2024-09-01', '2024-10-31', '/src/assets/Aalto.jpeg'),
-    ('Solar Race', '26 Oct 2024', 'Vantaa, Finland', 'Go-karts', 'Solar-electric', NULL, NULL, 1, '2024-10-26', '2024-10-26', '/src/assets/Vantaa.jpg');
-
-INSERT INTO education_centers (name, address, email, contact_no)
-VALUES
-    ('Aurinko Lab', 'Espoo, Finland', 'info@aurinkolab.fi', '+35845312338');
-
-INSERT INTO tutors (first_name, email, has_certificate, image, education_center_id, completed_vehicles, is_estimate, display_on_website)
-VALUES 
-    ('Tony', 'tony.poppel@gmail.com', true, '/src/assets/tony.jpeg', 1, 300, true, true),
-    ('Olga', 'olgakairova@gmail.com', true, '/src/assets/olga.jpeg', 1, 2, false, true),
-    ('Rostislav', 'N/A', false, '/src/assets/boat-icon.png', 1, 0.5, false, true);
-
-INSERT INTO students(first_name, last_name, email, password, contact_no, education_center_id)
-VALUES 
-    ('Cheow Yuen', 'Wong', 'cheowyuen@gmail.com', 'secret', '040 669 1363', 1);
+    ('Solar Race', '26 Oct 2024', 'Vantaa, Finland', 'Go-karts', 'Solar-electric', NULL, NULL, 1, '2024-10-26', '2024-10-26', '/src/assets/Vantaa.jpg')
+ON CONFLICT (name, start_date, end_date) DO NOTHING;

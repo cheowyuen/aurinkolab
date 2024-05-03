@@ -30,8 +30,8 @@ const eventsController = {
       const query = `
         SELECT 
           e.id, e.name, e.date, e.place, e.vehicle, e.engine, e.image,
-          t.first_name AS tutor,
-          c.name AS educationCenter,
+          COALESCE(t.first_name, '') AS tutor,
+          c.name AS education_center,
           CASE
             WHEN e.start_date <= CURRENT_DATE AND e.end_date >= CURRENT_DATE
               THEN 'ongoing'

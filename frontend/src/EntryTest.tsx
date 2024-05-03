@@ -5,6 +5,7 @@ import popper from './assets/popper.png';
 import goodTry from './assets/logo_sun.png';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { saveQuiz } from '../src/services/quizService';
 
 export interface Question {
     questionId: number;
@@ -132,7 +133,7 @@ const EntryTest: React.FC = () => {
     };
 
     /** Final submit for all answers */
-    const handleResultButtonClick = () => {
+    const handleResultButtonClick = async () => {
         let localScore = 0;
         for(const answer of participantAnswers ) {
             if (answer.isCorrect === true) {
@@ -142,7 +143,19 @@ const EntryTest: React.FC = () => {
 
         setScore(localScore);
         const grade = localScore / allQuestions.length * 10;
-        setResultMessage(grade >= 8.7 ? "Congratulations! You have passed the quiz" : "Close effort! Let's try again.");
+
+        try {
+            /** Save quiz result */
+            await saveQuiz(1, localScore, allQuestions.length, grade);
+    
+            /** If no error was thrown, data was saved successfully */
+            setResultMessage(grade >= 8.7 ? "Congratulations! You have passed the quiz" : "Close effort! Let's try again.");
+        } catch (error) {
+            /** Handle any errors that might have occurred during saveQuiz */
+            console.error("Error saving quiz result:", error);
+            setResultMessage("An error occurred while saving quiz result. Please try again.");
+        }
+        
         setQuizCompleted(true)
     };
 

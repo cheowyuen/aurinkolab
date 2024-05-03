@@ -59,7 +59,7 @@ CREATE TABLE quiz (
     id SERIAL PRIMARY KEY,
     student_id INT NOT NULL REFERENCES students(id),
     score INT NOT NULL,
-    totalQuestions INT NOT NULL,
+    totalquestions INT NOT NULL,
     grade DECIMAL(3,1) NOT NULL,
     datetime TIMESTAMP WITH TIME ZONE NOT NULL
 );

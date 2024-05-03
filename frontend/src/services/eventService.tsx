@@ -1,7 +1,6 @@
 import axios from 'axios';
-import { Event } from "../types";
+import { Event, EventDetails as EventDetailsType } from "../types";
 import config from '../../config';
-import { EventDetails as EventDetailsType} from "../../src/types";
 
 const baseUrl = `${config.API_BASE_URL}/events`;
 
