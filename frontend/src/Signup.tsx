@@ -3,6 +3,7 @@ import Notification from '../src/Notification';
 import { saveTutorSignup } from '../src/services/tutorSignupService';
 import { getAllEducationCenters } from '../src/services/educationCenterService';
 import { EducationCenter } from "../src/types";
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
     const [errorMessage, setErrorMessage] = useState("");
@@ -31,6 +32,7 @@ const Signup = () => {
         role: false
     });
 
+    const navigate = useNavigate();
     const notificationRef = useRef<HTMLDivElement | null>(null); /** Create a ref */
 
     useEffect(() => {
@@ -196,6 +198,8 @@ const Signup = () => {
         setEducationCenterId(educationCenters[0].id);
         setDisplay_on_website(false);
         setIsAgreed(false);
+
+        navigate('/verifyemail')
     };
 
     return (

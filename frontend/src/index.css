@@ -899,3 +899,7 @@ legend{
 .border-red {
   border-color: #c92e2e;
 }
+
+.font-roboto {
+  font-family: "Roboto", sans-serif;
+}

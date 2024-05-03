@@ -18,8 +18,8 @@ const tutorSignupController = {
 
         // Insert new tutor details into the database
         const query = `
-          INSERT INTO tutors (first_name, last_name, email, contact_no, password, education_center_id, role, display_on_website)
-          VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
+          INSERT INTO tutors (first_name, last_name, email, contact_no, password, education_center_id, role, display_on_website, date_registered)
+          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, current_timestamp);`;
         const result = await pool.query(query, [first_name, last_name, email, contact_no, passwordHash, education_center_id, role, display_on_website]);
 
         if (result.rowCount && result.rowCount > 0) {

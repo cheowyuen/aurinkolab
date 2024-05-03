@@ -3,10 +3,13 @@ import Logo from "./Logo";
 import { useState, useEffect } from 'react';
 import { Tutor } from "../src/types";
 import { getAllTutors } from '../src/services/tutorService';
+import defaultImage from '../src/assets/boat-icon.png';
 
 const Tutors = () => {
     const [tutors, setTutors] = useState<Tutor[]>([]);
+
     //const navigate = useNavigate();
+
     
     /*const tutors = [
         {image: "/src/assets/tony.jpeg", name: "Tony", email: "tony.poppel@gmail.com", completedVehicles: "300", isEstimate: true, isCertified: true, tutorId: 1},
@@ -39,7 +42,7 @@ const Tutors = () => {
                             <div className="rounded overflow-hidden shadow-md bg-white">
                                 <div className="absolute -mt-20 w-full flex justify-center">
                                     <div className="h-32 w-32">
-                                        <img src={tutor.image} alt={tutor.first_name} className="rounded-full object-cover h-full w-full shadow-md" />
+                                        <img src={tutor.image ? tutor.image : defaultImage } alt={tutor.first_name} className="rounded-full object-cover h-full w-full shadow-md" />
                                     </div>
                                 </div>
                                 <div className="mt-16">

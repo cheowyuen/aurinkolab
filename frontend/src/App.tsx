@@ -8,6 +8,7 @@ import EducationCenters from "./EducationCenters";
 import Tutors from "./Tutors";
 import Signup from "./Signup";
 import PartnersRegistration from "./PartnersRegistration";
+import VerifyEmail from "./VerifyEmail";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/tutors" element={<Tutors />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/partnersregistration" element={<PartnersRegistration />} />
+        <Route path="/verifyemail" element={<VerifyEmail />} />
       </Routes>
       </div>
     </BrowserRouter>
