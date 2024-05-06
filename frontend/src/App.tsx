@@ -9,6 +9,7 @@ import Tutors from "./Tutors";
 import Signup from "./Signup";
 import PartnersRegistration from "./PartnersRegistration";
 import VerifyEmail from "./VerifyEmail";
+import ConfirmEmail from "./ConfirmEmail";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/partnersregistration" element={<PartnersRegistration />} />
         <Route path="/verifyemail" element={<VerifyEmail />} />
+        <Route path="/confirmemail" element={<ConfirmEmail />} />
       </Routes>
       </div>
     </BrowserRouter>

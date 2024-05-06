@@ -170,7 +170,7 @@ const Signup = () => {
         } catch (error) {
             /** Handle any errors that might have occurred during saveQuiz */
             console.error("Error registering tutor:", error);
-            if (error instanceof Error) { /** Type-checking to ensure `error.message` is accessible */
+            if (error instanceof Error) { 
                 if (error.message === 'Email already in use') {
                     setErrorMessage("This email address is already registered."); 
                     return;
@@ -199,7 +199,7 @@ const Signup = () => {
         setDisplay_on_website(false);
         setIsAgreed(false);
 
-        navigate('/verifyemail')
+        navigate('/verifyemail', { state: { email: fields.email } })
     };
 
     return (
