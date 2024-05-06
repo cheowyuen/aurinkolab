@@ -6,7 +6,7 @@ const verifyEmailController = {
     try {
       const { token } = req.body;
 
-      const query = `SELECT * FROM tutors WHERE verification_token = $1 AND token_expiration > NOW();`;
+      const query = `SELECT * FROM tutors WHERE verification_token = $1 AND token_expiration > NOW() AND verified = false;`;
  
       const result = await pool.query(query, [token]);
       if (result.rowCount && result.rowCount > 0) {

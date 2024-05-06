@@ -37,9 +37,6 @@ const VerifyEmail = () => {
                     <p className="text-base text-center mt-8">
                         <b>Can't find the email?</b> It might be in your junk mail.
                     </p>
-                    <p className="text-base text-center mt-8">
-                        <b>Linked expired?</b> Request a new verification email.
-                    </p>
                 </div>
             </div>
         </div>

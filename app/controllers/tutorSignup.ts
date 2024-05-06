@@ -55,6 +55,24 @@ const tutorSignupController = {
               <p>The Aurinko Lab Team</p>`, 
           });
 
+          if (display_on_website) {
+            const approvalLink = `http://localhost:5173/admin`
+
+            const approvalRequest = await transporter.sendMail({
+              from: '"Aurinko Lab" <admin@aurinkolab.fi>', 
+              to: "admin@aurinkolab.fi", 
+              subject: "Approve Aurinko Lab account",
+              text: `Hello!\n
+                Tutor account ${email} is awaiting approval to display information on website.\n<a href="${approvalLink}">Approve</a>\n
+                Thanks,\n
+                The Aurinko Lab Team`, 
+              html: `<p>Hello!</p>
+                <p>Tutor account ${email} is awaiting approval to display information on website.</p><a href="${approvalLink}">Approve</a>
+                <p>Thanks,</p>
+                <p>The Aurinko Lab Team</p>`, 
+            });  
+          }
+
           res.status(201).json({ message: "Tutor registration is successful" });
         } else {
           throw new Error("Failed to register tutor");

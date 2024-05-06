@@ -1,6 +1,7 @@
 import emailIcon from './assets/email-verification.png';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { verifyEmail } from '../src/services/verifyEmailService';
+import { resendLink } from '../src/services/resendLinkService';
 import { useState, useEffect } from 'react';
 
 const ConfirmEmail = () => {
@@ -8,6 +9,7 @@ const ConfirmEmail = () => {
     const token = query.get('token');
     const [ isVerified, setIsVerified ] = useState<boolean>(false);
     const [ errorMessage, setErrorMessage ] = useState('');
+    const [ showButton, setShowButton ] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -29,6 +31,14 @@ const ConfirmEmail = () => {
         }
     }, [token]);
 
+    const handleResendLink = async () => {
+        if (token) {
+            await resendLink(token, "");
+            alert("Verification link is resent. Please check your email.");
+            setShowButton(false);
+        }
+    }
+
     return (
         
         <div className="flex justify-center page-styling-email"> 
@@ -42,9 +52,16 @@ const ConfirmEmail = () => {
                         {isVerified ? "Email successfully verified!" : errorMessage}
                     </p>
                     <img className="email-icon" src={emailIcon} alt="Email Icon" />
-                    <button onClick={() => navigate('/events')} className="shadow focus:shadow-outline focus:outline-none text-white py-4 px-8 rounded-3xl bg-lightblue mt-10">
-                        {isVerified ? "Continue" : "Resend Link"}
-                    </button>
+                    {isVerified && (
+                        <button onClick={() => navigate('/events')} className="shadow focus:shadow-outline focus:outline-none text-white py-4 px-8 rounded-3xl bg-lightblue mt-10">
+                            Continue
+                        </button>
+                    )}
+                    {!isVerified && showButton && (
+                        <button onClick={handleResendLink} className="shadow focus:shadow-outline focus:outline-none text-white py-4 px-8 rounded-3xl bg-lightblue mt-10">
+                            Resend Link
+                        </button>
+                    )}
                 </div>
             </div>
         </div>
