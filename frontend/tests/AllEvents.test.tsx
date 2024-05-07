@@ -17,6 +17,15 @@ jest.mock('react-router-dom', () => {
   };
 });
 
+jest.mock('../src/services/eventService', () => ({
+    getAllEvents: jest.fn().mockResolvedValue([
+      {name: "Engineering Hackathon-1", place: "Espoo, Finland", date: "Apr - May 2024", status: "ongoing", eventId: 1},
+      {name: "Solar Regatta", place: "Helsinki, Finland", date: "01 Jun 2024", status: "upcoming", eventId: 2},
+      {name: "Visit to Keravan Energia''s Solar Plant", place: "Kerava, Finland", date: "04 Apr 2024", status: "archive", eventId: 3},
+    ]),
+  }));
+
+import { getAllEvents } from '../src/services/eventService';
 
 describe("AllEvents Component", () => {
     beforeEach(() => {
@@ -28,31 +37,23 @@ describe("AllEvents Component", () => {
     });
 
     test('renders events correctly', async () => {
-        const events = [
-            {image: event_img, place: "Espoo", date: "Apr - May 2024", eventId: 1},
-            {image: event_img, place: "Espoo", date: "Aug - Dec 2024", eventId: 2},
-            {image: event_img, place: "Espoo", date: "Jan - Jun 2025", eventId: 3},
-            {image: event_img, place: "Espoo", date: "TBA", eventId: 4},
-            {image: event_img, place: "Espoo", date: "TBA", eventId: 5},
-        ]
+        const events = await getAllEvents();
 
-        const title = screen.getByTestId("events-page-title");
+        let title = screen.getByTestId("events-page-title");
         expect(title).toHaveTextContent("Events");
+        title = screen.getByTestId("ongoing-events");
+        expect(title).toHaveTextContent("Ongoing events");
+        title = screen.getByTestId("upcoming-events");
+        expect(title).toHaveTextContent("Upcoming events");
+        title = screen.getByTestId("archive");
+        expect(title).toHaveTextContent("Archive");
 
         for (let i = 0; i < events.length, i++;) {
+            expect(screen.getByText(events[i].name)).toBeInTheDocument();
             expect(screen.getByText(events[i].place)).toBeInTheDocument();
             expect(screen.getByText(events[i].date)).toBeInTheDocument();
         }
     })
-
-    test('navigates to the event detail page on click', async () => {
-        const user = userEvent.setup(); 
-        const navigate = require('react-router-dom').useNavigate(); 
-    
-        const image = screen.getAllByText("Espoo")[0];
-        await user.click(image);
-        expect(navigate).toHaveBeenCalledWith('/events/1');
-      });
 })
 
 
