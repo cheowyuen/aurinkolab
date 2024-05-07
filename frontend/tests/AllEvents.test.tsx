@@ -2,8 +2,6 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import AllEvents from '../src/AllEvents';
 import { BrowserRouter } from 'react-router-dom';
-import event_img from '../src/assets/aalto-design-factory.jpeg';
-import userEvent from '@testing-library/user-event';
 
 /** Mock for useNavigate hook */
 const mockNavigate = jest.fn();

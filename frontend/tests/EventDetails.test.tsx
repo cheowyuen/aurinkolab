@@ -12,12 +12,26 @@ jest.mock('react-router-dom', () => ({
 }));
 
 jest.mock('../src/services/eventService', () => ({
-    getEvent: jest.fn()
+    getEvent: jest.fn<Promise<EventDetail>, [string]>()
 }));
+
+interface EventDetail {
+    id: number;
+    name: string;
+    date: string;
+    education_center: string;
+    place: string;
+    vehicle: string;
+    engine: string;
+    tutor: string;
+    status: string;
+    image: string;
+}
 
 describe("EventDetails Component", () => {
     beforeEach(() => {
-        getEvent.mockResolvedValue({
+        const mockGetEvent = getEvent as jest.MockedFunction<typeof getEvent>;
+        mockGetEvent.mockResolvedValue({
             id: 1, 
             name: "Engineering Hackathon-1", 
             date: "April - May 2024", 
@@ -26,8 +40,10 @@ describe("EventDetails Component", () => {
             vehicle: "Boat",
             engine: "Solar Electric",
             tutor: "Tony",
-            status: "ongoing"
+            status: "ongoing",
+            image: ""
         });
+
         render(
             <MemoryRouter>
                 <EventDetails />
