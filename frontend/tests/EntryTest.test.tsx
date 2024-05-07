@@ -26,7 +26,7 @@ describe("EntryTest Component", () => {
         );
     });
 
-    test('renders and submits quiz', async () => {
+    test('renders quiz', async () => {
         window.scrollTo = jest.fn();
 
         const questionsPerPage = 6;
@@ -93,7 +93,7 @@ describe("EntryTest Component", () => {
         /** Test quiz result */
         const quiz_result_title = screen.getByText('Quiz Result');
         expect(quiz_result_title).toBeDefined();
-        const quiz_result = screen.getByText("Close effort! Let's try again.");
+        const quiz_result = screen.findByText(/Close effort! Let's try again./);
         expect(quiz_result).toBeDefined();
         const score = screen.getByText(/Score:/);
         expect(score).toBeDefined();

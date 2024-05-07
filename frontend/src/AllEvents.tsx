@@ -34,7 +34,7 @@ const AllEvents = () => {
             <div className='events-title' data-testid="events-page-title">
                 <p>Events</p>
             </div>
-            <div className="text-center title-font text-4xl mt-10"> 
+            <div className="text-center title-font text-4xl mt-10" data-testid="ongoing-events"> 
                 <p>Ongoing events</p>
             </div>
             <div className="flex justify-center p-16 events-page">
@@ -52,7 +52,7 @@ const AllEvents = () => {
                     ))}
                 </div>
             </div>
-            <div className="text-center title-font text-4xl mt-10"> 
+            <div className="text-center title-font text-4xl mt-10" data-testid="upcoming-events"> 
                 <p>Upcoming events</p>
             </div>
             <div className="flex justify-center p-16 events-page">
@@ -70,7 +70,7 @@ const AllEvents = () => {
                     ))}
                 </div>
             </div>
-            <div className="text-center title-font text-4xl mt-10"> 
+            <div className="text-center title-font text-4xl mt-10" data-testid="archive"> 
                 <p>Archive</p>
             </div>
             <div className="flex justify-center p-16 events-page">
