@@ -34,7 +34,7 @@ const ConfirmEmail = () => {
     const handleResendLink = async () => {
         if (token) {
             await resendLink(token, "");
-            alert("Verification link is resent. Please check your email.");
+            //alert("Verification link is resent. Please check your email.");
             setShowButton(false);
         }
     }
@@ -61,6 +61,9 @@ const ConfirmEmail = () => {
                         <button onClick={handleResendLink} className="shadow focus:shadow-outline focus:outline-none text-white py-4 px-8 rounded-3xl bg-lightblue mt-10">
                             Resend Link
                         </button>
+                    )}
+                    {!isVerified && !showButton && (
+                        <p className="mt-10">Verification link is sent. Please check your email.</p>
                     )}
                 </div>
             </div>

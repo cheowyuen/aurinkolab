@@ -34,7 +34,7 @@ const tutorSignupController = {
         const query = `
           INSERT INTO tutors (first_name, last_name, email, contact_no, password, education_center_id, role, display_on_website, date_registered, verification_token, token_expiration)
           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, current_timestamp, $9, NOW() + INTERVAL '1 day');`;
-        const result = await pool.query(query, [first_name, last_name, email, contact_no, passwordHash, education_center_id, role, display_on_website, token]);
+        const result = await pool.query(query, [first_name.trim(), last_name.trim(), email.trim(), contact_no.trim(), passwordHash, education_center_id, role.trim(), display_on_website, token]);
 
         if (result.rowCount && result.rowCount > 0) {
           const verificationLink = `http://localhost:5173/confirmemail?token=${token}`
