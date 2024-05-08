@@ -7,6 +7,14 @@ export interface Tutor {
     completed_vehicles: number,
     is_estimate: boolean
 }
+export interface TutorsPendingApproval {
+    id: number,
+    tutor_name: string,
+    email: string,
+    contact_no: boolean,
+    education_center: string,
+    role: number
+}
 
 export interface Event {
     id: number,
