@@ -13,7 +13,8 @@ export interface TutorsPendingApproval {
     email: string,
     contact_no: boolean,
     education_center: string,
-    role: number
+    role: number,
+    regRole: string
 }
 
 export interface Event {

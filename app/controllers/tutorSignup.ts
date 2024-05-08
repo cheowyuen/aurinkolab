@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 import nodemailer from 'nodemailer';
+import { QueryResult } from 'pg';
 
 const transporter = nodemailer.createTransport({
   //host: "email-smtp.us-east-1.amazonaws.com",
@@ -19,9 +20,12 @@ const tutorSignupController = {
   saveData: async (req: Request, res: Response) => {
     try {
       const token = uuidv4();
-      const { first_name, last_name, email, contact_no, password, education_center_id, role, display_on_website } = req.body;
+      const { first_name, last_name, email, contact_no, password, education_center_id, role, display_on_website, regRole } = req.body;
+      const dbTable = (regRole === "tutor" ? "tutors" : "students");
+      const columns = (regRole === "tutor" ? ", role, display_on_website" : "");
+      const values = (regRole === "tutor" ? ", $8, $9" : "");
 
-      const emailQuery = `SELECT * FROM tutors WHERE email=$1`;
+      const emailQuery = `SELECT * FROM ${dbTable} WHERE email=$1`;
       const { rows } = await pool.query(emailQuery, [email]);
 
       if (rows.length > 0) {
@@ -32,10 +36,15 @@ const tutorSignupController = {
 
         /** Insert new tutor details into the database */
         const query = `
-          INSERT INTO tutors (first_name, last_name, email, contact_no, password, education_center_id, role, display_on_website, date_registered, verification_token, token_expiration)
-          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, current_timestamp, $9, NOW() + INTERVAL '1 day');`;
-        const result = await pool.query(query, [first_name.trim(), last_name.trim(), email.trim(), contact_no.trim(), passwordHash, education_center_id, role.trim(), display_on_website, token]);
-
+          INSERT INTO ${dbTable} (first_name, last_name, email, contact_no, password, education_center_id, date_registered, verification_token, token_expiration${columns})
+          VALUES ($1, $2, $3, $4, $5, $6, $7, current_timestamp, NOW() + INTERVAL '1 day'${values});`;
+        
+        let result: QueryResult;
+        if (regRole === "tutor") {
+          result = await pool.query(query, [first_name.trim(), last_name.trim(), email.trim(), contact_no.trim(), passwordHash, education_center_id, role.trim(), display_on_website, token]);
+        } else {
+          result = await pool.query(query, [first_name.trim(), last_name.trim(), email.trim(), contact_no.trim(), passwordHash, education_center_id, role.trim(), display_on_website, token]);
+        }
         if (result.rowCount && result.rowCount > 0) {
           const verificationLink = `http://localhost:5173/confirmemail?token=${token}`
 
@@ -55,7 +64,7 @@ const tutorSignupController = {
               <p>The Aurinko Lab Team</p>`, 
           });
 
-          if (display_on_website) {
+          if (display_on_website && regRole === "tutor") {
             const approvalLink = `http://localhost:5173/admin`
 
             const approvalRequest = await transporter.sendMail({
@@ -73,14 +82,14 @@ const tutorSignupController = {
             });  
           }
 
-          res.status(201).json({ message: "Tutor registration is successful" });
+          res.status(201).json({ message: `${regRole} registration is successful` });
         } else {
-          throw new Error("Failed to register tutor");
+          throw new Error(`Failed to register ${regRole}`);
         }
       }
     } catch (error) {
       console.error('Database error:', error); 
-      res.status(500).json({ message: "An error occurred while saving tutor data"});
+      res.status(500).json({ message: `An error occurred while saving tutor/student data`});
     } 
   }
 };

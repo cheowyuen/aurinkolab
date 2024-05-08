@@ -4,6 +4,7 @@ import { saveTutorSignup } from '../src/services/tutorSignupService';
 import { getAllEducationCenters } from '../src/services/educationCenterService';
 import { EducationCenter } from "../src/types";
 import { useNavigate } from 'react-router-dom';
+import { getByRole } from '@testing-library/react';
 
 const Signup = () => {
     const [errorMessage, setErrorMessage] = useState("");
@@ -35,6 +36,9 @@ const Signup = () => {
     const navigate = useNavigate();
     const notificationRef = useRef<HTMLDivElement | null>(null); /** Create a ref */
 
+    const queryParams = new URLSearchParams(window.location.search);
+    const regRole = queryParams.get('role');
+    
     useEffect(() => {
         getAllEducationCenters().then(data => {
           setEducationCenters(data);
@@ -97,7 +101,7 @@ const Signup = () => {
             email: fields.email.trim() === "",
             contact_no: fields.contact_no.trim() === "",
             password: fields.password.trim() === "",
-            role: fields.role.trim() === ""
+            role: regRole === "tutor" ? fields.role.trim() === "" : false
         };
 
         setErrors(updatedErrors);
@@ -162,14 +166,15 @@ const Signup = () => {
                 fields.password, 
                 educationCenterId,
                 fields.role,
-                display_on_website
+                display_on_website,
+                regRole
             );
     
             /** If no error was thrown, data was saved successfully */
-            console.error("Successfully registered tutor");
+            console.error(`Successfully registered ${regRole}`);
         } catch (error) {
             /** Handle any errors that might have occurred during saveQuiz */
-            console.error("Error registering tutor:", error);
+            console.error(`Error registering ${regRole}:`, error);
             if (error instanceof Error) { 
                 if (error.message === 'Email already in use') {
                     setErrorMessage("This email address is already registered."); 
@@ -206,7 +211,7 @@ const Signup = () => {
         <div className="flex justify-center items-center min-h-screen"> 
             <div className="w-full max-w-4xl p-6 bg-white rounded">
                 <div className="signup-title">
-                    <p>Tutor Registration</p>
+                    <p>{regRole === "tutor" ? "Tutor" : "Student"} Registration</p>
                 </div>   
 
                 <div className="p-5 text-lg page-font-color">
@@ -271,20 +276,24 @@ const Signup = () => {
                                 </select>
                             </div>
                         </div>
-                        <div className="flex flex-wrap -mx-3 mb-6">
-                            <div className="w-full px-3">
-                                <label className="block tracking-wide mb-2">
-                                    Role*
-                                </label>
-                                <input onChange={handleInputChange} value={fields.role} className={`appearance-none block w-full border ${errors.role ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="role" type="text" />
+                        {regRole === "tutor" && (
+                            <div className="flex flex-wrap -mx-3 mb-6">
+                                <div className="w-full px-3">
+                                    <label className="block tracking-wide mb-2">
+                                        Role*
+                                    </label>
+                                    <input onChange={handleInputChange} value={fields.role} className={`appearance-none block w-full border ${errors.role ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="role" type="text" />
+                                </div>
                             </div>
-                        </div>
+                        )}
                         <div className="flex flex-wrap -mx-3 mb-6">
                             <div className="w-full px-3">
-                                <label className="block tracking-wide mb-2">
-                                    <input type="checkbox" name="display_on_website" className="mr-3" checked={display_on_website} onChange={displayOnWebsiteChange} />
-                                    By checking this box, you agree to have your information displayed on the website.
-                                </label>
+                                {regRole === "tutor" && (
+                                    <label className="block tracking-wide mb-2">
+                                        <input type="checkbox" name="display_on_website" className="mr-3" checked={display_on_website} onChange={displayOnWebsiteChange} />
+                                        By checking this box, you agree to have your information displayed on the website.
+                                    </label>
+                                )}
                                 <label className="block tracking-wide mb-2">
                                     <input type="checkbox" name="privacy_policy" className="mr-3" checked={isAgreed} onChange={handleCheckboxChange} />
                                     By creating an account, you agree to the <a href="" className="underline">Privacy Policy</a>.

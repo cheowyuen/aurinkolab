@@ -5,11 +5,11 @@ import axios, { AxiosError } from 'axios';
 const baseUrl = `${config.API_BASE_URL}/signup`;
 
 export const saveTutorSignup = async (
-    first_name: string, last_name: string, email: string, contact_no: string, password: string, education_center_id: number, role: string, display_on_website: boolean
+    first_name: string, last_name: string, email: string, contact_no: string, password: string, education_center_id: number, role: string, display_on_website: boolean, regRole: string
     ): Promise<TutorSignup> => {
 
     try {
-        const response = await axios.post(baseUrl, {first_name, last_name, email, contact_no, password, education_center_id, role, display_on_website});
+        const response = await axios.post(baseUrl, {first_name, last_name, email, contact_no, password, education_center_id, role, display_on_website, regRole});
         if (response.status === 201) {
             console.log('Registration successful:', response.data.message);
             return response.data;
