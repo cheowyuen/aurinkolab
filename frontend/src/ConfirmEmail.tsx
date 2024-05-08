@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 const ConfirmEmail = () => {
     const query = new URLSearchParams(useLocation().search);
     const token = query.get('token');
+    const role = query.get('role') || "student";
     const [ isVerified, setIsVerified ] = useState<boolean>(false);
     const [ errorMessage, setErrorMessage ] = useState('');
     const [ showButton, setShowButton ] = useState(true);
@@ -14,7 +15,7 @@ const ConfirmEmail = () => {
 
     useEffect(() => {
         if (token) {
-            verifyEmail(token) 
+            verifyEmail(token, role) 
                 .then(response => {
                     if (response.message === "Email verification is successful") {
                         setIsVerified(true);
@@ -29,18 +30,17 @@ const ConfirmEmail = () => {
         } else {
             setErrorMessage('Verification token is missing.');
         }
-    }, [token]);
+    }, [token, role]);
 
     const handleResendLink = async () => {
         if (token) {
-            await resendLink(token, "");
+            await resendLink(token, "", role);
             //alert("Verification link is resent. Please check your email.");
             setShowButton(false);
         }
     }
 
     return (
-        
         <div className="flex justify-center page-styling-email"> 
             <div className="w-full max-w-xl">
                 <div className="signup-title">

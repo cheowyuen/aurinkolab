@@ -4,13 +4,14 @@ import { Request, Response } from 'express';
 const verifyEmailController = {
   verifyEmail: async (req: Request, res: Response) => {
     try {
-      const { token } = req.body;
+      const { token, role } = req.body;
+      const dbTable = (role === "tutor" ? "tutors" : "students");
 
-      const query = `SELECT * FROM tutors WHERE verification_token = $1 AND token_expiration > NOW() AND verified = false;`;
+      const query = `SELECT * FROM ${dbTable} WHERE verification_token = $1 AND token_expiration > NOW() AND verified = false;`;
  
       const result = await pool.query(query, [token]);
       if (result.rowCount && result.rowCount > 0) {
-        const verifiedQuery = `UPDATE tutors SET verified = true WHERE verification_token = $1;`;
+        const verifiedQuery = `UPDATE ${dbTable} SET verified = true WHERE verification_token = $1;`;
         const verifiedResult = await pool.query(verifiedQuery, [token]);
         if (verifiedResult.rowCount && verifiedResult.rowCount > 0) {
           res.status(201).json({ message: "Email verification is successful" });

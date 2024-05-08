@@ -37,16 +37,16 @@ const tutorSignupController = {
         /** Insert new tutor details into the database */
         const query = `
           INSERT INTO ${dbTable} (first_name, last_name, email, contact_no, password, education_center_id, date_registered, verification_token, token_expiration${columns})
-          VALUES ($1, $2, $3, $4, $5, $6, $7, current_timestamp, NOW() + INTERVAL '1 day'${values});`;
+          VALUES ($1, $2, $3, $4, $5, $6, current_timestamp, $7, NOW() + INTERVAL '1 day'${values});`;
         
         let result: QueryResult;
         if (regRole === "tutor") {
-          result = await pool.query(query, [first_name.trim(), last_name.trim(), email.trim(), contact_no.trim(), passwordHash, education_center_id, role.trim(), display_on_website, token]);
+          result = await pool.query(query, [first_name.trim(), last_name.trim(), email.trim(), contact_no.trim(), passwordHash, education_center_id, token, role.trim(), display_on_website]);
         } else {
-          result = await pool.query(query, [first_name.trim(), last_name.trim(), email.trim(), contact_no.trim(), passwordHash, education_center_id, role.trim(), display_on_website, token]);
+          result = await pool.query(query, [first_name.trim(), last_name.trim(), email.trim(), contact_no.trim(), passwordHash, education_center_id, token]);
         }
         if (result.rowCount && result.rowCount > 0) {
-          const verificationLink = `http://localhost:5173/confirmemail?token=${token}`
+          const verificationLink = `http://localhost:5173/confirmemail?token=${token}&role=${regRole}`
 
           const info = await transporter.sendMail({
             from: '"Aurinko Lab" <admin@aurinkolab.fi>', 

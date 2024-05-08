@@ -3,8 +3,7 @@ import Notification from '../src/Notification';
 import { saveTutorSignup } from '../src/services/tutorSignupService';
 import { getAllEducationCenters } from '../src/services/educationCenterService';
 import { EducationCenter } from "../src/types";
-import { useNavigate } from 'react-router-dom';
-import { getByRole } from '@testing-library/react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Signup = () => {
     const [errorMessage, setErrorMessage] = useState("");
@@ -36,8 +35,8 @@ const Signup = () => {
     const navigate = useNavigate();
     const notificationRef = useRef<HTMLDivElement | null>(null); /** Create a ref */
 
-    const queryParams = new URLSearchParams(window.location.search);
-    const regRole = queryParams.get('role');
+    const queryParams = new URLSearchParams(useLocation().search);
+    const regRole = queryParams.get('role') || "student";
     
     useEffect(() => {
         getAllEducationCenters().then(data => {
