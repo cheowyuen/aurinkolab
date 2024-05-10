@@ -5,7 +5,11 @@ const tutorsController = {
   getAll: async (req: Request, res: Response) => {
     try {
       const { rows } = await pool.query(
-        `SELECT id, first_name, email, has_certificate, image, completed_vehicles, is_estimate FROM tutors where display_on_website = true;`
+        `SELECT id, first_name, email, has_certificate, image, completed_vehicles, is_estimate 
+        FROM tutors 
+        WHERE display_on_website = true
+        AND is_approved = true
+        AND verified = true;`
       );
       res.json(rows);
     } catch (error) {
