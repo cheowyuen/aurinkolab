@@ -10,6 +10,7 @@ import Signup from "./Signup";
 import PartnersRegistration from "./PartnersRegistration";
 import VerifyEmail from "./VerifyEmail";
 import ConfirmEmail from "./ConfirmEmail";
+import Admin from "./Admin";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/partnersregistration" element={<PartnersRegistration />} />
         <Route path="/verifyemail" element={<VerifyEmail />} />
         <Route path="/confirmemail" element={<ConfirmEmail />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
       </div>
     </BrowserRouter>

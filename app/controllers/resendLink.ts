@@ -18,19 +18,20 @@ const resendLinkController = {
   resendLink: async (req: Request, res: Response) => {
     try {
       const new_token = uuidv4();
-      const { token, email } = req.body;
+      const { token, email, role } = req.body;
+      const dbTable = (role === "tutor" ? "tutors" : "students");
       let query = "";
       let result: QueryResult;
 
       if (email === "") {
-          query = `UPDATE tutors 
+          query = `UPDATE ${dbTable} 
           SET verification_token = $1, 
               token_expiration = NOW() + INTERVAL '1 day'
           WHERE verification_token = $2;`;
           result = await pool.query(query, [new_token, token]);
       }
       else {
-          query = `UPDATE tutors 
+          query = `UPDATE ${dbTable} 
           SET verification_token = $1, 
               token_expiration = NOW() + INTERVAL '1 day'
           WHERE email = $2;`;
@@ -39,7 +40,7 @@ const resendLinkController = {
       
 
       if (result.rowCount && result.rowCount > 0) {
-          const verificationLink = `http://localhost:5173/confirmemail?token=${new_token}`
+          const verificationLink = `http://localhost:5173/confirmemail?token=${new_token}&role=${role}`
 
           const info = await transporter.sendMail({
           from: '"Aurinko Lab" <admin@aurinkolab.fi>', 

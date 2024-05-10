@@ -3,9 +3,9 @@ import config from '../../config';
 
 const baseUrl = `${config.API_BASE_URL}/resendLink`;
 
-export const resendLink = async (token: string, email: string)  => {
+export const resendLink = async (token: string, email: string, role: string)  => {
     try {
-        const response = await axios.post(baseUrl, { token, email });
+        const response = await axios.post(baseUrl, { token, email, role });
         return response.data;
     } catch (error) {
         if (axios.isAxiosError(error)) {

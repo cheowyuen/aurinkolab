@@ -7,6 +7,7 @@ import tutorSignupRouter from "../routes/tutorSignup";
 import educationCentersRouter from "../routes/educationCenters";
 import verifyEmailRouter from "../routes/verify";
 import resendLinkRouter from "../routes/resendLink";
+import approveTutorRouter from "../routes/approveTutor";
 
 const app = express();
 
@@ -20,6 +21,8 @@ app.use("/signup", tutorSignupRouter);
 app.use("/educationCenters", educationCentersRouter);
 app.use("/confirmemail", verifyEmailRouter);
 app.use("/resendLink", resendLinkRouter);
+app.use("/approvetutor", approveTutorRouter);
+
 
 const PORT = 3001;
 app.listen(PORT, () => {
