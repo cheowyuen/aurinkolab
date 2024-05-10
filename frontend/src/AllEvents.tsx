@@ -34,11 +34,11 @@ const AllEvents = () => {
             <div className='events-title' data-testid="events-page-title">
                 <p>Events</p>
             </div>
-            <div className="text-center title-font text-4xl mt-10" data-testid="ongoing-events"> 
+            <div id= "ongoing-events" className="text-center title-font text-4xl mt-10" data-testid="ongoing-events"> 
                 <p>Ongoing events</p>
             </div>
             <div className="flex justify-center p-16 events-page">
-                <div className="grid 2xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-12">
+                <div  className="grid 2xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-12">
                     {events.filter(e => e.status==="ongoing").map((event) => (
                         <div key={event.id} className="relative w-80 h-60 bg-gray-300 rounded-xl overflow-hidden cursor-pointer event-container" onClick={() => handleEventClick(event.id)}> 
                             <img src={event.image} alt={event.place} className="absolute w-full h-full object-cover opacity-80" /> 
