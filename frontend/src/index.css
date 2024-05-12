@@ -336,12 +336,16 @@ body {
   color: #FFFFFF;
   font-family: "Roboto Slab", sans-serif;
   padding-top: 100px;
-  padding-bottom: 30px;
   padding-left: 1rem;
   padding-right: 1rem;
   text-align: center;
   font-size: 3rem;
   font-weight: bold;
+}
+
+.login-title {
+  padding-top: 100px;
+  padding-bottom: 1px;
 }
 
 .quiz-title {
@@ -608,6 +612,19 @@ body {
   margin-left: 10rem;
   margin-bottom: 2rem;
   margin-right: 10rem;
+  text-align: center;
+}
+
+.login-notification {
+  font-family: "Poppins", sans-serif;
+  color: #c92e2e;
+  font-size: 1.3rem;
+  border-style: solid;
+  border-radius: 2rem;
+  border-width: 0.1rem;
+  border-color: #c92e2e;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
   text-align: center;
 }
 
@@ -928,6 +945,10 @@ legend{
 
 .bg-lightblue {
   background: var(--color-1); 
+}
+
+.bg-gray {
+  background: var(--color-2); 
 }
 
 .border-red {

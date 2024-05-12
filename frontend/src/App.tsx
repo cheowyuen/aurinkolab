@@ -11,6 +11,7 @@ import PartnersRegistration from "./PartnersRegistration";
 import VerifyEmail from "./VerifyEmail";
 import ConfirmEmail from "./ConfirmEmail";
 import Admin from "./Admin";
+import Login from "./Login";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/verifyemail" element={<VerifyEmail />} />
         <Route path="/confirmemail" element={<ConfirmEmail />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
       </div>
     </BrowserRouter>
