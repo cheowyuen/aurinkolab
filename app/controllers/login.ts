@@ -27,7 +27,7 @@ const LoginController = {
             }
 
             const token = jsonwebtoken.sign(userForToken, process.env.SECRET)
-            
+           
             res
                 .status(200)
                 .send({ token })

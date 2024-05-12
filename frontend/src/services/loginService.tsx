@@ -3,11 +3,12 @@ import axios, { AxiosError } from 'axios';
 
 const baseUrl = `${config.API_BASE_URL}/login`;
 
-export const LoginService = async (email: string, password: string, role: string) => {
+export const login = async (email: string, password: string, role: string) => {
 
     try {
         const response = await axios.post(baseUrl, {email, password, role});
-        if (response.status === 201) {
+     
+        if (response.status === 200) {
             console.log('Login successful:', response.data.message);
             return response.data;
         } else {

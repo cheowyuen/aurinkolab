@@ -338,6 +338,7 @@ body {
   padding-top: 100px;
   padding-left: 1rem;
   padding-right: 1rem;
+  padding-bottom: 30px;
   text-align: center;
   font-size: 3rem;
   font-weight: bold;
@@ -362,6 +363,7 @@ body {
 
 .signup-title {
   color: var(--color-1);
+  padding-bottom: 1px;
 }
 
 .parent-container { 

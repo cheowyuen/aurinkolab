@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import Notification from '../src/Notification';
-import { LoginService } from './services/loginService';
+import { login } from './services/LoginService';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -74,14 +74,13 @@ const Login = () => {
 
         try {
             /** Save tutor data */
-            const token = await LoginService(
+            const token = await login(
                 fields.email, 
                 fields.password,
                 student ? "student" : "tutor"
             );
-
-            sessionStorage.setItem('userToken', token);
             console.log('Token stored:', token);
+            sessionStorage.setItem('userToken', token);
         
             /** If no error was thrown, data was saved successfully */
             console.log(`Successfully login`);
