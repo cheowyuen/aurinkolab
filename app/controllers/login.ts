@@ -1,6 +1,6 @@
 import { pool } from "../database/database";
 import { Request, Response } from 'express';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import jsonwebtoken from 'jsonwebtoken';
 
 const LoginController = {

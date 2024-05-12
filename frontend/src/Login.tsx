@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import Notification from '../src/Notification';
-import { login } from './services/LoginService';
+import { login } from './services/loginService';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
