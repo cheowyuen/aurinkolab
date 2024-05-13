@@ -80,8 +80,9 @@ const Login = () => {
                 student ? "student" : "tutor"
             );
           
-            sessionStorage.setItem('userToken', token);
-        
+            sessionStorage.setItem("userToken", token);
+            console.log("user token: ", token);
+
             /** If no error was thrown, data was saved successfully */
             console.log(`Successfully login`);
         } catch (error) {

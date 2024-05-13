@@ -9,7 +9,6 @@ export const login = async (email: string, password: string, role: string) => {
         const response = await axios.post(baseUrl, {email, password, role});
      
         if (response.status === 200) {
-            console.log('Login successful:', response.data.message);
             return response.data;
         } else {
             throw new Error('Login failed with status: ' + response.status);
