@@ -9,6 +9,7 @@ import verifyEmailRouter from "../routes/verify";
 import resendLinkRouter from "../routes/resendLink";
 import approveTutorRouter from "../routes/approveTutor";
 import LoginRouter from "../routes/login";
+import sendResetEmailRouter from "../routes/sendReseetEmail";
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use("/confirmemail", verifyEmailRouter);
 app.use("/resendLink", resendLinkRouter);
 app.use("/approvetutor", approveTutorRouter);
 app.use("/login", LoginRouter);
+app.use("/send-reset-email", sendResetEmailRouter);
 
 const PORT = 3001;
 app.listen(PORT, () => {

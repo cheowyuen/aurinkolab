@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Notification from '../src/Notification';
 import successIcon from './assets/success-icon.png';
+import { sendResetEmail } from '../src/services/sendResetEmail';
 
 const ResetPassword = () => {
     const [errorMessage, setErrorMessage] = useState("");
@@ -57,11 +58,7 @@ const ResetPassword = () => {
         }
 
         try {
-            /*const token = await login(
-                fields.email, 
-                "",
-                ""
-            );*/
+            await sendResetEmail(fields.email);
 
             setEmailSent(true)
 

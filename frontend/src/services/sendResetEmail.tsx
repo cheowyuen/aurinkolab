@@ -8,17 +8,14 @@ export const sendResetEmail = async (email: string) => {
     try {
         const response = await axios.post(baseUrl, {email});
         if (response.status === 201) {
-            console.log('Registration successful:', response.data.message);
+            console.log('Reset password email sent');
             return response.data;
         } else {
-            throw new Error('Registration failed with status: ' + response.status);
+            throw new Error('Failed to send reset password email with status: ' + response.status);
         }
     } catch (error) {
         const e = error as AxiosError;
-        if (e.response && e.response.status === 409) {
-            throw new Error('Email already in use'); 
-        } else {
-            throw new Error('An unexpected error occurred: ' + (e.message || 'Unknown error'));
-        }
+        
+        throw new Error('An unexpected error occurred: ' + (e.message || 'Unknown error'));
     }
 }
