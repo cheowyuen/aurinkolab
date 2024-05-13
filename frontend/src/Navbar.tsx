@@ -103,6 +103,11 @@ function Navbar() {
                         <RouterLink to="/events">Apply Now</RouterLink>
                     </motion.span>
                 </div>
+                <div className="apply-button hidden md:flex">
+                    <motion.span variants={reveal} className="cursor-pointer">
+                        <RouterLink to="/login">Login</RouterLink>
+                    </motion.span>
+                </div>
             </motion.div>
         </motion.div>
     );

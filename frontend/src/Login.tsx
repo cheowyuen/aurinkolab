@@ -79,7 +79,7 @@ const Login = () => {
                 fields.password,
                 student ? "student" : "tutor"
             );
-            console.log('Token stored:', token);
+          
             sessionStorage.setItem('userToken', token);
         
             /** If no error was thrown, data was saved successfully */
