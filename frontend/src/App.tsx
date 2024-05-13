@@ -13,6 +13,7 @@ import ConfirmEmail from "./ConfirmEmail";
 import Admin from "./Admin";
 import Login from "./Login";
 import { AuthProvider } from './utils/AuthContext';
+import SendResetEmail from "./SendResetEmail";
 import ResetPassword from "./ResetPassword";
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
           <Route path="/confirmemail" element={<ConfirmEmail />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/request-reset" element={<SendResetEmail />} />
           <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
         </div>

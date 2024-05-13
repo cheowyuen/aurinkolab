@@ -1,28 +1,24 @@
 import { useState, useEffect, useRef } from 'react';
-import Notification from '../src/Notification';
-import { useLocation } from 'react-router-dom';
-import { resetPassword } from '../src/services/resetPasswordService';
+import Notification from './Notification';
 import successIcon from './assets/success-icon.png';
+import { sendEmail } from './services/sendResetEmailService';
 
-const ResetPassword = () => {
+const SendResetEmail = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const [submitCount, setSubmitCount] = useState(0);
-    const [passwordReset, setPasswordReset] = useState(false);
+    const [emailSent, setEmailSent] = useState(false);
+    const [student, setStudent] = useState(true);
+    const [tutor, setTutor] = useState(false);
 
     const [fields, setFields] = useState({
-        password: "",
-        confirmPassword: ""
+        email: ""
     });
 
     const [errors, setErrors] = useState({
-        password: false
+        email: false
     });
 
     const notificationRef = useRef<HTMLDivElement | null>(null); /** Create a ref */
-
-    const query = new URLSearchParams(useLocation().search);
-    const token = query.get('token');
-    const role = query.get('role') || "student";
 
     useEffect(() => {
         if (errorMessage !== '') { 
@@ -42,6 +38,16 @@ const ResetPassword = () => {
         setFields(prev => ({ ...prev, [name]: value }));
     };
 
+    const studentRadioChange = () => {
+        setStudent(true);
+        setTutor(false);
+    };
+
+    const tutorRadioChange = () => {
+        setTutor(true);
+        setStudent(true);
+    };
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
@@ -49,7 +55,7 @@ const ResetPassword = () => {
 
         /** Set error for blank required fields */
         const updatedErrors = {
-            password: fields.password.trim() === ""
+            email: fields.email.trim() === ""
         };
 
         setErrors(updatedErrors);
@@ -57,35 +63,28 @@ const ResetPassword = () => {
         /** Check for blank required fields */
         const hasError = Object.values(updatedErrors).some(e => e);
         if (hasError) {
-            setErrorMessage("Please fill in all required fields.");
-            return;
-        } else {
-            setErrorMessage('');
-        }
-
-        if (fields.password !== fields.confirmPassword) {
-            setErrorMessage('Passwords do not match.');
+            setErrorMessage("Please fill in email.");
             return;
         } else {
             setErrorMessage('');
         }
 
         try {
-            if (token) {
-                await resetPassword(token, role, fields.password);
-                setPasswordReset(true);
-        
-                /** If no error was thrown, data was saved successfully */
-                console.log(`Password reset`);
-            }
-            else {
-                setErrorMessage('Verification token is missing.');
-            }
+            
+            await sendEmail(
+                fields.email,
+                student ? "student" : "tutor"
+            );
+            
+            setEmailSent(true)
+
+            /** If no error was thrown, data was saved successfully */
+            console.log(`Reset password email sent`);
         } catch (error) {
             /** Handle any errors that might have occurred during saveQuiz */
-            console.error(`Error logging in`, error);
+            console.error(`Error sending email to reset password`, error);
             if (error instanceof Error) { 
-                setErrorMessage("An error occurred during password reset. Please try again."); 
+                setErrorMessage("An error occurred during sending reset password email. Please try again."); 
                 return;
             } else {
                 setErrorMessage("An unexpected error occurred. Please try again."); 
@@ -95,19 +94,22 @@ const ResetPassword = () => {
 
         /** Reset fields after successful submission */
         setFields({
-            password: "",
-            confirmPassword: ""
+            email: ""
         });
+
+        setStudent(true);
+        setTutor(false);
     };
 
     return (
         <div className="flex justify-center items-center min-h-screen"> 
             <div className="w-full max-w-xl p-6 bg-white rounded">
-                {!passwordReset && (
+                {!emailSent && (
                     <div>
                         <div className="signup-title login-title">
                             <p>Reset Password</p>
-                        </div>   
+                        </div>  
+                        <p className="text-center mb-3">to continue to your Aurinko Lab account.</p> 
 
                         <div className="p-5 text-lg page-font-color">
                             <Notification ref={notificationRef} message={errorMessage} type="login-notification" />
@@ -115,20 +117,27 @@ const ResetPassword = () => {
                             <form noValidate className="w-full max-w-xl" onSubmit={handleSubmit}>
                                 <div className="mb-6">
                                     <label className="block tracking-wide mb-2">
-                                        Password*
+                                        Email*
                                     </label>
-                                    <input onChange={handleInputChange} value={fields.password} className={`appearance-none block w-full border ${errors.password || errorMessage.includes("Passwords") ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="password" type="password" />
+                                    <input onChange={handleInputChange} value={fields.email} className={`appearance-none block w-full border ${errors.email || errorMessage.includes("email") ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="email" type="email" />
                                 </div>
-                                <div className="mb-8">
-                                    <label className="block tracking-wide mb-2">
-                                        Confirm Password*
-                                    </label>
-                                    <input onChange={handleInputChange} value={fields.confirmPassword} className={`appearance-none block w-full border ${errorMessage.includes("Passwords") ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="confirmPassword" type="password" />
+                                <label className="block tracking-wide mb-2">
+                                    Role
+                                </label>
+                                <div className="flex flex-wrap -mx-3 mb-10">
+                                    <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                        <input type="radio" name="student" className="mr-3" checked={student} onChange={studentRadioChange} />
+                                            Student
+                                    </div>
+                                    <div className="w-full md:w-1/2 px-3">
+                                        <input type="radio" name="student" className="mr-3" checked={tutor} onChange={tutorRadioChange} />
+                                            Tutor
+                                    </div>
                                 </div>
                                 <div className="flex flex-wrap -mx-3 mb-10">
                                     <div className="w-full px-3 text-center">
                                         <button className="shadow focus:shadow-outline focus:outline-none text-white py-4 px-12 rounded-3xl bg-lightblue" type="submit">
-                                            Reset
+                                            Send reset password email
                                         </button>
                                     </div>
                                 </div>
@@ -137,11 +146,11 @@ const ResetPassword = () => {
                     </div>
                 )}
 
-                {passwordReset && (
+                {emailSent && (
                     <div className='text-center'>
                         <img className="success-icon" src={successIcon} alt="Success Icon" />
-                        <p className="text-3xl mb-3 font-semibold">Password is reset!</p>
-                        <p className="underline"><a href="/login">Click here to login</a></p>
+                        <p className="text-3xl mb-3 font-semibold">Reset password email sent!</p>
+                        <p className="text-base">Check your email for a password reset link if your email address is registered with us.</p>
                     </div>
                 )}
             </div>
@@ -149,5 +158,5 @@ const ResetPassword = () => {
     );
 }
 
-export default ResetPassword;
+export default SendResetEmail;
 

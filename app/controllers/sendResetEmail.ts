@@ -1,14 +1,12 @@
 import { pool } from "../database/database";
 import { Request, Response } from 'express';
-import bcrypt from 'bcryptjs';
-import { v4 as uuidv4 } from 'uuid';
-import { QueryResult } from 'pg';
+import crypto from 'crypto';
 import transporter from '../utils/mailer';
 
 const sendResetEmailController = {
   saveData: async (req: Request, res: Response) => {
     try {
-      const token = uuidv4();
+      const token = crypto.randomBytes(48).toString('hex');
       const { email, role } = req.body;
       const dbTable = (role === "tutor" ? "tutors" : "students");
 
@@ -20,7 +18,7 @@ const sendResetEmailController = {
         const query = `
           UPDATE ${dbTable} 
           SET reset_password_token = $1, 
-            pwd_token_expiration =  NOW() + INTERVAL '1 day'
+            reset_token_expiration =  NOW() + INTERVAL '1 day'
           WHERE email = $2;`;
         
         const result = await pool.query(query, [token, email.trim()]);
@@ -43,14 +41,10 @@ const sendResetEmailController = {
               <p>Thanks,</p>
               <p>The Aurinko Lab Team</p>`, 
           });
-
-          res.status(201).json({ message: `Reset password email sent` });
-        } else {
-          throw new Error(`Failed to send email to reset password`);
-        }
-      } else {
-        res.status(409).json({ message: "Email not found" });
+        }  
       }
+
+      res.status(200).json({ message: "If your email is registered, you will receive a link to reset your password." });
     } catch (error) {
       console.error('Database error:', error); 
       res.status(500).json({ message: `An error occurred while sending reset password email`});
