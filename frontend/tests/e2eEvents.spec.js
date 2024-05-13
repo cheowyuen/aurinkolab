@@ -1,6 +1,5 @@
-
-const {By, Builder, until} = require('selenium-webdriver');
-const assert = require("assert");
+import { By, Builder, until } from 'selenium-webdriver';
+import assert from "assert";
 
 
 /**Test case for verifying the events link and then retrieve all of the events */

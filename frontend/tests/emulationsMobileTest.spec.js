@@ -1,6 +1,7 @@
-const { By, Builder, until } = require('selenium-webdriver');
-const assert = require("assert");
-const chrome = require('selenium-webdriver/chrome');
+import { By, Builder, until } from 'selenium-webdriver';
+import assert from 'assert';
+import chrome from 'selenium-webdriver/chrome.js';
+
 
 /** test case for mobile devise dimensions, google emulations of a mobile devise */
 

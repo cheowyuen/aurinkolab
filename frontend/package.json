@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "clean": "rmdir /s /q dist",
     "test": "jest",
-    "selenium-test": "npx mocha tests/**/*.spec.tsx --timeout 60000"
+    "selenium-test": "npx mocha tests/**/*.spec.js --timeout 60000"
   },
   "dependencies": {
     "@types/bcrypt": "^5.0.2",
