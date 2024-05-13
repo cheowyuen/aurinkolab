@@ -5,10 +5,12 @@ import LinkedinLogo from "./LogoLinkedin";
 import TiktokLogo from "./LogoTiktok";
 import { Link as RouterLink, useLocation } from 'react-router-dom'; //Imported Link to route to Test page
 import { useState, useEffect } from 'react';
+import { useAuth } from '../src/utils/useAuth';
 
 function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
+    const { isAuthenticated, logout } = useAuth();
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -103,11 +105,20 @@ function Navbar() {
                         <RouterLink to="/events">Apply Now</RouterLink>
                     </motion.span>
                 </div>
-                <div className="apply-button hidden md:flex">
+                {!isAuthenticated && (
+                    <div className="apply-button hidden md:flex">
+                        <motion.span variants={reveal} className="cursor-pointer">
+                            <RouterLink to="/login">Login</RouterLink>
+                        </motion.span>
+                    </div>
+                )}
+                {isAuthenticated && (
+                    <div className="apply-button hidden md:flex">
                     <motion.span variants={reveal} className="cursor-pointer">
-                        <RouterLink to="/login">Login</RouterLink>
+                        <RouterLink to="/login" onClick={logout}>Logout</RouterLink>
                     </motion.span>
                 </div>
+                )}
             </motion.div>
         </motion.div>
     );

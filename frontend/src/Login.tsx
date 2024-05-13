@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import Notification from '../src/Notification';
 import { login } from './services/loginService';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../src/utils/useAuth';
 
 const Login = () => {
     const [errorMessage, setErrorMessage] = useState("");
@@ -21,6 +22,7 @@ const Login = () => {
 
     const navigate = useNavigate();
     const notificationRef = useRef<HTMLDivElement | null>(null); /** Create a ref */
+    const { login: userLogin } = useAuth();
 
     useEffect(() => {
         if (errorMessage !== '') { 
@@ -81,6 +83,7 @@ const Login = () => {
             );
           
             sessionStorage.setItem("userToken", token);
+            userLogin(token);
             console.log("user token: ", token);
 
             /** If no error was thrown, data was saved successfully */
@@ -131,6 +134,7 @@ const Login = () => {
                                 Password*
                             </label>
                             <input onChange={handleInputChange} value={fields.password} className={`appearance-none block w-full border ${errors.password || errorMessage.includes("Passwords") ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="password" type="password" />
+                            <p className='text-sm underline'><a href="/reset-password">Forgot password?</a></p>
                         </div>
                         <label className="block tracking-wide mb-2">
                             Role
