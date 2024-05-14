@@ -960,3 +960,10 @@ legend{
 .font-roboto {
   font-family: "Roboto", sans-serif;
 }
+
+.success-icon {
+  width: 15%;
+  height: auto;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}

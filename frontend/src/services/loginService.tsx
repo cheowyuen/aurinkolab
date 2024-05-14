@@ -15,6 +15,10 @@ export const login = async (email: string, password: string, role: string) => {
         }
     } catch (error) {
         const e = error as AxiosError;
-        throw new Error('An unexpected error occurred: ' + (e.message || 'Unknown error'));
+        if (e.response && e.response.status === 401) {
+            throw new Error('Invalid email or password'); 
+        } else {
+            throw new Error('An unexpected error occurred: ' + (e.message || 'Unknown error'));
+        }
     }
 }

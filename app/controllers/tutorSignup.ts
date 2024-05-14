@@ -2,19 +2,8 @@ import { pool } from "../database/database";
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import { v4 as uuidv4 } from 'uuid';
-import nodemailer from 'nodemailer';
 import { QueryResult } from 'pg';
-
-const transporter = nodemailer.createTransport({
-  //host: "email-smtp.us-east-1.amazonaws.com",
-  host: "smtp.ethereal.email",
-  port: 587,
-  secure: false, /** Use `true` for port 465, `false` for all other ports */
-  auth: {
-    user: "deion.casper@ethereal.email",
-    pass: "ZhXnG2PtCTYhenMNs3",
-  },
-});
+import transporter from '../utils/mailer';
 
 const tutorSignupController = {
   saveData: async (req: Request, res: Response) => {

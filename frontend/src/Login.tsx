@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import Notification from '../src/Notification';
 import { login } from './services/loginService';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../src/utils/useAuth';
 
 const Login = () => {
     const [errorMessage, setErrorMessage] = useState("");
@@ -21,6 +22,7 @@ const Login = () => {
 
     const navigate = useNavigate();
     const notificationRef = useRef<HTMLDivElement | null>(null); /** Create a ref */
+    const { login: userLogin } = useAuth();
 
     useEffect(() => {
         if (errorMessage !== '') { 
@@ -81,16 +83,22 @@ const Login = () => {
             );
           
             sessionStorage.setItem("userToken", token);
+            userLogin(token);
             console.log("user token: ", token);
 
             /** If no error was thrown, data was saved successfully */
             console.log(`Successfully login`);
         } catch (error) {
-            /** Handle any errors that might have occurred during saveQuiz */
+            /** Handle any errors that might have occurred*/
             console.error(`Error logging in`, error);
             if (error instanceof Error) { 
-                setErrorMessage("An error occurred during login. Please try again."); 
-                return;
+                if (error.message === 'Invalid email or password') {
+                    setErrorMessage("Invalid email or password."); 
+                    return;
+                } else {
+                    setErrorMessage("An error occurred during login. Please try again."); 
+                    return;
+                }
             } else {
                 setErrorMessage("An unexpected error occurred. Please try again."); 
                 return;
@@ -124,13 +132,14 @@ const Login = () => {
                             <label className="block tracking-wide mb-2">
                                 Email*
                             </label>
-                            <input onChange={handleInputChange} value={fields.email} className={`appearance-none block w-full border ${errors.email || errorMessage.includes("email") ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="email" type="email" />
+                            <input onChange={handleInputChange} value={fields.email} className={`appearance-none block w-full border ${errors.email ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="email" type="email" />
                         </div>
                         <div className="mb-6">
                             <label className="block tracking-wide mb-2">
                                 Password*
                             </label>
-                            <input onChange={handleInputChange} value={fields.password} className={`appearance-none block w-full border ${errors.password || errorMessage.includes("Passwords") ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="password" type="password" />
+                            <input onChange={handleInputChange} value={fields.password} className={`appearance-none block w-full border ${errors.password ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="password" type="password" />
+                            <p className='text-sm underline'><a href="/request-reset">Forgot password?</a></p>
                         </div>
                         <label className="block tracking-wide mb-2">
                             Role
