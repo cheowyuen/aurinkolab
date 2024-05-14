@@ -6,6 +6,7 @@ services:
       - 3001:3001
     volumes:
       - ./app:/app
+      - /app/node_modules 
     depends_on:
       - database
     env_file:
