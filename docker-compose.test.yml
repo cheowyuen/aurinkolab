@@ -4,9 +4,6 @@ services:
     build: ./app
     ports:
       - 3001:3001
-    volumes:
-      - ./app:/app
-      - /app/node_modules
     depends_on:
       - database
     env_file:
@@ -24,10 +21,7 @@ services:
     container_name: frontend
     build: ./frontend
     ports:
-      - "5173:5173"  
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules 
+      - "5173:5173"
 
   flyway:
     image: flyway/flyway:7.3.0-alpine
