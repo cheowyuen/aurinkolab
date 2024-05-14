@@ -132,13 +132,13 @@ const Login = () => {
                             <label className="block tracking-wide mb-2">
                                 Email*
                             </label>
-                            <input onChange={handleInputChange} value={fields.email} className={`appearance-none block w-full border ${errors.email || errorMessage.includes("email") ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="email" type="email" />
+                            <input onChange={handleInputChange} value={fields.email} className={`appearance-none block w-full border ${errors.email ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="email" type="email" />
                         </div>
                         <div className="mb-6">
                             <label className="block tracking-wide mb-2">
                                 Password*
                             </label>
-                            <input onChange={handleInputChange} value={fields.password} className={`appearance-none block w-full border ${errors.password || errorMessage.includes("Passwords") ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="password" type="password" />
+                            <input onChange={handleInputChange} value={fields.password} className={`appearance-none block w-full border ${errors.password ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="password" type="password" />
                             <p className='text-sm underline'><a href="/request-reset">Forgot password?</a></p>
                         </div>
                         <label className="block tracking-wide mb-2">
