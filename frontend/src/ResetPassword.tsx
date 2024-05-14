@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import Notification from '../src/Notification';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Navigate } from 'react-router-dom';
 import { resetPassword } from '../src/services/resetPasswordService';
 import successIcon from './assets/success-icon.png';
 
@@ -8,6 +8,7 @@ const ResetPassword = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const [submitCount, setSubmitCount] = useState(0);
     const [passwordReset, setPasswordReset] = useState(false);
+    const [shouldRedirect, setShouldRedirect] = useState(false);
 
     const [fields, setFields] = useState({
         password: "",
@@ -36,6 +37,18 @@ const ResetPassword = () => {
             }
         }
       }, [errorMessage, submitCount]);
+
+    useEffect(() => {
+        if (!token) {
+            /** Set state to trigger redirect */
+            setShouldRedirect(true);
+          }
+    }, [token]);
+
+    if (shouldRedirect) {
+        /** Redirect */
+        return <Navigate to="/" />;
+    }
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target as { name: string, value: string };

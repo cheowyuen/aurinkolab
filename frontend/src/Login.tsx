@@ -9,6 +9,7 @@ const Login = () => {
     const [submitCount, setSubmitCount] = useState(0);
     const [student, setStudent] = useState(true);
     const [tutor, setTutor] = useState(false);
+    const [shouldRedirect, setShouldRedirect] = useState(false);
 
     const [fields, setFields] = useState({
         email: "",
@@ -22,7 +23,7 @@ const Login = () => {
 
     const navigate = useNavigate();
     const notificationRef = useRef<HTMLDivElement | null>(null); /** Create a ref */
-    const { login: userLogin } = useAuth();
+    const { login: userLogin, isAuthenticated } = useAuth();
 
     useEffect(() => {
         if (errorMessage !== '') { 
@@ -36,6 +37,18 @@ const Login = () => {
             }
         }
       }, [errorMessage, submitCount]);
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            /** Set state to trigger redirect */
+            setShouldRedirect(true);
+          }
+    }, [isAuthenticated]);
+
+    if (shouldRedirect) {
+        /** Redirect */
+        navigate('/');
+    }
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target as { name: string, value: string };
@@ -76,15 +89,14 @@ const Login = () => {
 
         try {
             /** Save tutor data */
-            const token = await login(
+            const user = await login(
                 fields.email, 
                 fields.password,
                 student ? "student" : "tutor"
             );
           
-            sessionStorage.setItem("userToken", token);
-            userLogin(token);
-            console.log("user token: ", token);
+            sessionStorage.setItem("userToken", JSON.stringify(user));
+            userLogin(user.token);
 
             /** If no error was thrown, data was saved successfully */
             console.log(`Successfully login`);

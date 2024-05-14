@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getEvent } from '../src/services/eventService';
 import { EventDetails as EventDetailsType} from "../src/types";
+import { useAuth } from '../src/utils/useAuth';
 //import allEvents from '../src/data/allEvents';
 
 import date_icon from '/src/assets/date-icon.png';
@@ -15,6 +16,7 @@ import tutor_icon from '/src/assets/tutor.png';
 const EventDetails = () => {
     const { eventId } = useParams(); 
     const [ event, setEvent ] = useState<EventDetailsType>({id: 0, name: "", date: "", education_center: "", place: "", vehicle: "", engine: "", tutor: "", status: "", image: ""});
+    const { isAuthenticated } = useAuth();
     let title = "Ongoing Event";
 
     useEffect(() => {
@@ -40,6 +42,10 @@ const EventDetails = () => {
     }
     else if (event.status === "archive") {
         title = "Past Event";
+    }
+
+    const handleSubmit = () => {
+        console.log("success");
     }
 
     return (
@@ -87,7 +93,9 @@ const EventDetails = () => {
                         <img src={schedule_icon} alt="Schedule" className="icon" />
                         <span className="icon-details"><span className="font-bold">Schedule</span>: </span>
                     </span><br/><br/> */}
-                    {/* <button className="button-small">Apply</button> */}
+                    {isAuthenticated && (
+                        <button className="button-small" onClick={handleSubmit}>Apply</button> 
+                    )}
                 </div>
             </div>
         </div>

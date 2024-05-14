@@ -16,7 +16,7 @@ const VerifyEmail = () => {
 
     if (shouldRedirect) {
         /** Redirect */
-        return <Navigate to="/signup" />;
+        return <Navigate to="/" />;
     }
 
     return (

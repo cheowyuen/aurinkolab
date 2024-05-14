@@ -18,9 +18,8 @@ const LoginController = {
         const passwordCorrect = await bcrypt.compare(password, rows[0].password);
 
         if (passwordCorrect) {
-            const userForToken = {
-                id: rows[0].id,
-            }
+          const id = rows[0].id;
+            const userForToken = {id};
             
             if (!process.env.SECRET) {
                 throw new Error('SECRET environment variable not set');
@@ -30,7 +29,7 @@ const LoginController = {
            
             res
                 .status(200)
-                .send({ token })
+                .send({ token, role, id })
         }
         else {
             res.status(401).json({ message: "Invalid email or password" });
