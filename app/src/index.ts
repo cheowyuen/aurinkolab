@@ -8,6 +8,7 @@ import educationCentersRouter from "../routes/educationCenters";
 import verifyEmailRouter from "../routes/verify";
 import resendLinkRouter from "../routes/resendLink";
 import approveTutorRouter from "../routes/approveTutor";
+import LoginRouter from "../routes/login";
 
 const app = express();
 
@@ -22,7 +23,7 @@ app.use("/educationCenters", educationCentersRouter);
 app.use("/confirmemail", verifyEmailRouter);
 app.use("/resendLink", resendLinkRouter);
 app.use("/approvetutor", approveTutorRouter);
-
+app.use("/login", LoginRouter);
 
 const PORT = 3001;
 app.listen(PORT, () => {

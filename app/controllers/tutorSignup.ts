@@ -1,6 +1,6 @@
 import { pool } from "../database/database";
 import { Request, Response } from 'express';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { v4 as uuidv4 } from 'uuid';
 import nodemailer from 'nodemailer';
 import { QueryResult } from 'pg';
