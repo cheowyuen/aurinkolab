@@ -94,9 +94,9 @@ const Login = () => {
                 fields.password,
                 student ? "student" : "tutor"
             );
-          
-            sessionStorage.setItem("userToken", JSON.stringify(user));
-            userLogin(user.token);
+            
+            //sessionStorage.setItem("userToken", JSON.stringify(user));
+            userLogin(JSON.stringify(user));
 
             /** If no error was thrown, data was saved successfully */
             console.log(`Successfully login`);

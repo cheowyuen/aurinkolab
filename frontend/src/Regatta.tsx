@@ -5,7 +5,7 @@ import { getAllEducationCenters } from '../src/services/educationCenterService';
 import { EducationCenter } from "../src/types";
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const Signup = () => {
+const Regatta = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const [submitCount, setSubmitCount] = useState(0);
     const [isAgreed, setIsAgreed] = useState(false);
@@ -313,5 +313,5 @@ const Signup = () => {
     );
 }
 
-export default Signup;
+export default Regatta;
 

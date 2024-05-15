@@ -11,6 +11,7 @@ import approveTutorRouter from "../routes/approveTutor";
 import LoginRouter from "../routes/login";
 import sendResetEmailRouter from "../routes/sendResetEmail";
 import resetPasswordRouter from "../routes/resetPassword";
+import applyEventRouter from "../routes/applyEvent";
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use("/approvetutor", approveTutorRouter);
 app.use("/login", LoginRouter);
 app.use("/send-reset-email", sendResetEmailRouter);
 app.use("/reset-password", resetPasswordRouter);
+app.use("/apply-event", applyEventRouter);
 
 const PORT = 3001;
 app.listen(PORT, () => {

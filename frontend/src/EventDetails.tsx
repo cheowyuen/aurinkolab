@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { getEvent } from '../src/services/eventService';
 import { EventDetails as EventDetailsType} from "../src/types";
 import { useAuth } from '../src/utils/useAuth';
+import { applyEvent } from '../src/services/applyEventService';
 //import allEvents from '../src/data/allEvents';
 
 import date_icon from '/src/assets/date-icon.png';
@@ -16,7 +17,11 @@ import tutor_icon from '/src/assets/tutor.png';
 const EventDetails = () => {
     const { eventId } = useParams(); 
     const [ event, setEvent ] = useState<EventDetailsType>({id: 0, name: "", date: "", education_center: "", place: "", vehicle: "", engine: "", tutor: "", status: "", image: ""});
+    const [ confirmation, setConfirmation ] = useState(false);
+    const [ registered, setRegistered ] = useState(false);
+    const [ success, setSuccess ] = useState(false);
     const { isAuthenticated } = useAuth();
+    const navigate = useNavigate();
     let title = "Ongoing Event";
 
     useEffect(() => {
@@ -44,8 +49,45 @@ const EventDetails = () => {
         title = "Past Event";
     }
 
-    const handleSubmit = () => {
-        console.log("success");
+    const handleSubmit = async () => {
+        if (event.name === "Regatta" || event.name === "Race") {
+            navigate(`/regatta/${event.id}`);
+        } else {
+            setConfirmation(true);
+        }
+    }
+
+    const handleConfirmation = async () => {
+        const loggedUserJSON = sessionStorage.getItem('userToken');
+        if (loggedUserJSON) {
+            try {
+                const user = JSON.parse(loggedUserJSON)
+                await applyEvent(user.id, user.role, Number(eventId), user.token);
+                setSuccess(true);
+                setConfirmation(false);
+                //alert("Registration successful!");
+            }
+            catch (error) {
+                if (error instanceof Error) {
+                    if (error.message === "It looks like you're already registered for this event. We look forward to your participation.") {
+                        setRegistered(true);
+                        setConfirmation(false);
+                        //alert(error.message);
+                        return;
+                    } else {
+                        console.log("An error occurred during event registration.")
+                        return;
+                    }
+                } else {
+                    console.log("An unexpected error occurred.");
+                    return;
+                }
+            }
+        }
+    }
+
+    const handleCancellation = () => {
+        setConfirmation(false);
     }
 
     return (
@@ -93,8 +135,25 @@ const EventDetails = () => {
                         <img src={schedule_icon} alt="Schedule" className="icon" />
                         <span className="icon-details"><span className="font-bold">Schedule</span>: </span>
                     </span><br/><br/> */}
-                    {isAuthenticated && (
+                    {!confirmation && !success && !registered && isAuthenticated && event.status === "upcoming" && (
                         <button className="button-small" onClick={handleSubmit}>Apply</button> 
+                    )}
+                    {confirmation && (
+                        <div className="purple font-semibold">
+                            <p className="mb-5">Please click Confirm to finalize your event registration.</p>
+                            <button className="button-event mr-6" onClick={handleConfirmation}>Confirm</button> 
+                            <button className="button-event" onClick={handleCancellation}>Cancel</button> 
+                        </div>
+                    )}
+                    {success && (
+                        <div className="purple font-semibold">
+                            <p>Registration successful! Check your email for a confirmation message.</p>
+                        </div>
+                    )}
+                    {registered && (
+                        <div className="purple font-semibold">
+                            <p>It looks like you're already registered for this event. We look forward to your participation.</p>
+                        </div>
                     )}
                 </div>
             </div>

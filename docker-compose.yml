@@ -5,7 +5,8 @@ services:
     ports:
       - 3001:3001
     volumes:
-      - ./app/src:/app/src
+      - ./app:/app
+      - /app/node_modules
     depends_on:
       - database
     env_file:

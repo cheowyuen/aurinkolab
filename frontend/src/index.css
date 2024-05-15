@@ -468,8 +468,8 @@ body {
   border-radius: 30px;
   color: #FFFFFF;
   font-family: "Poppins", sans-serif;
-  font-size: 1.5rem;
-  padding: 1rem 3rem;
+  font-size: 1.3rem;
+  padding: 1rem 2.5rem;
 }
 
 .button-tiny {
@@ -966,4 +966,17 @@ legend{
   height: auto;
   margin: 0 auto;
   margin-bottom: 2rem;
+}
+
+.purple {
+  color: var(--color-7);
+}
+
+.button-event {
+  background-color: var(--color-7);
+  border-radius: 30px;
+  color: #FFFFFF;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.3rem;
+  padding: 1rem 2.5rem;
 }
