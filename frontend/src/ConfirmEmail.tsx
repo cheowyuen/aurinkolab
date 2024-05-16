@@ -53,7 +53,7 @@ const ConfirmEmail = () => {
                     </p>
                     <img className="email-icon" src={emailIcon} alt="Email Icon" />
                     {isVerified && (
-                        <button onClick={() => navigate('/events')} className="shadow focus:shadow-outline focus:outline-none text-white py-4 px-8 rounded-3xl bg-lightblue mt-10">
+                        <button onClick={() => navigate('/login')} className="shadow focus:shadow-outline focus:outline-none text-white py-4 px-8 rounded-3xl bg-lightblue mt-10">
                             Continue
                         </button>
                     )}

@@ -336,12 +336,17 @@ body {
   color: #FFFFFF;
   font-family: "Roboto Slab", sans-serif;
   padding-top: 100px;
-  padding-bottom: 30px;
   padding-left: 1rem;
   padding-right: 1rem;
+  padding-bottom: 30px;
   text-align: center;
   font-size: 3rem;
   font-weight: bold;
+}
+
+.login-title {
+  padding-top: 100px;
+  padding-bottom: 1px;
 }
 
 .quiz-title {
@@ -358,6 +363,7 @@ body {
 
 .signup-title {
   color: var(--color-1);
+  padding-bottom: 1px;
 }
 
 .parent-container { 
@@ -608,6 +614,19 @@ body {
   margin-left: 10rem;
   margin-bottom: 2rem;
   margin-right: 10rem;
+  text-align: center;
+}
+
+.login-notification {
+  font-family: "Poppins", sans-serif;
+  color: #c92e2e;
+  font-size: 1.3rem;
+  border-style: solid;
+  border-radius: 2rem;
+  border-width: 0.1rem;
+  border-color: #c92e2e;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
   text-align: center;
 }
 
@@ -930,10 +949,21 @@ legend{
   background: var(--color-1); 
 }
 
+.bg-gray {
+  background: var(--color-2); 
+}
+
 .border-red {
   border-color: #c92e2e;
 }
 
 .font-roboto {
   font-family: "Roboto", sans-serif;
+}
+
+.success-icon {
+  width: 15%;
+  height: auto;
+  margin: 0 auto;
+  margin-bottom: 2rem;
 }

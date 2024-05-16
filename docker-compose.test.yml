@@ -4,8 +4,6 @@ services:
     build: ./app
     ports:
       - 3001:3001
-    volumes:
-      - ./app/src:/app/src
     depends_on:
       - database
     env_file:
@@ -23,10 +21,7 @@ services:
     container_name: frontend
     build: ./frontend
     ports:
-      - "5173:5173"  
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules 
+      - "5173:5173"
 
   flyway:
     image: flyway/flyway:7.3.0-alpine
@@ -37,6 +32,16 @@ services:
     volumes:
       - ./flyway/sql:/flyway/sql
     command: -connectRetries=60 -baselineOnMigrate=true migrate
+
+  chrome:
+    image: "selenium/standalone-chrome:latest"
+    container_name: "chrome"
+    hostname: chrome
+    shm_size: '2gb'
+    restart: always
+    ports:
+      - "4444:4444" 
+    
 
 volumes:
   postgres_data:

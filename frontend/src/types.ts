@@ -57,6 +57,12 @@ export interface TutorSignup {
     display_on_website: boolean;
 }
 
+export interface Login {
+    email: string;
+    password: string;
+    role: string;
+}
+
 export interface EducationCenter {
     id: number;
     name: number;

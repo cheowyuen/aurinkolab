@@ -5,6 +5,7 @@ import LinkedinLogo from "./LogoLinkedin";
 import TiktokLogo from "./LogoTiktok";
 import { Link as RouterLink, useLocation } from 'react-router-dom'; //Imported Link to route to Test page
 import { useState, useEffect } from 'react';
+
 import { useTranslation } from "react-i18next";
 
 const lngs = {
@@ -12,10 +13,14 @@ const lngs = {
     es: {nativeName: 'Espanish'}
 }
 
+import { useAuth } from '../src/utils/useAuth';
+
+
 function Navbar() {
     const {t, i18n} =useTranslation()
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
+    const { isAuthenticated, logout } = useAuth();
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -59,6 +64,7 @@ function Navbar() {
                 </button>
 
                 {isOpen && (
+
                     <div className="absolute top-full left-0 w-full py-3 px-5 md:hidden dropdown-menu">
                         <RouterLink to="/events" onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">{t('Events')}</RouterLink>
                         <RouterLink to="/tutors" onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">{t('Tutors')}</RouterLink>
@@ -72,6 +78,7 @@ function Navbar() {
                         <a href="https://www.linkedin.com/company/aurinkolab" target="_blank" rel="noopener noreferrer" className="cursor-pointer py-4 px-4 container"><LinkedinLogo /></a>
                         <a href="https://www.tiktok.com/@aurinkolab?_t=8kJWgknKlHN&_r=1" target="_blank" rel="noopener noreferrer" className="cursor-pointer py-4 px-4 container"><TiktokLogo /></a>
                         <RouterLink to="/events" onClick={() => setIsOpen(false)} className="block py-2 px-4 cursor-pointer">{t('Apply Now')}</RouterLink>
+
                     </div>
                 )}
 
@@ -99,7 +106,9 @@ function Navbar() {
                         <RouterLink to={"/"} state={{ scrollTo: "contact-section" }}>{t('Contacts')}</RouterLink>
                     </motion.div>
                     <motion.div variants={reveal} className="cursor-pointer">
+
                         <RouterLink to="/entrytest">{t('Quiz')}</RouterLink> {/* Route to quiz page */}
+
                     </motion.div>
                     <motion.div variants={reveal} className="cursor-pointer">
                     <a href="https://www.linkedin.com/company/aurinkolab" target="_blank" rel="noopener noreferrer" className="cursor-pointer"><LinkedinLogo /></a>
@@ -110,6 +119,7 @@ function Navbar() {
                 </div>     
                 <div className="apply-button hidden md:flex">
                     <motion.span variants={reveal} className="cursor-pointer">
+
                         <RouterLink to="/events">{t('Apply Now')}</RouterLink>
                     </motion.span>
                 </div>
@@ -123,6 +133,7 @@ function Navbar() {
                   
 
                 </div>
+
             </motion.div>
         </motion.div>
     );
