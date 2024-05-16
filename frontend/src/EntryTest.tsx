@@ -6,6 +6,7 @@ import goodTry from './assets/logo_sun.png';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { saveQuiz } from '../src/services/quizService';
+import { useTranslation } from "react-i18next";
 
 export interface Question {
     questionId: number;
@@ -34,6 +35,7 @@ const chunkArray = (array: Question[], chunkSize: number): Question[][] => {
 } 
 
 const EntryTest: React.FC = () => {
+    const {t} = useTranslation()
     const [ questions, setQuestions ] = useState<Question[][]>([]); /** Two dimensional array where nested array consists of questions per page */
     const [ pageIndex, setPageIndex ] = useState<number>(0); /** Indicate index of current page */
     const [ participantAnswers, setParticipantAnswers ] = useState<Array<{ questionId: number, answerId: number, isCorrect: boolean }>>([]); /** To store participant's answers */
@@ -49,8 +51,13 @@ const EntryTest: React.FC = () => {
 
     /** On page load, set questions of each page */
     useEffect(() => {
+        
         setQuestions(chunkArray(allQuestions, 6)); /** Second parameter is to set number of questions per page */
-    }, [])
+        return()=>{
+            console.log('calling the questions')
+        }
+    }, [allQuestions])
+
 
     useEffect(() => {
         if (message !== '') { 
@@ -170,11 +177,11 @@ const EntryTest: React.FC = () => {
         setScore(0);
         setResultMessage('');
     }
-      
+    
     return (
         <div>
             <div className='quiz-title' data-testid="quiz-page-title">
-                <p>Quiz</p>
+                <p>{t('Quizz')}</p>
             </div>
 
             {!quizCompleted ? (

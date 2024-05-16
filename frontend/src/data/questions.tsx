@@ -1,10 +1,12 @@
+
 import { Question } from "../EntryTest";
+import i18next from "./../../i18n";
 
 const allQuestions: Question[] = [
     {
         questionId: 1,
         questionNo: 1,
-        question: "What is electrical voltage?",
+        question: i18next.t('question1'),
         answers: [
             {
                 answerId: 1,
@@ -972,7 +974,9 @@ const allQuestions: Question[] = [
                 isCorrect: true
             }
         ]
-    }
+    }, 
+
 ];
+
 
 export default allQuestions;
