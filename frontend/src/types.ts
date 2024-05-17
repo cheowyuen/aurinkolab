@@ -39,6 +39,7 @@ export interface EventDetails {
     image: string;
     event_type: string;
     max_participants: number;
+    available_spots: number;
 }
 
 export interface Quiz {

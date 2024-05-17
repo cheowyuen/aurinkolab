@@ -14,18 +14,19 @@ import place_icon from '/src/assets/location.png';
 import vehicle_icon from '/src/assets/boat-icon.png';
 import engine_icon from '/src/assets/engine.png';
 import tutor_icon from '/src/assets/tutor.png';
+import group_icon from '/src/assets/group-icon.png';
 //import schedule_icon from '/src/assets/schedule.png';
 
 const EventDetails = () => {
     const { eventId } = useParams(); 
-    const [ event, setEvent ] = useState<EventDetailsType>({id: 0, name: "", date: "", education_center: "", place: "", vehicle: "", engine: "", tutor: "", status: "", image: "", event_type: "", max_participants: 0});
+    const [ event, setEvent ] = useState<EventDetailsType>({id: 0, name: "", date: "", education_center: "", place: "", vehicle: "", engine: "", tutor: "", status: "", image: "", event_type: "", max_participants: 0, available_spots: -1});
     const [ confirmation, setConfirmation ] = useState(false);
     const [ registered, setRegistered ] = useState(false);
     const [ success, setSuccess ] = useState(false);
     const [ registration, setRegistration ] = useState(false);
     const [ message, setMessage ] = useState("Registration successful! Check your email for a confirmation message.");
     const [ eventType ] = useState("");
-    const [ isVisible, setIsVisible ] = useState(false);
+    const [ isVisible, setIsVisible ] = useState(true);
     const regattaRef = useRef<HTMLDivElement>(null);
     const { isAuthenticated } = useAuth();
     const navigate = useNavigate();
@@ -47,9 +48,8 @@ const EventDetails = () => {
         const loggedUser = sessionStorage.getItem('userToken');
         if (loggedUser && event.event_type) {
             const user = JSON.parse(loggedUser);
-            if ((user.role === "student" && event.event_type !== "masterclass") || (user.role === "tutor" && event.event_type !== "hackathon")) {
-                console.log(event.event_type)
-                setIsVisible(true);
+            if ((user.role === "student" && event.event_type === "masterclass") || (user.role === "tutor" && event.event_type === "hackathon")) {
+                setIsVisible(false);
             }
         }
     }, [event.event_type]);
@@ -168,6 +168,14 @@ const EventDetails = () => {
                             <span className="icon-text">
                                 <img src={tutor_icon} alt="Tutor" className="icon" />
                                 <span className="icon-details"><span className="font-bold">Tutor</span>: {event.tutor}</span>
+                            </span><br/><br/>
+                        </>
+                    )}   
+                    {event.event_type === "hackathon" && (
+                        <>
+                            <span className="icon-text">
+                                <img src={group_icon} alt="Spots" className="icon" />
+                                <span className="icon-details"><span className="font-bold">Remaining spots</span>: {event.available_spots}</span>
                             </span><br/><br/>
                         </>
                     )}   
