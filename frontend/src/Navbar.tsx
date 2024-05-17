@@ -5,25 +5,39 @@ import LinkedinLogo from "./LogoLinkedin";
 import TiktokLogo from "./LogoTiktok";
 import { Link as RouterLink, useLocation } from 'react-router-dom'; //Imported Link to route to Test page
 import { useState, useEffect } from 'react';
+import { useAuth } from '../src/utils/useAuth';
+
+
 
 import { useTranslation } from "react-i18next";
 
-const lngs = {
-    en: {nativeName: 'English'},
-    es: {nativeName: 'Espanish'}
+interface Language {
+    nativeName: string;
 }
 
-import { useAuth } from '../src/utils/useAuth';
+// Provide an index signature for lngs object
+interface Languages {
+    [key: string]: Language;
+}
+
+
+const lngs: Languages = {
+    en: {nativeName: 'English'},
+    es: {nativeName: 'Spanish'}
+}
+
+
 
 
 function Navbar() {
     const {t, i18n} =useTranslation()
     const [isOpen, setIsOpen] = useState(false);
+    
     const location = useLocation();
     const { isAuthenticated, logout } = useAuth();
 
     useEffect(() => {
-        const timer = setTimeout(() => {
+        const timer = setTimeout(() => {    
           if (location.state?.scrollTo) {
             const section = document.getElementById(location.state.scrollTo);
             if (section) {
@@ -123,16 +137,30 @@ function Navbar() {
                         <RouterLink to="/events">{t('Apply Now')}</RouterLink>
                     </motion.span>
                 </div>
-                <div >
-                {Object.keys(lngs).map((lng) => (
-                <button type="submit" key={lng} onClick={() => i18n.changeLanguage(lng)} disabled={i18n.resolvedLanguage === lng}>
-                    {lngs[lng].nativeName}
-                </button>
-            ))}
-                    
-                  
-
+                {!isAuthenticated && (
+                    <div className="apply-button hidden md:flex">
+                        <motion.span variants={reveal} className="cursor-pointer">
+                            <RouterLink to="/login">{t('Login')}</RouterLink>
+                        </motion.span>
+                    </div>
+                )}
+                {isAuthenticated && (
+                    <div className="apply-button hidden md:flex">
+                    <motion.span variants={reveal} className="cursor-pointer">
+                        <RouterLink to="/login" onClick={logout}>{t('Logout')}</RouterLink>
+                    </motion.span>
                 </div>
+                  )}
+                <div  >
+                    <select className="language-button " onChange={(e) =>{i18n.changeLanguage(e.target.value); }} value={i18n.resolvedLanguage}>
+                {Object.keys(lngs).map((lng) => (
+                            <option key={lng} value={lng}>
+                                {lngs[lng].nativeName  }
+                            </option>
+                        ))}
+                    </select>
+                </div>
+               
 
             </motion.div>
         </motion.div>

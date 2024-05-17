@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { animationStart, reveal } from "./utils/animation";
 import "./index.css";
-import { useTranslation, Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 
 function HeroText() {

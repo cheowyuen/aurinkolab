@@ -967,3 +967,20 @@ legend{
   margin: 0 auto;
   margin-bottom: 2rem;
 }
+
+/** Languages button*/
+
+.language-button{
+  background-color: var(--color-8);
+  display: flex;
+  font-size: 0,5vw;
+  gap: 30px;
+  align-items: center;
+  color: var(--color-4);
+  margin-right: 30px;
+  font-weight: bold;
+ 
+  
+
+
+}

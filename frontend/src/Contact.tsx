@@ -19,7 +19,7 @@ function ContactSection(): JSX.Element {
           {t('email')}: <a href={`mailto:${"maria@aurinkolab.fi"}`}>{"maria@aurinkolab.fi"}</a><br/>
         </span>
         <div className="schedule-meeting-text">
-          <p> {t('Set up a meeting:')}</p>
+          <p> {t('meeting')}:</p>
           <iframe
             src={calendlyLink}
             width="100%"

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getEvent } from '../src/services/eventService';
 import { EventDetails as EventDetailsType} from "../src/types";
+import { useTranslation } from "react-i18next";
 //import allEvents from '../src/data/allEvents';
 
 import date_icon from '/src/assets/date-icon.png';
@@ -41,6 +42,7 @@ const EventDetails = () => {
     else if (event.status === "archive") {
         title = "Past Event";
     }
+    const {t} =useTranslation()
 
     return (
         <div>
@@ -57,29 +59,29 @@ const EventDetails = () => {
                     <p className="text-3xl title-font">{event.name}</p><br/>
                     <span className="icon-text">
                         <img src={date_icon} alt="Date" className="icon" />
-                        <span className="icon-details"><span className="font-bold">Dates</span>: {event.date}</span>
+                        <span className="icon-details"><span className="font-bold">{t('Dates')}</span>: {event.date}</span>
                     </span><br/><br/>
                     <span className="icon-text">
                         <img src={edu_centre_icon} alt="Education Centre" className="icon" />
-                        <span className="icon-details"><span className="font-bold">Education Center</span>: {event.education_center}</span>
+                        <span className="icon-details"><span className="font-bold">{t('Education Center')}</span>: {event.education_center}</span>
                     </span><br/><br/>
                     <span className="icon-text">
                         <img src={place_icon} alt="Place" className="icon" />
-                        <span className="icon-details"><span className="font-bold">Place</span>: {event.place}</span>
+                        <span className="icon-details"><span className="font-bold">{t('Place')}</span>: {event.place}</span>
                     </span><br/><br/>
                     <span className="icon-text">
                         <img src={vehicle_icon} alt="Vehicle" className="icon" />
-                        <span className="icon-details"><span className="font-bold">Vehicle</span>: {event.vehicle}</span>
+                        <span className="icon-details"><span className="font-bold">{t('Vehicle')}</span>: {event.vehicle}</span>
                     </span><br/><br/>
                     <span className="icon-text">
                         <img src={engine_icon} alt="Engine" className="icon" />
-                        <span className="icon-details"><span className="font-bold">Engine</span>: {event.engine}</span>
+                        <span className="icon-details"><span className="font-bold">{t('Engine')}</span>: {event.engine}</span>
                     </span><br/><br/>
                     {event.tutor != "" && (
                         <>
                             <span className="icon-text">
                                 <img src={tutor_icon} alt="Tutor" className="icon" />
-                                <span className="icon-details"><span className="font-bold">Tutor</span>: {event.tutor}</span>
+                                <span className="icon-details"><span className="font-bold">{t('Tutor')}</span>: {event.tutor}</span>
                             </span><br/><br/>
                         </>
                     )}   

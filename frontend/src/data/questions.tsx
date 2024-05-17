@@ -1,12 +1,15 @@
 
 import { Question } from "../EntryTest";
-import i18next from "./../../i18n";
+
+
+
 
 const allQuestions: Question[] = [
     {
+        
         questionId: 1,
         questionNo: 1,
-        question: i18next.t('question1'),
+        question:"What is electrical voltage?",
         answers: [
             {
                 answerId: 1,
