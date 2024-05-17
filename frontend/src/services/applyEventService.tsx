@@ -3,14 +3,14 @@ import axios, { AxiosError } from 'axios';
 
 const baseUrl = `${config.API_BASE_URL}/apply-event`;
 
-export const applyEvent = async (userId: number, role: string, eventId: number, token: string) => {
+export const applyEvent = async (userId: number, role: string, eventId: number, token: string, max_participants: number) => {
 
     try {
         const config = {
             headers: { Authorization: `Bearer ${token}` },
         }
 
-        const response = await axios.post(baseUrl, {userId, role, eventId}, config);
+        const response = await axios.post(baseUrl, {userId, role, eventId, max_participants}, config);
      
         if (response.status === 200) {
             return response.data;

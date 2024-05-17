@@ -15,7 +15,8 @@ const eventsController = {
             ELSE
               'archive'
           END AS status
-        FROM events;`
+        FROM events
+        ORDER BY start_date, id;`
       );
       res.json(rows);
     } catch (error) {
@@ -29,7 +30,7 @@ const eventsController = {
       const id = req.params.id;
       const query = `
         SELECT 
-          e.id, e.name, e.date, e.place, e.vehicle, e.engine, e.image,
+          e.id, e.name, e.date, e.place, e.vehicle, e.engine, e.image, e.event_type, e.max_participants,
           COALESCE(t.first_name, '') AS tutor,
           c.name AS education_center,
           CASE

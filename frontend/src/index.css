@@ -366,6 +366,13 @@ body {
   padding-bottom: 1px;
 }
 
+.regatta-title {
+  color: var(--color-8);
+  font-family: "Roboto Slab", sans-serif;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
 .parent-container { 
   display: flex;
   flex-direction: column;
@@ -953,6 +960,10 @@ legend{
   background: var(--color-2); 
 }
 
+.bg-navy {
+  background: var(--color-8);
+}
+
 .border-red {
   border-color: #c92e2e;
 }
@@ -972,8 +983,12 @@ legend{
   color: var(--color-7);
 }
 
+.navy {
+  color: var(--color-8);
+}
+
 .button-event {
-  background-color: var(--color-7);
+  background-color: var(--color-8);
   border-radius: 30px;
   color: #FFFFFF;
   font-family: "Poppins", sans-serif;

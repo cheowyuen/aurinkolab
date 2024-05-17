@@ -12,6 +12,7 @@ import LoginRouter from "../routes/login";
 import sendResetEmailRouter from "../routes/sendResetEmail";
 import resetPasswordRouter from "../routes/resetPassword";
 import applyEventRouter from "../routes/applyEvent";
+import regattaRouter from "../routes/regatta";
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use("/login", LoginRouter);
 app.use("/send-reset-email", sendResetEmailRouter);
 app.use("/reset-password", resetPasswordRouter);
 app.use("/apply-event", applyEventRouter);
+app.use("/regatta", regattaRouter);
 
 const PORT = 3001;
 app.listen(PORT, () => {

@@ -77,7 +77,7 @@ const Admin = () => {
     }
 
     return (
-        <div className="flex min-h-screen">
+        <div className="flex min- h-screen">
             <aside className="w-full p-6 sm:w-60 dark:bg-gray-50 dark:text-gray-800 mt-30">
                 <nav className="space-y-8 text-sm">
                     <div className="space-y-2">

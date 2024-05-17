@@ -14,7 +14,7 @@ const getTokenFrom = (request: Request) => {
 const applyEventController = {
     applyEvent: async (req: Request, res: Response) => {
         try {
-            const { userId, role, eventId  } = req.body;
+            const { userId, role, eventId, max_participants  } = req.body;
             const dbColumn = (role === "tutor" ? "tutor_id" : "student_id");
 
             const token = getTokenFrom(req);
@@ -31,7 +31,18 @@ const applyEventController = {
                     res.status(409).json({ message: "It looks like you're already registered for this event. We look forward to your participation." });
                 }
                 else {
-                    const insertQuery = `INSERT INTO events_students (event_id, ${dbColumn}) VALUES ($1, $2);`;
+                    let maxReached = false;
+                    if (role === "student") {
+                        const maxQuery = `SELECT COUNT(*) AS total FROM events_students WHERE event_id = $1 AND student_id IS NOT NULL`
+                        const maxResult = await pool.query(maxQuery, [eventId]);
+
+                        if (maxResult.rowCount && maxResult.rowCount > 0) {
+                            maxReached = maxResult.rows[0].total >= max_participants;
+                        }
+                    }
+
+                    const dbTable = (maxReached ? "waiting_list" : "events_students");
+                    const insertQuery = `INSERT INTO ${dbTable} (event_id, ${dbColumn}, registration_time, registered) VALUES ($1, $2, NOW(), ${!maxReached});`;
                     const insertResult = await pool.query(insertQuery, [eventId, userId]);
 
                     if (insertResult.rowCount && insertResult.rowCount > 0) {
@@ -40,12 +51,17 @@ const applyEventController = {
 
                         if (eventResult.rowCount && eventResult.rowCount > 0) {
                             const eventDetails = eventResult.rows[0];
+                            const title = maxReached ? "Waiting List" : "Event Registration Confirmation";
+                            const content = maxReached 
+                                ? "Thank you for your interest in the event. Currently, we are at full capacity, but we have added you to our waiting list. We will notify you as soon as a spot becomes available." 
+                                : "You have successfully registered for the event";
+
                             await transporter.sendMail({
                             from: '"Aurinko Lab" <admin@aurinkolab.fi>', 
                             to: "cheowyuen@gmail.com", 
-                            subject: `Aurinko Lab: Event Registration Confirmation`,
+                            subject: `Aurinko Lab: ${title}`,
                             text: `Hello!\n
-                                You have successfully registered for the event!\n
+                                ${content}\n
                                 ${eventDetails.name}\n
                                 Date: ${eventDetails.date}\n
                                 Place: ${eventDetails.place}\n
@@ -55,7 +71,7 @@ const applyEventController = {
                                 The Aurinko Lab Team`, 
                             html: `<p>Hello!</p>
                                 </br>
-                                <p>You have successfully registered for the event!</p>
+                                <p>${content}</p>
                                 <h2>${eventDetails.name}</h2>
                                 <p>Date: ${eventDetails.date}</p>
                                 <p>Place: ${eventDetails.place}</p>
@@ -68,8 +84,12 @@ const applyEventController = {
                         }
                     }
 
-                    res.status(200).json({ message: "Successfully registered for event." });
-                }
+                    if (maxReached) {
+                        res.status(200).json({ message: "Added to waiting list" });
+                    } else {
+                        res.status(200).json({ message: "Successfully registered for event." });
+                    }
+                } 
             }  
         } catch (error) {
             console.error('Database error:', error); 

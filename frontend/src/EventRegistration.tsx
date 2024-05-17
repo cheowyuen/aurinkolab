@@ -7,7 +7,7 @@ interface RegattaProps {
     eventId: number;
 }
 
-const Regatta = ({ onRegistrationChange, eventId }: RegattaProps) => {
+const EventRegistration = ({ onRegistrationChange, eventId }: RegattaProps) => {
     const [errorMessage, setErrorMessage] = useState("");
     const [submitCount, setSubmitCount] = useState(0);
     const [showLogoUpload] = useState(false);
@@ -235,5 +235,5 @@ const Regatta = ({ onRegistrationChange, eventId }: RegattaProps) => {
     );
 }
 
-export default Regatta;
+export default EventRegistration;
 

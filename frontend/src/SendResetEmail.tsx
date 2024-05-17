@@ -45,7 +45,7 @@ const SendResetEmail = () => {
 
     const tutorRadioChange = () => {
         setTutor(true);
-        setStudent(true);
+        setStudent(false);
     };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {

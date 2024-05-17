@@ -62,7 +62,7 @@ const Login = () => {
 
     const tutorRadioChange = () => {
         setTutor(true);
-        setStudent(true);
+        setStudent(false);
     };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -89,6 +89,7 @@ const Login = () => {
 
         try {
             /** Save tutor data */
+            console.log(student)
             const user = await login(
                 fields.email, 
                 fields.password,

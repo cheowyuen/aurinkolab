@@ -15,7 +15,6 @@ import Login from "./Login";
 import { AuthProvider } from './utils/AuthContext';
 import SendResetEmail from "./SendResetEmail";
 import ResetPassword from "./ResetPassword";
-import Regatta from "./Regatta";
 
 function App() {
   return (
@@ -38,7 +37,7 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/login" element={<Login />} />
           <Route path="/request-reset" element={<SendResetEmail />} />
-          <Route path="/regatta" element={<Regatta />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
         </div>
       </BrowserRouter>
