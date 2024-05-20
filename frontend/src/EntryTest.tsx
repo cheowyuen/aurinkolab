@@ -6,7 +6,7 @@ import goodTry from './assets/logo_sun.png';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { saveQuiz } from '../src/services/quizService';
-import { useTranslation } from "react-i18next";
+import { useTranslation, withTranslation } from "react-i18next";
 
 
 export interface Question {
@@ -36,7 +36,7 @@ const chunkArray = (array: Question[], chunkSize: number): Question[][] => {
 } 
 
 const EntryTest: React.FC = () => {
-    const {t} = useTranslation()
+    const {t} = useTranslation() /** We call the t function  to set the tranlation keys */
     const [ questions, setQuestions ] = useState<Question[][]>([]); /** Two dimensional array where nested array consists of questions per page */
     const [ pageIndex, setPageIndex ] = useState<number>(0); /** Indicate index of current page */
     const [ participantAnswers, setParticipantAnswers ] = useState<Array<{ questionId: number, answerId: number, isCorrect: boolean }>>([]); /** To store participant's answers */
@@ -196,7 +196,7 @@ const EntryTest: React.FC = () => {
                     <div className='questions'>
                         {/* Loop through questions of current page */}
                         {questions[pageIndex] ? questions[pageIndex].map((question) => (
-                            <div key= 'question.questionId' className='individual-question'>
+                            <div key= {question.questionId} className='individual-question'> {/** we have to use the dynamic key to manage the translation of the questions that are in a different file with the object format array */}
                                 <p>{`${question.questionNo}. ${t(`questions_translation.questionT_${question.questionNo}`)}`} 
                                     <span className={`unanswered-question ${(skippedQuestions.includes(question.questionNo) && currentButton === "Submit") ? '' : 'hidden'}`}> 
                                         {skippedQuestions.includes(question.questionNo) ? t('Unanswered') : '' }
@@ -214,7 +214,7 @@ const EntryTest: React.FC = () => {
                                             checked={participantAnswers.some(pa => pa.questionId === question.questionId && pa.answerId === answer.answerId)} 
                                             onChange={(e) => handleAnswerChange(question.questionId, parseInt(e.target.value), answer.isCorrect)} 
                                         /> {/* Save/Update answer on change */}
-                                        <span>{`${t(`answers_translation.questionT_${question.questionNo}answer.answer${index + 1}`)}`}</span>
+                                        <span>{`${t(`answers_translation.questionT_${question.questionNo}answer.answer${index + 1}`)}`}</span> {/** We have to create an index for each answer because i18n does not allow to have multiple keys with the seme name or number */}
                                          {/* Show "Your answer" only if the answer is incorrect and it's selected */}
                                          <span className={`correct-answer ${(!answer.isCorrect 
                                             && participantAnswers.some(pa => pa.questionId === question.questionId && pa.answerId === answer.answerId) 
@@ -274,4 +274,9 @@ const EntryTest: React.FC = () => {
     );
 }
 
-export default EntryTest;
+
+// Export the pure component for testing purposes
+export { EntryTest };
+
+// Default export the component wrapped with the HOC
+export default withTranslation()(EntryTest);
