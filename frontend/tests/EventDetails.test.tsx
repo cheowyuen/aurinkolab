@@ -3,6 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import EventDetails from '../src/EventDetails';
 import { MemoryRouter } from 'react-router-dom';
 import { getEvent } from '../src/services/eventService';
+import { AuthProvider } from '../src/utils/AuthContext';
 
 jest.mock('react-router-dom', () => ({
     ...jest.requireActual('react-router-dom'), 
@@ -51,9 +52,11 @@ describe("EventDetails Component", () => {
         });
 
         render(
-            <MemoryRouter>
-                <EventDetails />
-            </MemoryRouter>
+            <AuthProvider>  
+                <MemoryRouter>
+                    <EventDetails />
+                </MemoryRouter>
+            </AuthProvider>
         );
     });
 
