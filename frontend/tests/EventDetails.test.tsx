@@ -26,6 +26,9 @@ interface EventDetail {
     tutor: string;
     status: string;
     image: string;
+    event_type: string;
+    max_participants: number;
+    available_spots: number;
 }
 
 describe("EventDetails Component", () => {
@@ -41,7 +44,10 @@ describe("EventDetails Component", () => {
             engine: "Solar Electric",
             tutor: "Tony",
             status: "ongoing",
-            image: ""
+            image: "",
+            event_type: "hackathon",
+            max_participants: 14,
+            available_spots: 0
         });
 
         render(
@@ -69,5 +75,6 @@ describe("EventDetails Component", () => {
         expect(screen.getByText(/Solar Electric/)).toBeInTheDocument();
         expect(screen.getByText(/Tutor/)).toBeInTheDocument();
         expect(screen.getByText(/Tony/)).toBeInTheDocument();
+        expect(screen.getByText(/Remaining spots/)).toBeInTheDocument();
     });
 });
