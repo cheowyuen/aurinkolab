@@ -4,7 +4,6 @@ import { getEvent } from '../src/services/eventService';
 import { EventDetails as EventDetailsType} from "../src/types";
 import { applyEvent } from '../src/services/applyEventService';
 import Regatta from './Regatta';
-import EventRegistration from './EventRegistration';
 import { useAuth } from '../src/utils/useAuth';
 //import allEvents from '../src/data/allEvents';
 
@@ -25,7 +24,6 @@ const EventDetails = () => {
     const [ success, setSuccess ] = useState(false);
     const [ registration, setRegistration ] = useState(false);
     const [ message, setMessage ] = useState("Registration successful! Check your email for a confirmation message.");
-    const [ eventType ] = useState("");
     const [ isVisible, setIsVisible ] = useState(true);
     const regattaRef = useRef<HTMLDivElement>(null);
     const { isAuthenticated } = useAuth();
@@ -48,7 +46,7 @@ const EventDetails = () => {
         const loggedUser = sessionStorage.getItem('userToken');
         if (loggedUser && event.event_type) {
             const user = JSON.parse(loggedUser);
-            if ((user.role === "student" && event.event_type === "masterclass") || (user.role === "tutor" && event.event_type === "hackathon")) {
+            if ((user.role === "student" && event.event_type === "masterclass") || (user.role === "tutor" && event.event_type === "hackathon") || user.role === "admin") {
                 setIsVisible(false);
             }
         }
@@ -183,14 +181,20 @@ const EventDetails = () => {
                         <img src={schedule_icon} alt="Schedule" className="icon" />
                         <span className="icon-details"><span className="font-bold">Schedule</span>: </span>
                     </span><br/><br/> */}
-                    {!registration && !confirmation && !registered && !success && eventType === "" && event.status === "upcoming" && isVisible && (
-                        <button className="button-small" onClick={handleSubmit}>Apply</button> 
+                    {!registration && !confirmation && !registered && !success && event.status === "upcoming" && isVisible && (
+                        <button className="button-small" onClick={handleSubmit}>
+                            Apply
+                        </button> 
                     )}
                     {confirmation && (
                         <div className="navy font-semibold">
                             <p className="mb-5">Please click Confirm to finalize your event registration.</p>
-                            <button className="button-event mr-6" onClick={handleConfirmation}>Confirm</button> 
-                            <button className="button-event" onClick={handleCancellation}>Cancel</button> 
+                            <button className="button-event mr-6" onClick={handleConfirmation}>
+                                Confirm
+                            </button> 
+                            <button className="button-event" onClick={handleCancellation}>
+                                Cancel
+                            </button> 
                         </div>
                     )}
                     {success && (
@@ -208,11 +212,6 @@ const EventDetails = () => {
             {registration && (
                 <div ref={regattaRef}>
                     <Regatta onRegistrationChange={handleRegistrationChange} eventId={Number(eventId)} />
-                </div>
-            )}
-            {eventType !== "" && (
-                <div ref={regattaRef}>
-                    <EventRegistration onRegistrationChange={handleRegistrationChange} eventId={Number(eventId)} />
                 </div>
             )}
         </div>

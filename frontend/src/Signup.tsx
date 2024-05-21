@@ -168,9 +168,6 @@ const Signup = () => {
                 display_on_website,
                 regRole
             );
-    
-            /** If no error was thrown, data was saved successfully */
-            console.log(`Successfully registered ${regRole}`);
         } catch (error) {
             /** Handle any errors that might have occurred during saveQuiz */
             console.error(`Error registering ${regRole}:`, error);

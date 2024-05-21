@@ -30,7 +30,7 @@ const eventsController = {
       const id = req.params.id;
       const query = `
         SELECT 
-          e.id, e.name, e.date, e.place, e.vehicle, e.engine, e.image, e.event_type, COALESCE(e.max_participants, 0),
+          e.id, e.name, e.date, e.place, e.vehicle, e.engine, e.image, e.event_type, COALESCE(e.max_participants, 0) AS max_participants,
           COALESCE(t.first_name, '') AS tutor,
           c.name AS education_center,
           CASE

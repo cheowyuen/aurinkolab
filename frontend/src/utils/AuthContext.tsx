@@ -1,4 +1,4 @@
-import React, { createContext, useState, ReactNode } from 'react';
+import { createContext, useState, ReactNode, useEffect } from 'react';
 
 interface AuthContextType {
     isAuthenticated: boolean;
@@ -16,6 +16,18 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!sessionStorage.getItem('userToken'));
     const [userRole, setUserRole] = useState("");
+
+    useEffect(() => {
+        const userToken = sessionStorage.getItem('userToken');
+        if (userToken) {
+            const loggedUser = JSON.parse(userToken);
+            setUserRole(loggedUser.role);
+            console.log('role',userRole)
+        } else {
+            console.log('No user token found');
+        }
+    }, [userRole]);
+
 
     const login = (user: string) => {
         sessionStorage.setItem('userToken', user);

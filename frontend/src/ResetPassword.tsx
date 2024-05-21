@@ -87,9 +87,6 @@ const ResetPassword = () => {
             if (token) {
                 await resetPassword(token, role, fields.password);
                 setPasswordReset(true);
-        
-                /** If no error was thrown, data was saved successfully */
-                console.log(`Password reset`);
             }
             else {
                 setErrorMessage('Verification token is missing.');
