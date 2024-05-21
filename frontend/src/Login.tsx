@@ -47,7 +47,7 @@ const Login = () => {
 
     if (shouldRedirect) {
         /** Redirect */
-        navigate('/');
+        navigate('/events');
     }
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
