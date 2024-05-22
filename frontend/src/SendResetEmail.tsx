@@ -45,7 +45,7 @@ const SendResetEmail = () => {
 
     const tutorRadioChange = () => {
         setTutor(true);
-        setStudent(true);
+        setStudent(false);
     };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -77,9 +77,6 @@ const SendResetEmail = () => {
             );
             
             setEmailSent(true)
-
-            /** If no error was thrown, data was saved successfully */
-            console.log(`Reset password email sent`);
         } catch (error) {
             /** Handle any errors that might have occurred during saveQuiz */
             console.error(`Error sending email to reset password`, error);

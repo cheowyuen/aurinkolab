@@ -366,6 +366,26 @@ body {
   padding-bottom: 1px;
 }
 
+.regatta-title {
+  color: var(--color-8);
+  font-family: "Roboto Slab", sans-serif;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.admin-panel-title {
+  font-size: 1.5rem;
+  padding-top: 110px;
+  color: var(--color-2);
+}
+
+hr.custom-hr {
+  border: 0;
+  height: 1.5px;
+  background: var(--color-2);
+  margin: 15px 0;
+}
+
 .parent-container { 
   display: flex;
   flex-direction: column;
@@ -468,8 +488,8 @@ body {
   border-radius: 30px;
   color: #FFFFFF;
   font-family: "Poppins", sans-serif;
-  font-size: 1.5rem;
-  padding: 1rem 3rem;
+  font-size: 1.3rem;
+  padding: 1rem 2.5rem;
 }
 
 .button-tiny {
@@ -628,6 +648,30 @@ body {
   padding: 1.5rem;
   margin-bottom: 2rem;
   text-align: center;
+}
+
+.admin-panel-notification {
+  color: #c92e2e;
+  border-style: solid;
+  border-radius: 2rem;
+  border-width: 0.1rem;
+  border-color: #c92e2e;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  text-align: center;
+  display: inline-block;
+}
+
+.admin-success-notification {
+  color: var(--color-2);
+  border-style: solid;
+  border-radius: 2rem;
+  border-width: 0.1rem;
+  border-color: var(--color-2);
+  padding: 1rem;
+  margin-top: 0.5rem;
+  text-align: center;
+  display: inline-block;
 }
 
 .notification-container {
@@ -953,6 +997,10 @@ legend{
   background: var(--color-2); 
 }
 
+.bg-navy {
+  background: var(--color-8);
+}
+
 .border-red {
   border-color: #c92e2e;
 }
@@ -967,6 +1015,7 @@ legend{
   margin: 0 auto;
   margin-bottom: 2rem;
 }
+
 
 /** Languages button*/
 
@@ -984,3 +1033,27 @@ legend{
 
 
 }
+
+.purple {
+  color: var(--color-7);
+}
+
+.navy {
+  color: var(--color-8);
+}
+
+.dark-gray {
+  color: white;
+  background: var(--color-2);
+}
+
+.button-event {
+  background-color: var(--color-8);
+  border-radius: 30px;
+  color: #FFFFFF;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.3rem;
+  padding: 1rem 2.5rem;
+}
+
+

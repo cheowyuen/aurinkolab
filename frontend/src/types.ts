@@ -37,6 +37,9 @@ export interface EventDetails {
     tutor: string;
     status: string;
     image: string;
+    event_type: string;
+    max_participants: number;
+    available_spots: number;
 }
 
 export interface Quiz {
@@ -66,4 +69,18 @@ export interface Login {
 export interface EducationCenter {
     id: number;
     name: number;
+}
+
+export interface Regatta {
+    vehicle_name: string;
+    team_leader: string;
+    email: string;
+    contact_no: string;
+    team_logo?: string;
+}
+
+export interface News {
+    title: string;
+    image: string;
+    text: string;
 }
