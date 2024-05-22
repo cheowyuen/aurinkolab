@@ -11,6 +11,7 @@ Create a new folder in the frontend/public/locales with abbreviation of the new 
 Inside, create a new file .json with the name "translation"
 
 Note: all of the files inside the languages folder will be named "translation"
+![image](https://github.com/AurinkoLab/website/assets/69098107/cead9016-27fe-4447-9f45-62d1ad2dbb2b)
 
 ## step 2
 
@@ -37,6 +38,8 @@ import { useTranslation } from "react-i18next";
 ```
 
 - Then you will have to add this new key to all of the translation files in each language available in order to grantee that the application will have a translation to render for that specific paragraph or text.
+
+  ![image](https://github.com/AurinkoLab/website/assets/69098107/42215b3f-8c06-4a55-a230-3e1f46c23dd0)
 
 
 
