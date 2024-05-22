@@ -84,3 +84,9 @@ export interface Regatta {
     contact_no: string;
     team_logo?: string;
 }
+
+export interface News {
+    title: string;
+    image: string;
+    text: string;
+}

@@ -80,8 +80,8 @@ const ApprroveTutor = () => {
         <div>
             <div className="w-full max-w-4xl p-6 bg-white rounded-xl">
                 <div className="mt-30">
-                    <button onClick={() => handleSubmit("approve")} type="button" className="border-2 border-black rounded-2xl p-2 tracking-widest inline-block mr-5">Approve Tutor</button>
-                    <button onClick={() => handleSubmit("reject")} type="button" className="border-2 border-black rounded-2xl p-2 tracking-widest inline-block">Reject Tutor</button>
+                    <button onClick={() => handleSubmit("approve")} type="button" className="rounded-2xl p-2 pl-4 pr-4 tracking-widest inline-block mr-5 dark-gray">Approve Tutor</button>
+                    <button onClick={() => handleSubmit("reject")} type="button" className="rounded-2xl p-2 pl-4 pr-4 tracking-widest inline-block dark-gray">Reject Tutor</button>
                 </div>   
             </div>
 
