@@ -10,12 +10,12 @@ const AddNews = () => {
     const [fields, setFields] = useState({
         title: "",
         image: "",
-        text: ""
+        news_text: ""
     });
 
     const [errors, setErrors] = useState({
         title: false,
-        text: false
+        news_text: false
     });
 
     const notificationRef = useRef<HTMLDivElement | null>(null); /** Create a ref */
@@ -46,7 +46,7 @@ const AddNews = () => {
         /** Set error for blank required fields */
         const updatedErrors = {
             title: fields.title.trim() === "",
-            text: fields.text.trim() === ""
+            news_text: fields.news_text.trim() === ""
         };
 
         setErrors(updatedErrors);
@@ -66,7 +66,7 @@ const AddNews = () => {
             await addNews(
                 fields.title, 
                 fields.image, 
-                fields.text
+                fields.news_text
             );
 
             setErrorMessage(`News successfully added`);
@@ -89,7 +89,7 @@ const AddNews = () => {
         setFields({
             title: "",
             image: "",
-            text: ""
+            news_text: ""
         });
     };
 
@@ -127,7 +127,7 @@ const AddNews = () => {
                                     <label className="block tracking-wide mb-2">
                                         Text*
                                     </label>
-                                    <textarea onChange={handleInputChange} value={fields.text} className={`appearance-none block w-full border ${errors.text ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="text" rows={5}></textarea>
+                                    <textarea onChange={handleInputChange} value={fields.news_text} className={`appearance-none block w-full border ${errors.news_text ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="news_text" rows={5}></textarea>
                                 </div>
                             </div>
                             <div className="flex flex-wrap -mx-3 mb-6 mt-10">
