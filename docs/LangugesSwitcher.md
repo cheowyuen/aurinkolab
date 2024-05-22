@@ -11,6 +11,7 @@ Create a new folder in the frontend/public/locales with abbreviation of the new 
 Inside, create a new file .json with the name "translation"
 
 Note: all of the files inside the languages folder will be named "translation"
+
 ![image](https://github.com/AurinkoLab/website/assets/69098107/cead9016-27fe-4447-9f45-62d1ad2dbb2b)
 
 ## step 2
