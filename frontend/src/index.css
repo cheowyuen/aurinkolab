@@ -373,6 +373,19 @@ body {
   font-weight: bold;
 }
 
+.admin-panel-title {
+  font-size: 1.5rem;
+  padding-top: 110px;
+  color: var(--color-2);
+}
+
+hr.custom-hr {
+  border: 0;
+  height: 1.5px;
+  background: var(--color-2);
+  margin: 15px 0;
+}
+
 .parent-container { 
   display: flex;
   flex-direction: column;
@@ -635,6 +648,18 @@ body {
   padding: 1.5rem;
   margin-bottom: 2rem;
   text-align: center;
+}
+
+.admin-panel-notification {
+  color: #c92e2e;
+  border-style: solid;
+  border-radius: 2rem;
+  border-width: 0.1rem;
+  border-color: #c92e2e;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  text-align: center;
+  display: inline-block;
 }
 
 .notification-container {
@@ -987,6 +1012,11 @@ legend{
   color: var(--color-8);
 }
 
+.dark-gray {
+  color: white;
+  background: var(--color-2);
+}
+
 .button-event {
   background-color: var(--color-8);
   border-radius: 30px;
@@ -995,3 +1025,4 @@ legend{
   font-size: 1.3rem;
   padding: 1rem 2.5rem;
 }
+
