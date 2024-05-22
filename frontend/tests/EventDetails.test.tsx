@@ -3,6 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import EventDetails from '../src/EventDetails';
 import { MemoryRouter } from 'react-router-dom';
 import { getEvent } from '../src/services/eventService';
+import { AuthProvider } from '../src/utils/AuthContext';
 
 jest.mock('react-router-dom', () => ({
     ...jest.requireActual('react-router-dom'), 
@@ -26,6 +27,9 @@ interface EventDetail {
     tutor: string;
     status: string;
     image: string;
+    event_type: string;
+    max_participants: number;
+    available_spots: number;
 }
 
 describe("EventDetails Component", () => {
@@ -41,13 +45,18 @@ describe("EventDetails Component", () => {
             engine: "Solar Electric",
             tutor: "Tony",
             status: "ongoing",
-            image: ""
+            image: "",
+            event_type: "hackathon",
+            max_participants: 14,
+            available_spots: 0
         });
 
         render(
-            <MemoryRouter>
-                <EventDetails />
-            </MemoryRouter>
+            <AuthProvider>  
+                <MemoryRouter>
+                    <EventDetails />
+                </MemoryRouter>
+            </AuthProvider>
         );
     });
 
@@ -69,5 +78,6 @@ describe("EventDetails Component", () => {
         expect(screen.getByText(/Solar Electric/)).toBeInTheDocument();
         expect(screen.getByText(/Tutor/)).toBeInTheDocument();
         expect(screen.getByText(/Tony/)).toBeInTheDocument();
+        expect(screen.getByText(/Remaining spots/)).toBeInTheDocument();
     });
 });

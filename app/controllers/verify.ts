@@ -11,7 +11,7 @@ const verifyEmailController = {
  
       const result = await pool.query(query, [token]);
       if (result.rowCount && result.rowCount > 0) {
-        const verifiedQuery = `UPDATE ${dbTable} SET verified = true WHERE verification_token = $1;`;
+        const verifiedQuery = `UPDATE ${dbTable} SET verified = true, token_expiration = NOW() WHERE verification_token = $1;`;
         const verifiedResult = await pool.query(verifiedQuery, [token]);
         if (verifiedResult.rowCount && verifiedResult.rowCount > 0) {
           res.status(201).json({ message: "Email verification is successful" });

@@ -15,7 +15,8 @@ const eventsController = {
             ELSE
               'archive'
           END AS status
-        FROM events;`
+        FROM events
+        ORDER BY start_date, id;`
       );
       res.json(rows);
     } catch (error) {
@@ -29,7 +30,7 @@ const eventsController = {
       const id = req.params.id;
       const query = `
         SELECT 
-          e.id, e.name, e.date, e.place, e.vehicle, e.engine, e.image,
+          e.id, e.name, e.date, e.place, e.vehicle, e.engine, e.image, e.event_type, COALESCE(e.max_participants, 0) AS max_participants,
           COALESCE(t.first_name, '') AS tutor,
           c.name AS education_center,
           CASE
@@ -39,7 +40,8 @@ const eventsController = {
               THEN 'upcoming'
             ELSE
               'archive'
-          END AS status
+          END AS status,
+          COALESCE(e.max_participants, 0) - (SELECT COUNT(*) FROM events_students es WHERE es.event_id = e.id) AS available_spots
         FROM events e 
         LEFT JOIN tutors t on e.tutor_id = t.id
         LEFT JOIN education_centers c on e.education_center_id = c.id

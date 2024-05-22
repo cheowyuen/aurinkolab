@@ -4,7 +4,7 @@ import config from '../../config';
 
 const baseUrl = `${config.API_BASE_URL}/events`;
 
-export const getAllEvents = async () => {
+export const getAllEvents = async (): Promise<Event[]> => {
     const response = await axios.get<Event[]>(baseUrl);
     return response.data;
 }
