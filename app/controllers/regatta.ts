@@ -1,6 +1,5 @@
 import { pool } from "../database/database";
 import { Request, Response } from 'express';
-import { QueryResult } from 'pg';
 import transporter from '../utils/mailer';
 
 const regattaController = {

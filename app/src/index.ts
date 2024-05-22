@@ -14,6 +14,7 @@ import resetPasswordRouter from "../routes/resetPassword";
 import applyEventRouter from "../routes/applyEvent";
 import regattaRouter from "../routes/regatta";
 import adminLoginRouter from "../routes/adminLogin";
+import newsRouter from "../routes/news";
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.use("/reset-password", resetPasswordRouter);
 app.use("/apply-event", applyEventRouter);
 app.use("/regatta", regattaRouter);
 app.use("/admin-login", adminLoginRouter);
+app.use("/news", newsRouter);
 
 const PORT = 3001;
 app.listen(PORT, () => {
