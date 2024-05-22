@@ -20,12 +20,12 @@ const sendResetEmailController = {
           SET reset_password_token = $1, 
             reset_token_expiration =  NOW() + INTERVAL '1 day'
           WHERE email = $2;`;
-        
+          console.log(query)
         const result = await pool.query(query, [token, email.trim()]);
 
         if (result.rowCount && result.rowCount > 0) {
           const resetPasswordLink = `http://localhost:5173/reset-password?token=${token}&role=${role}`
-
+        
           const info = await transporter.sendMail({
             from: '"Aurinko Lab" <admin@aurinkolab.fi>', 
             to: "cheowyuen@gmail.com", 

@@ -3,17 +3,16 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jsonwebtoken from 'jsonwebtoken';
 
-const LoginController = {
+const adminLoginController = {
   login: async (req: Request, res: Response) => {
     try {
-      const { email, password, role} = req.body;
-      const dbTable = (role === "tutor" ? "tutors" : "students");
+      const { username, password} = req.body;
 
-      const accountQuery = `SELECT * FROM ${dbTable} WHERE email=$1`;
-      const { rows } = await pool.query(accountQuery, [email]);
+      const accountQuery = `SELECT * FROM admin WHERE username=$1`;
+      const { rows } = await pool.query(accountQuery, [username]);
 
       if (rows.length === 0) {
-        res.status(401).json({ message: "Invalid email or password" });
+        res.status(401).json({ message: "Invalid username or password" });
       } else {
         const passwordCorrect = await bcrypt.compare(password, rows[0].password);
 
@@ -29,10 +28,10 @@ const LoginController = {
            
             res
                 .status(200)
-                .send({ token, role, id })
+                .send({ token, role: "admin", id })
         }
         else {
-            res.status(401).json({ message: "Invalid email or password" });
+            res.status(401).json({ message: "Invalid username or password" });
         }
       }
     } catch (error) {
@@ -42,4 +41,4 @@ const LoginController = {
   }
 };
 
-export default LoginController;
+export default adminLoginController;

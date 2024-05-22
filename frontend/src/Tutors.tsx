@@ -1,5 +1,5 @@
 import Logo from "./Logo";
-//import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Tutor } from "../src/types";
 import { getAllTutors } from '../src/services/tutorService';
@@ -8,9 +8,8 @@ import defaultImage from '../src/assets/boat-icon.png';
 const Tutors = () => {
     const [tutors, setTutors] = useState<Tutor[]>([]);
 
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
 
-    
     /*const tutors = [
         {image: "/src/assets/tony.jpeg", name: "Tony", email: "tony.poppel@gmail.com", completedVehicles: "300", isEstimate: true, isCertified: true, tutorId: 1},
         {image: "/src/assets/olga.jpeg", name: "Olga", email: "olgakairova@gmail.com", completedVehicles: "2", isEstimate: false, isCertified: true, tutorId: 2},
@@ -28,12 +27,12 @@ const Tutors = () => {
                 <p>Aurinko Tutors</p>
             </div>
 
-            {/* <div className="flex justify-center mx-auto pt-12 pb-6 bg-gray-100 w-full">
+            <div className="flex justify-center mx-auto pt-12 pb-6 bg-gray-100 w-full">
                 <div className="flex flex-col items-center">
                     <h1 className="xl:text-4xl text-3xl text-center text-gray-800 font-extrabold pb-6 mx-auto">Join us as a tutor</h1>
-                    <button className="button-tiny" onClick={() => navigate('/signup')}>Register</button>
+                    <button className="button-tiny" onClick={() => navigate('/signup?role=tutor')}>Register</button>
                 </div>
-            </div> */}
+            </div>
 
             <div className="w-full px-10 pt-10 events-page bg-gray-100">
                 <div className="lg:flex md:flex sm:flex items-center flex-wrap justify-around">

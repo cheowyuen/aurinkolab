@@ -7,18 +7,6 @@ const AllEvents = () => {
     const [events, setEvents] = useState<Event[]>([]);
     const navigate = useNavigate();
 
-    /*const events = [
-        {image: '/src/assets/Kerava.jpg', name: "Visit to Keravan Energia's Solar Plant", place: "Kerava, Finand", date: "04 Apr 2024", eventId: 1, status: "archive"},
-        {image: '/src/assets/Aalto.jpeg', name: "Engineering Hackathon-1", place: "Espoo, Finland", date: "Apr - May 2024", eventId: 2, status: "ongoing"},
-        {image: '/src/assets/Aalto.jpeg', name: "Engineering Hackathon-2", place: "Espoo, Finland", date: "Apr - May 2024", eventId: 3, status: "ongoing"},
-        {image: '/src/assets/Sigulda.png', name: "Engineering Hackathon-3", place: "Sigulda, Latvia", date: "Apr - May 2024", eventId: 4, status: "upcoming"},
-        {image: '/src/assets/Helsinki.png', name: "Solar Regatta", place: "Helsinki, Finland", date: "01 Jun 2024", eventId: 5, status: "upcoming"},
-        {image: '/src/assets/Aalto.jpeg', name: "Training for Tutors", place: "Espoo, Finland", date: "28 - 29 Aug 2024", eventId: 6, status: "upcoming"},
-        {image: '/src/assets/Aalto.jpeg', name: "Engineering Hackathon-4", place: "Espoo, Finland", date: "Sep - Oct 2024", eventId: 7, status: "upcoming"},
-        {image: '/src/assets/Aalto.jpeg', name: "Engineering Hackathon-5", place: "Espoo, Finland", date: "Sep - Oct 2024", eventId: 8, status: "upcoming"},
-        {image: '/src/assets/Vantaa.jpg', name: "Solar Race", place: "Vantaa, Finland", date: "26 Oct 2024", eventId: 9, status: "upcoming"},
-    ]*/
-
     useEffect(() => {
         getAllEvents().then(data => {
           setEvents(data);
