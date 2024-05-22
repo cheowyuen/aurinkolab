@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import Notification from '../src/Notification';
-import { applyRegatta } from '../src/services/regattaService';
+import { addNews } from '../src/services/newsService';
 
 const AddNews = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const [submitCount, setSubmitCount] = useState(0);
+    const [notificationType, setNotificationType] = useState("");
 
     const [fields, setFields] = useState({
         title: "",
@@ -14,7 +15,6 @@ const AddNews = () => {
 
     const [errors, setErrors] = useState({
         title: false,
-        image: false,
         text: false
     });
 
@@ -33,7 +33,7 @@ const AddNews = () => {
         }
       }, [errorMessage, submitCount]);
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target as { name: string, value: string };
         setFields(prev => ({ ...prev, [name]: value }));
     }; 
@@ -46,7 +46,6 @@ const AddNews = () => {
         /** Set error for blank required fields */
         const updatedErrors = {
             title: fields.title.trim() === "",
-            image: fields.image.trim() === "",
             text: fields.text.trim() === ""
         };
 
@@ -56,20 +55,26 @@ const AddNews = () => {
         const hasError = Object.values(updatedErrors).some(e => e);
         if (hasError) {
             setErrorMessage("Please fill in all required fields.");
+            setNotificationType("admin-panel-notification");
             return;
         } else {
             setErrorMessage('');
+            setNotificationType("");
         }
 
         try {
-            await applyRegatta(
-                1,
+            await addNews(
                 fields.title, 
                 fields.image, 
-                fields.text, 
-                '', 
-                ''
+                fields.text
             );
+
+            setErrorMessage(`News successfully added`);
+            setNotificationType("admin-success-notification");
+            setTimeout(() => {
+                setErrorMessage("");
+                setNotificationType("");
+            }, 2000)
         } catch (error) {
             if (error instanceof Error) {
                 console.log("An error occurred while adding news.")
@@ -98,7 +103,7 @@ const AddNews = () => {
 
                 <div className="pl-5 text-base page-font-color">
                     <div>
-                        <Notification ref={notificationRef} message={errorMessage} type="admin-panel-notification" />
+                        <Notification ref={notificationRef} message={errorMessage} type={notificationType} />
 
                         <form noValidate className="w-full max-w-4xl pt-2" onSubmit={handleSubmit}>
                             <div className="flex flex-wrap -mx-3 mb-6">
@@ -112,9 +117,9 @@ const AddNews = () => {
                             <div className="flex flex-wrap -mx-3 mb-6">
                                 <div className="w-full px-3">
                                     <label className="block tracking-wide mb-2">
-                                        Image*
+                                        Image
                                     </label>
-                                    <input onChange={handleInputChange} value={fields.image} className={`appearance-none block w-full border ${errors.image ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="image" type="text" />
+                                    <input onChange={handleInputChange} value={fields.image} className={`appearance-none block w-full border border-gray-300 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="image" type="text" />
                                 </div>
                             </div>
                             <div className="flex flex-wrap -mx-3 mb-6">
@@ -122,7 +127,7 @@ const AddNews = () => {
                                     <label className="block tracking-wide mb-2">
                                         Text*
                                     </label>
-                                    <input onChange={handleInputChange} value={fields.text} className={`appearance-none block w-full border ${errors.text ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="text" type="text" />
+                                    <textarea onChange={handleInputChange} value={fields.text} className={`appearance-none block w-full border ${errors.text ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="text" rows={5}></textarea>
                                 </div>
                             </div>
                             <div className="flex flex-wrap -mx-3 mb-6 mt-10">

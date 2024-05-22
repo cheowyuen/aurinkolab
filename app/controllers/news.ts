@@ -6,9 +6,8 @@ const newsController = {
         try {
             const { title, image, text } = req.body;
 
-            const query = `INSERT INTO news (title, image, text, date_added) VALUES ($1, $2, $3, NOW())`;
+            const query = `INSERT INTO news (title, image, news_text, date_added) VALUES ($1, $2, $3, NOW());`;
             const result = await pool.query(query, [title, image, text]);
-
             if (result.rowCount && result.rowCount > 0) {
                 res.status(201).json({ message: `News added successfully` });
             } else {
