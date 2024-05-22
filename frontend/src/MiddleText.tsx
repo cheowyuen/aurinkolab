@@ -1,9 +1,11 @@
+import { useTranslation } from "react-i18next";
 
 const MiddleText = () => {
+  const {t} =useTranslation()
   return (
     <div className="middle">
       <div className="middle-text">
-        <p>AurinkoLab Engineering Hackathon: 20 hours for your own electric-solar or hydrogen-driven vehicles</p>
+        <p>{t('middle-text')}</p>
       </div>
     </div>
   );

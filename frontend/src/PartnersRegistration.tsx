@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import Notification from '../src/Notification';
+import { useTranslation } from "react-i18next";
 
 const Signup = () => {
+    const {t} =useTranslation()
     const [errorMessage, setErrorMessage] = useState("");
     const [submitCount, setSubmitCount] = useState(0);
 
@@ -86,10 +88,10 @@ const Signup = () => {
         <div className="flex justify-center items-center min-h-screen"> 
             <div className="w-full max-w-4xl p-6 bg-white rounded">
                 <div className="signup-title">
-                    <p>Sponsorship Opportunities</p>
+                    <p>{t('Sponsorship Opportunities')}</p>
                 </div>
                 <div>
-                    <p className="text-center">To download the presentation, please submit the form below and we will e-mail you the presentaion file.</p>
+                    <p className="text-center"> {t('partner-description')}</p>
                     
                 </div>   
 
@@ -101,13 +103,13 @@ const Signup = () => {
                         <div className="flex flex-wrap -mx-3 mb-6">
                             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                                 <label className="block tracking-wide mb-2">
-                                    Company Name*
+                                {t('Company Name')}*
                                 </label>
                                 <input onChange={handleInputChange} value={fields.companyName} className={`appearance-none block w-full border ${errors.companyName ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="companyName" type="text" />
                             </div>
                             <div className="w-full md:w-1/2 px-3">
                                 <label className="block tracking-wide text mb-2">
-                                    Email Address*
+                                {t('Email Address')}*
                                 </label>
                                 <input onChange={handleInputChange} value={fields.emailAddress} className={`appearance-none block w-full border ${errors.emailAddress ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="emailAddress" type="text" />
                             </div>
@@ -120,7 +122,7 @@ const Signup = () => {
                         <div className="flex flex-wrap -mx-3 mb-6">
                             <div className="w-full px-3 text-center">
                                 <button className="shadow focus:shadow-outline focus:outline-none text-white py-4 px-8 rounded-3xl bg-lightblue" type="submit">
-                                    Send me the presentation
+                                    {t('Send me the presentation')}
                                 </button>
                             </div>
                         </div>
