@@ -11,6 +11,7 @@ import approveTutorRouter from "../routes/approveTutor";
 import LoginRouter from "../routes/login";
 import sendResetEmailRouter from "../routes/sendResetEmail";
 import resetPasswordRouter from "../routes/resetPassword";
+import partnersRouter from "../routes/parnersRegistration";
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use("/events", eventsRouter);
 app.use("/tutors", tutorsRouter);
 app.use("/quiz", quizRouter);
 app.use("/signup", tutorSignupRouter);
+app.use("/partnersregistration", partnersRouter );
 app.use("/educationCenters", educationCentersRouter);
 app.use("/confirmemail", verifyEmailRouter);
 app.use("/resendLink", resendLinkRouter);

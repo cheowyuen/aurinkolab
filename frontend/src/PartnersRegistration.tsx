@@ -1,22 +1,26 @@
 import { useState, useEffect, useRef } from 'react';
 import Notification from '../src/Notification';
+import { savePartnersData } from '../src/services/savePartnersData';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-const Signup = () => {
+const partnersRegistration = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const [submitCount, setSubmitCount] = useState(0);
 
     const [fields, setFields] = useState({
         companyName: "",
-        emailAddress: "",
+        emailAddress: ""
        
     });
 
     const [errors, setErrors] = useState({
         companyName: false,
-        emailAddress: false,
+        emailAddress: false
     });
 
+    const navigate = useNavigate();
     const notificationRef = useRef<HTMLDivElement | null>(null); /** Create a ref */
+   
 
     useEffect(() => {
         if (errorMessage !== '') { 
@@ -43,7 +47,7 @@ const Signup = () => {
 
     
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit =async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         setSubmitCount(prevCount => prevCount + 1);
@@ -74,13 +78,43 @@ const Signup = () => {
             setErrorMessage('');
         }
 
+        try {
+            /** Save tutor data */
+            await savePartnersData(
+                fields.companyName, 
+                fields.emailAddress
+            );
+            console.log("sending the form data")
+    
+            /** If no error was thrown, data was saved successfully */
+            console.error(`Successfully registered`);
+        } catch (error) {
+            /** Handle any errors that might have occurred during saveQuiz */
+            console.error(`Error registering :`, error);
+            if (error instanceof Error) { 
+                if (error.message === 'Email already in use') {
+                    setErrorMessage("This email address is already registered."); 
+                    return;
+                } else {
+                    setErrorMessage("An error occurred during registration. Please try again."); 
+                    return;
+                }
+            } else {
+                setErrorMessage("An unexpected error occurred. Please try again."); 
+                return;
+            }
+        }
+
      
         /** Reset fields after successful submission */
         setFields({
             companyName: "",
-            emailAddress: "",
+            emailAddress: ""
         });
+        
+        navigate('/verifyemail', { state: { emailAddress: fields.emailaddress } })
     };
+    
 
     return (
         <div className="flex justify-center items-center min-h-screen"> 
@@ -131,4 +165,4 @@ const Signup = () => {
     );
 }
 
-export default Signup;
+export default partnersRegistration;
