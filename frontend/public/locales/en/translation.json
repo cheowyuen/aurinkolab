@@ -84,6 +84,22 @@
     "one question":"one question",
     "a few questions":"a few questions",
 
+    "Tutor Registration":"Tutor Registration",
+    "Student Registration":"Student Registration",
+    "Don't have an account?":"Don't have an account?",
+    "Log in":"Log in",
+    "Student":"Student",
+    "Role":"Role",
+    "Password":"Password",
+    "Email":"Email",
+    "Log In":"Log In",
+
+
+
+    
+
+
+
 
     "questions_translation":{
         "questionT_1":"What is electrical voltage?",
