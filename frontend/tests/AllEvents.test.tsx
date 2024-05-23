@@ -42,18 +42,18 @@ describe("AllEvents Component", () => {
         expect(title).toHaveTextContent("Events");
         title = screen.getByTestId("ongoing-events");
         expect(title).toHaveTextContent("Ongoing events");
-        /*title = screen.getByTestId("upcoming-events");
+        title = screen.getByTestId("upcoming-events");
         expect(title).toHaveTextContent("Upcoming events");
         title = screen.getByTestId("archive");
-        expect(title).toHaveTextContent("Archive");*/
+        expect(title).toHaveTextContent("Archive");
       
 
-       /*for (let i = 0; i < events.length; i++) {
+       for (let i = 0; i < events.length; i++) {
         await waitFor(() => {
           expect(screen.getByText(events[i].name)).toBeInTheDocument();
           expect(screen.getByText(events[i].place)).toBeInTheDocument();
           expect(screen.getByText(events[i].date)).toBeInTheDocument();
         });
-      }*/
+      }
     })
 })

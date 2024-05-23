@@ -80,8 +80,6 @@ const AllEvents = () => {
 
 
             </div>
-            
-        </div>
     )
 }
 

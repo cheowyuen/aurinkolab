@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render, screen, waitFor, act } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import EventDetails from '../src/EventDetails';
 import { MemoryRouter } from 'react-router-dom';
 import { getEvent } from '../src/services/eventService';

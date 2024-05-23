@@ -120,6 +120,9 @@ function Navbar() {
                         <RouterLink to={"/"} state={{ scrollTo: "contact-section" }}>{t('Contacts')}</RouterLink>
                     </motion.div>
                     <motion.div variants={reveal} className="cursor-pointer">
+                        <RouterLink to={"/news"}>{t('Contacts')}</RouterLink>
+                    </motion.div>
+                    <motion.div variants={reveal} className="cursor-pointer">
                         <RouterLink id="quiz-nav-bar" to="/entrytest">{t('Quiz')}</RouterLink> {/* Route to quiz page */}
                     </motion.div>
                     <motion.div variants={reveal} className="cursor-pointer">
