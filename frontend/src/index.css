@@ -1005,6 +1005,10 @@ legend{
   background: var(--color-8);
 }
 
+.bg-beige {
+  background: var(--color-4);
+}
+
 .border-red {
   border-color: #c92e2e;
 }
@@ -1060,4 +1064,11 @@ legend{
   padding: 1rem 2.5rem;
 }
 
+.card {
+  transition: transform 0.3s ease; 
+}
+
+.card:hover {
+  transform: scale(1.05); 
+}
 

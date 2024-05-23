@@ -5,6 +5,7 @@ import MiddleText from "./MiddleText";
 import AboutAurinkoLab from "./AboutAurinkoLab";
 import Contact from "./Contact";
 import Partners from "./Partners";
+import NewsSection from "./NewsSection";
 
 function Home() {
     return (
@@ -15,6 +16,8 @@ function Home() {
         <AboutAurinkoLab />
         {/* Mariaro: hided for a main page. TODO: delete after 28.04.2024 */}
         {/* <FAQ /> */}
+        <MiddleText />
+        <NewsSection />
         <MiddleText />
         <Partners />
         <MiddleText />

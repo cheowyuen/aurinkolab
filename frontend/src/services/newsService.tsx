@@ -42,3 +42,10 @@ export const getNews = async (id: string): Promise<AllNews>  => {
         throw error; 
     }
 }
+
+export const getLatestNews = async (): Promise<AllNews[]> => {
+    baseUrl = `${baseUrl}/latest`;
+    console.log(baseUrl)
+    const response = await axios.get<AllNews[]>(baseUrl);
+    return response.data;
+} 
