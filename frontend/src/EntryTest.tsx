@@ -150,9 +150,9 @@ const EntryTest: React.FC = () => {
     
             /** If no error was thrown, data was saved successfully */
             setResultMessage(grade >= 8.7 ? "Congratulations! You have passed the quiz" : "Close effort! Let's try again.");
-        } catch (error) {
+        } catch {
             /** Handle any errors that might have occurred during saveQuiz */
-            console.error("Error saving quiz result:", error);
+            console.log("Error saving quiz result:");
             setResultMessage("An error occurred while saving quiz result. Please try again.");
         }
         

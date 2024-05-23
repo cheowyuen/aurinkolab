@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, act } from '@testing-library/react';
 import EventDetails from '../src/EventDetails';
 import { MemoryRouter } from 'react-router-dom';
 import { getEvent } from '../src/services/eventService';
@@ -50,22 +50,24 @@ describe("EventDetails Component", () => {
             max_participants: 14,
             available_spots: 0
         });
+    });
 
-        render(
-            <AuthProvider>  
-                <MemoryRouter>
-                    <EventDetails />
-                </MemoryRouter>
-            </AuthProvider>
-        );
+    afterEach(() => {
+        jest.clearAllMocks();
     });
 
     test('renders event details correctly', async () => {
-        // Await for the async elements to load
-        await waitFor(() => {
-            expect(screen.getByText("Ongoing Event")).toBeInTheDocument();
+        await act(async () => {
+            render(
+                <AuthProvider>  
+                    <MemoryRouter>
+                        <EventDetails />
+                    </MemoryRouter>
+                </AuthProvider>
+            );
         });
         
+        expect(screen.getByText("Ongoing Event")).toBeInTheDocument();
         expect(screen.getByText("Engineering Hackathon-1")).toBeInTheDocument();
         expect(screen.getByText(/Dates/)).toBeInTheDocument();
         expect(screen.getByText(/April - May 2024/)).toBeInTheDocument();
