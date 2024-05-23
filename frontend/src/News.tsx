@@ -34,7 +34,7 @@ const News = () => {
                             </h3>
                         </div>
                     </li> 
-                )) : "No news found"}
+                )) : ""}
             </ul>
         </div>
     )
