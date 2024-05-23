@@ -20,6 +20,8 @@ import AddNews from "./AddNews";
 import AdminDashboard from "./AdminDashboard";
 import AdminRoute from './AdminRoute';
 import AdminLoginRoute from './AdminLoginRoute';
+import News from './News';
+import NewsDetails from './NewsDetails';
 
 function App() {
   return (
@@ -49,6 +51,8 @@ function App() {
                 <Route path="add" element={<AddNews />} />
             </Route>
           </Route>
+          <Route path="/news" element={<News />} />
+          <Route path="/news/:newsId" element={<NewsDetails />} />
         </Routes>
         </div>
       </BrowserRouter>

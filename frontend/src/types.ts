@@ -79,8 +79,12 @@ export interface Regatta {
     team_logo?: string;
 }
 
-export interface News {
+export interface AllNews {
+    id: number;
     title: string;
     image: string;
-    text: string;
+    news_text: string;
+    date_added: string;
 }
+
+export interface News extends Omit<AllNews, 'date_added'| 'id'> {}
