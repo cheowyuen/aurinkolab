@@ -6,6 +6,7 @@ import Stek from "./LogoStek";
 import Comstdt from "./LogoComstedt"
 
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 
 
 /**
@@ -18,10 +19,11 @@ import { useNavigate } from 'react-router-dom';
  */
 
 function PartnersSection(): JSX.Element {
+    const {t} =useTranslation()
     const navigate = useNavigate();
     return (
     <div id="partners-container" className= "partners-div"> 
-        <div className="header-content"><p>Aurinko Partners :</p></div>
+        <div className="header-content"><p>{t('Aurinko Partners')} :</p></div>
             <div id="partners-section" className="partners-section">
                 <div>
                     <a ><Elvene /></a>
@@ -49,7 +51,7 @@ function PartnersSection(): JSX.Element {
             </div>
             <div className="flex justify-center mx-auto pt-12 pb-6  w-full">
                 <div className="flex flex-col items-center">
-                    <button className="button-tiny" onClick={() => navigate('/partnersregistration')}>Download the Presentation for Partners</button>
+                    <button className="button-tiny" onClick={() => navigate('/partnersregistration')}>{t('Download the Presentation for Partners')}</button>
                 </div>
             </div>
     </div> 

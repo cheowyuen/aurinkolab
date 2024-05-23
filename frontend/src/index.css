@@ -1020,6 +1020,24 @@ legend{
   margin-bottom: 2rem;
 }
 
+
+/** Languages button*/
+
+.language-button{
+  background-color: var(--color-8);
+  display: flex;
+  font-size: 0,5vw;
+  gap: 30px;
+  align-items: center;
+  color: var(--color-4);
+  margin-right: 30px;
+  font-weight: bold;
+ 
+  
+
+
+}
+
 .purple {
   color: var(--color-7);
 }
@@ -1041,4 +1059,5 @@ legend{
   font-size: 1.3rem;
   padding: 1rem 2.5rem;
 }
+
 

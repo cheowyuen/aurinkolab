@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Event } from "../src/types";
 import { getAllEvents } from '../src/services/eventService';
+import { useTranslation } from "react-i18next";
 
 const AllEvents = () => {   
     const [events, setEvents] = useState<Event[]>([]);
@@ -16,14 +17,14 @@ const AllEvents = () => {
     const handleEventClick = (eventId: number) => {
         navigate(`/events/${eventId}`);
     };
-
+    const {t} =useTranslation()
     return (
         <div>
             <div className='events-title' data-testid="events-page-title">
-                <p>Events</p>
+                <p>{t('Events')}</p>
             </div>
             <div id= "ongoing-events" className="text-center title-font text-4xl mt-10" data-testid="ongoing-events"> 
-                <p>Ongoing events</p>
+                <p>{t('Ongoing events')}</p>
             </div>
             <div className="flex justify-center p-16 events-page">
                 <div className="grid 2xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-12">
@@ -39,8 +40,9 @@ const AllEvents = () => {
                         </div>
                     ))}
                 </div>
-                <div className="text-center title-font text-4xl mt-10" data-testid="upcoming-events"> 
-                <p>Upcoming events</p>
+            </div>
+            <div className="text-center title-font text-4xl mt-10" data-testid="upcoming-events"> 
+                <p>{t('Upcoming events')}</p>
             </div>
             <div className="flex justify-center p-16 events-page">
                 <div className="grid 2xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-12">
@@ -58,7 +60,7 @@ const AllEvents = () => {
                 </div>
             </div>
             <div className="text-center title-font text-4xl mt-10" data-testid="archive"> 
-                <p>Archive</p>
+                <p>{t('Archive')}</p>
             </div>
             <div className="flex justify-center p-16 events-page">
                 <div className="grid 2xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-12">
