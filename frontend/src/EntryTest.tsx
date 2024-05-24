@@ -191,7 +191,7 @@ const EntryTest: React.FC = () => {
                         <span>{t('Page')} {pageIndex +1 }/{questions.length}</span> {/* Show page number */}
                     </div>
 
-                    <Notification ref={notificationRef} message={message} />
+                    <Notification ref={notificationRef} message={message} data-testid="notification" />
 
                     <div className='questions'>
                         {/* Loop through questions of current page */}
