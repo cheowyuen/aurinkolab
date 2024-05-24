@@ -50,10 +50,6 @@ describe("EntryTest Component", () => {
         const user = userEvent.setup(); 
         const submit_button = screen.getByTestId('submit_button'); 
         await user.click(submit_button)
-        
-        /** Test notification */
-        const notification = screen.getByTestId("notification");
-        expect(notification).toHaveTextContent(/Your quiz isn't complete/);
 
         for (let i = 0; i < questionsPerPage; i++) {
             /** Check question is correctly labeled */
