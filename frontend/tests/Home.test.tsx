@@ -4,6 +4,7 @@ import Home from '../src/Home';
 import { BrowserRouter } from 'react-router-dom';
 import { I18nextProvider } from 'react-i18next';
 import i18n from "./../i18nForTests"
+import { NewsProvider } from '../src/utils/NewsContext';
 
 /** The componente must be wrap with the i18n module to ensure the jest test will read a tranlated component and not just the i18n keys */
 describe("HeroText Component", () => {
@@ -13,7 +14,9 @@ describe("HeroText Component", () => {
         render(
             <BrowserRouter>
              < I18nextProvider i18n={i18n}>
-                <Home />
+                <NewsProvider>  
+                    <Home />
+                </NewsProvider>
             </I18nextProvider>
             </BrowserRouter>
         );
