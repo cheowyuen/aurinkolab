@@ -1,20 +1,20 @@
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { AllNews } from "../src/types";
-import { getAllNews } from '../src/services/newsService';
+import { useNews } from './utils/useNews';
 
 const News = () => {   
-    const [news, setNews] = useState<AllNews[]>([]);
-    const [updatedNews, setUpdatedNews] = useState<AllNews[]>([]);
+    const { news } = useNews();
+    const [updatedNews, setUpdatedNews] = useState(news)
     const [filter, setFilter] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
-        getAllNews().then(data => {
-          setNews(data);
-          setUpdatedNews(data);
-        })
-    }, [])
+        setUpdatedNews(news);
+    }, [news])
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const handleEventClick = (newsId: number) => {
         navigate(`/news/${newsId}`);

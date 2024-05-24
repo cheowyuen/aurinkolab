@@ -15,6 +15,7 @@ import applyEventRouter from "../routes/applyEvent";
 import regattaRouter from "../routes/regatta";
 import adminLoginRouter from "../routes/adminLogin";
 import newsRouter from "../routes/news";
+import latestNewsRouter from "../routes/latestNews";
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use("/apply-event", applyEventRouter);
 app.use("/regatta", regattaRouter);
 app.use("/admin-login", adminLoginRouter);
 app.use("/news", newsRouter);
+app.use("/latest-news", latestNewsRouter);
 
 const PORT = 3001;
 app.listen(PORT, () => {

@@ -20,7 +20,7 @@ const NewsDetails = () => {
     }, [newsId])
 
     if (!news) {
-        return <div>No news found</div>;
+        return <div></div>;
     }
 
     return (
