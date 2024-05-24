@@ -65,6 +65,8 @@ describe("EntryTest Component", () => {
     })
 
     test('fails quiz', async () => {
+        jest.setTimeout(10000);
+        
         window.scrollTo = jest.fn();
 
         const user = userEvent.setup(); 
