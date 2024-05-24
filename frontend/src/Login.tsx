@@ -3,8 +3,10 @@ import Notification from '../src/Notification';
 import { login } from './services/loginService';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../src/utils/useAuth';
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
+    const {t} =useTranslation()
     const [errorMessage, setErrorMessage] = useState("");
     const [submitCount, setSubmitCount] = useState(0);
     const [student, setStudent] = useState(true);
@@ -130,7 +132,7 @@ const Login = () => {
         <div className="flex justify-center items-center min-h-screen"> 
             <div className="w-full max-w-xl p-6 bg-white rounded">
                 <div className="signup-title login-title">
-                    <p>Log In</p>
+                    <p>{t('Log in')}</p>
                 </div>   
 
                 <div className="p-5 text-lg page-font-color">
@@ -139,54 +141,54 @@ const Login = () => {
                     <form noValidate className="w-full max-w-xl" onSubmit={handleSubmit}>
                         <div className="mb-6">
                             <label className="block tracking-wide mb-2">
-                                Email*
+                            {t('Email')}*
                             </label>
                             <input onChange={handleInputChange} value={fields.email} className={`appearance-none block w-full border ${errors.email ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="email" type="email" />
                         </div>
                         <div className="mb-6">
                             <label className="block tracking-wide mb-2">
-                                Password*
+                            {t('Password')}*
                             </label>
                             <input onChange={handleInputChange} value={fields.password} className={`appearance-none block w-full border ${errors.password ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="password" type="password" />
                             <p className='text-sm underline'><a href="/request-reset">Forgot password?</a></p>
                         </div>
                         <label className="block tracking-wide mb-2">
-                            Role
+                        {t('Role')} 
                         </label>
                         <div className="flex flex-wrap -mx-3 mb-6">
                             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                                 <input type="radio" name="student" className="mr-3" checked={student} onChange={studentRadioChange} />
-                                    Student
+                                {t('Student')}  
                             </div>
                             <div className="w-full md:w-1/2 px-3">
                                 <input type="radio" name="student" className="mr-3" checked={tutor} onChange={tutorRadioChange} />
-                                    Tutor
+                                {t('Tutor')}  
                             </div>
                         </div>
                         <div className="flex flex-wrap -mx-3 mb-10">
                             <div className="w-full px-3 text-center">
                                 <button className="shadow focus:shadow-outline focus:outline-none text-white py-4 px-12 rounded-3xl bg-lightblue" type="submit">
-                                    Log in
+                                {t('Log in')}  
                                 </button>
                             </div>
                         </div>
                     </form>
                     <div className="flex flex-wrap -mx-3 mb-10">
                         <p className="title-font text-xl">
-                            Don't have an account?
+                        {t("Don't have an account?")}  
                         </p>
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-10">
                         <div className="w-full px-3 text-center">
                             <button onClick={() => {navigate('/signup?role=student')}} className="shadow focus:shadow-outline focus:outline-none text-white py-4 px-12 rounded-3xl bg-gray w-3/4">
-                                Student Registration
+                            {t('Student Registration')}   
                             </button>
                         </div>
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-10">
                         <div className="w-full px-3 text-center">
                             <button onClick={() => {navigate('/signup?role=tutor')}} className="shadow focus:shadow-outline focus:outline-none text-white py-4 px-12 rounded-3xl bg-gray w-3/4">
-                                Tutor Registration
+                            {t('Tutor Registration')}
                             </button>
                         </div>
                     </div>
