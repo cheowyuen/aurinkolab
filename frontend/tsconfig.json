@@ -17,6 +17,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "windi.config.ts", "tests/EntryTest.test.tsx", "tests/AllEvents.test.tsx", "tests/EventDetails.test.tsx", "tests/Home.temp.tsx", "tests/MiddleText.test.tsx"],
+  "include": ["src", "windi.config.ts", "tests/EntryTest.test.tsx", "tests/AllEvents.test.tsx", "tests/EventDetails.test.tsx", "tests/Home.test.tsx", "tests/MiddleText.test.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
