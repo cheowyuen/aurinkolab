@@ -98,11 +98,11 @@ const partnersRegistration = () => {
             console.error(`Error registering :`, error);
             console.log("estes es el error>>>",error)
             if (error instanceof Error) { 
-                if (error.message == "Email already request the presentation") {
+                if (error.message == "The email address has already requested the presentation.") {
                     setErrorMessage(error.message); 
                     return;
                 } else {
-                    setErrorMessage("An error occurred during registration. Please try again."); 
+                    setErrorMessage("An error occurred during submission. Please try again."); 
                     return;
                 }
             } else {
