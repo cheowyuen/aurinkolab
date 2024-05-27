@@ -8,7 +8,6 @@ import path from 'path';
 const partnersController = {
   saveData: async (req: Request, res: Response) => {
     try {
-      const token = uuidv4();
       const { companyName, emailAddress } = req.body;
     
 
@@ -16,8 +15,9 @@ const partnersController = {
       const { rows } = await pool.query(emailQuery, [emailAddress]);
 
       if (rows.length > 0) {
+        console.log(rows)
         /** Email exists, cannot proceed with registration */
-        res.status(409).json({ message: "Email already request the p  resentation" });
+        res.status(409).json({ message: "Email already request the presentation" });
       } else {
         
         /** Insert new tutor details into the database */
@@ -29,7 +29,6 @@ const partnersController = {
         const result: QueryResult = await pool.query(query, [companyName, emailAddress]);
 
         if (result.rowCount && result.rowCount > 0) {
-          const verificationLink = `http://localhost:5173/confirmemail?token=${token}`
 
           const pdfPath = path.join(__dirname, '../utils/AurinkoLab_ sponsorship_opportunities.pdf');  // Specify the correct path to your PDF file
           console.log(pdfPath)
@@ -46,7 +45,7 @@ const partnersController = {
               The Aurinko Lab Team`, 
             html: `<p>Hello!</p>
               <p>Thank you for your interest in collaborating and forming alliances with Aurinkolab. Attached you can find our presentation on how to become a partner of Aurinkolab.</p>
-              <p>Shall we schedule a meeting?</p>
+              <p>Let's schedule a meeting!</p>
               <p>Let us know your queries.,</p>
               <p>Thanks,</p>
               <p>The Aurinko Lab Team</p>`, 
@@ -59,9 +58,9 @@ const partnersController = {
               ]
             });
         
-
+            return res.status(200).json({ message: "Presentation requested successfully" });
         } else {
-          throw new Error(`Failed to reuqest the presentation`);
+          throw new Error(`Failed to request the presentation`);
         }
       }
     } catch (error) {

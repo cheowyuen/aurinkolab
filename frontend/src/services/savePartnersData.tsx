@@ -10,7 +10,7 @@ export const savePartnersData = async (
 
     try {
         const response = await axios.post(baseUrl, {companyName, emailAddress});
-        if (response.status === 201) {
+        if (response.status === 200) {
             console.log('Presentation requested:', response.data.message);
             return response.data;
         } else {
@@ -19,7 +19,7 @@ export const savePartnersData = async (
     } catch (error) {
         const e = error as AxiosError;
         if (e.response && e.response.status === 409) {
-            throw new Error('Email already request presentation '); 
+            throw new Error('Email already request the presentation'); 
         } else {
             throw new Error('An unexpected error occurred: ' + (e.message || 'Unknown error'));
         }

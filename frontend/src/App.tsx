@@ -20,6 +20,8 @@ import AddNews from "./AddNews";
 import AdminDashboard from "./AdminDashboard";
 import AdminRoute from './AdminRoute';
 import AdminLoginRoute from './AdminLoginRoute';
+import ConfirmationPartners from './confirmationPartners';
+
 
 function App() {
   return (
@@ -36,6 +38,7 @@ function App() {
           <Route path="/tutors" element={<Tutors />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/partnersregistration" element={<PartnersRegistration />} />
+          <Route path="/confirmationpartners" element={<ConfirmationPartners />} />
           <Route path="/verifyemail" element={<VerifyEmail />} />
           <Route path="/confirmemail" element={<ConfirmEmail />} />
           <Route path="/login" element={<Login />} />

@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import Notification from '../src/Notification';
 import { savePartnersData } from '../src/services/savePartnersData';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 const partnersRegistration = () => {
     const [errorMessage, setErrorMessage] = useState("");
@@ -79,7 +80,7 @@ const partnersRegistration = () => {
         }
 
         try {
-            /** Save tutor data */
+            /** Save partners data */
             await savePartnersData(
                 fields.companyName, 
                 fields.emailAddress
@@ -91,9 +92,10 @@ const partnersRegistration = () => {
         } catch (error) {
             /** Handle any errors that might have occurred during saveQuiz */
             console.error(`Error registering :`, error);
+            console.log("estes es el error>>>",error)
             if (error instanceof Error) { 
-                if (error.message === 'Email already in use') {
-                    setErrorMessage("This email address is already registered."); 
+                if (error.message == "Email already request the presentation") {
+                    setErrorMessage(error.message); 
                     return;
                 } else {
                     setErrorMessage("An error occurred during registration. Please try again."); 
@@ -107,14 +109,19 @@ const partnersRegistration = () => {
 
      
         /** Reset fields after successful submission */
+        const emailForNavigation = fields.emailAddress;
+
+        /** Reset fields after successful submission */
         setFields({
             companyName: "",
             emailAddress: ""
         });
-        
-        navigate('/verifyemail', { state: { emailAddress: fields.emailaddress } })
-    };
     
+        /** Navigate after resetting fields */
+        navigate('/confirmationpartners', { state: { email: emailForNavigation } 
+    });
+
+};
 
     return (
         <div className="flex justify-center items-center min-h-screen"> 
