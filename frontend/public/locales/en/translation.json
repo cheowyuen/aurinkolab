@@ -1,0 +1,580 @@
+{
+    "Events":"Events",
+    "Tutors":"Tutors",
+    "About":"About",
+    "Partners":"Partners",
+    "Contact":"Contact",
+    "Quiz":"Quiz",
+    "Apply Now":"Apply Now",
+
+    
+    
+    
+    "hero-paragraph-1":"AurinkoLab: Empowering tomorrow's engineers today",
+    "hero-paragraph-2":"Crafting Electric-Solar or Hydrogen-Powered Multimodal Vehicles",
+
+
+    "AurinkoLab":"AurinkoLab",
+    "20-Hour Engineering Hackathon":"20-Hour Engineering Hackathon",
+    "about-text-1":"20-hour education program designed for 15-** year-olds to create their own electric-solar and hydrogen-driven vehicles.<br />The program has been accepted as TET practice by the educational administration of Espoo city.<br /><br />",
+    
+    "Final Championship":"Final Championship",
+    "about-text-2":"The hackathon concludes with a final championship event - Solar Regatta or Racing - where teams showcase their innovative vehicles",
+
+    "AurinkoLab Engineering Talent Hub":"AurinkoLab Engineering Talent Hub",
+    "abot-text-3":"Engineering Talent Hub is a community for engineering students and enthusiasts to design their own hydrogen-driven or electric-solar vehicles, using established or original designs. <br />AurinkoLab experts rigorously test these solutions, integrating them into the AurinkoLab Resource Hub for future hackathons. <br />Talented students are recommended to partner companies in need of skilled employees.<br /><br />",
+
+    "AurinkoLab Resource Hub":"AurinkoLab Resource Hub",
+    "abot-text-4":" Access a diverse range of materials such as diagrams, manuals, and training videos.<br /><br />",
+
+
+
+    "Aurinko Partners":"Aurinko Partners",
+    "Download the Presentation for Partners":"Download the Presentation for Partners",
+
+
+
+    "Contacts":"Contacts",
+    "email":"email",
+    "phone":"phone",
+    "meeting":"Set up a meeting",
+
+
+    "middle-text":"AurinkoLab Engineering Hackathon: 20 hours for your own electric-solar or hydrogen-driven vehicles",
+
+    "Sponsorship Opportunities":"Sponsorship Opportunities",
+    "partner-description":"To download the presentation, please submit the form below and we will e-mail you the presentation file.",
+    "Company Name":"Company Name",
+    "Email Address":"Email Address",
+    "Send me the presentation":"Send me the presentation",
+
+    "Ongoing events":"Ongoing events",
+    "Upcoming events":"Upcoming events",
+    "Archive":"Archive",
+
+    "Dates":"Dates",
+    "Education Center":"Education Center",
+    "Place":"Place",
+    "Vehicle":"Vehicle",
+    "Engine":"Engine",
+    "Tutor":"Tutor",
+
+    "Aurinko Tutors":"Aurinko Tutors",
+    "Completed":"Completed",
+    "multimodal green energy vehicles":"multimodal green energy vehicles",
+    "certified by AurinkoLab":"certified by AurinkoLab",
+
+    "Login":"Login",
+    "Logout":"Logout",
+
+    "Retake Quiz":"Retake Quiz",
+    "Quiz Result":"Quiz Result",
+    "Continue":"Continue",
+    "Grade":"Grade",
+    "Result":"Result",
+    "Next":"Next",
+    "Submit":"Submit",
+    "Loading questions":"Loading questions",
+    "Page":"Page",
+    "Your answer":"Your answer",
+    "Your quiz isn't complete, just":"Your quiz isn't complete, just",
+    "left: Question no":"left: Question no",
+    "Unanswered":"Unanswered",
+    "Correct answer":"Correct answer",
+    "one question":"one question",
+    "a few questions":"a few questions",
+
+    "Tutor Registration":"Tutor Registration",
+    "Student Registration":"Student Registration",
+    "Don't have an account?":"Don't have an account?",
+    "Log in":"Log in",
+    "Student":"Student",
+    "Role":"Role",
+    "Password":"Password",
+    "Email":"Email",
+    "Log In":"Log In",
+
+
+
+    
+
+
+
+
+    "questions_translation":{
+        "questionT_1":"What is electrical voltage?",
+        "questionT_2":"What is electric current and how is it related to voltage?",
+        "questionT_3":"What quantities can affect the voltage in circuits? ",
+        "questionT_4":"Who introduced the concept of tension and in what context?",
+        "questionT_5":"What is voltage in DC circuits?",
+        "questionT_6":"In what units is voltage measured in Finland?",
+        "questionT_7":"How is instantaneous voltage related to the amplitude value of voltage?",
+        "questionT_8":"What are the standards and typical voltage values?",
+        "questionT_9":"What is electric current?",
+        "questionT_10":"How is electric current related to voltage?",
+        "questionT_11":"How is electric current measured in SI?",
+        "questionT_12":"What factors influence the strength of electric current in a conductor?",
+        "questionT_13":"Who proposed the theory of the movement of electric current in a conductor?",
+        "questionT_14":"What types of electric current exist?",
+        "questionT_15":"In what units is electric current measured in Finland?",
+        "questionT_16":"What is direct current?",
+        "questionT_17":"What is an electric battery?",
+        "questionT_18":"How does an electric battery work?",
+        "questionT_19":"What are the main components of an electric battery?",
+        "questionT_20":"What types of electric batteries are there?",
+        "questionT_21":"What are the benefits of using lithium batteries?",
+        "questionT_22":"What factors can affect the performance of an electric battery?",
+        "questionT_23":"What is the average lifespan of an electric battery?",
+        "questionT_24":"What is the main purpose of using electric batteries in modern technology?",
+        "questionT_25":"What methods of recycling electric batteries are there?",
+        "questionT_26":"What safety precautions are recommended when working with electric batteries?",
+        "questionT_27":"What is a solar battery?",
+        "questionT_28":"How does a solar battery work?",
+        "questionT_29":"What types of solar panels are there?",
+        "questionT_30":"What is the difference between film solar cells and crystalline solar cells?",
+        "questionT_31":"What factors can affect the performance of a solar panel?",
+        "questionT_32":"What are the main benefits of using solar panels?",
+        "questionT_33":"What is the typical lifespan of solar panels?",
+        "questionT_34":"What safety precautions are important to follow when installing solar panels?",
+        "questionT_35":"What factors influence the choice of location for installing solar panels?",
+        "questionT_36":"What other uses for solar panels are there besides home use?"
+       
+
+            },
+    "answers_translation":{
+        "questionT_1answer":{
+        
+                "answer1": "a. Current in an electrical circuit",
+                
+                "answer2": "b. Potential difference between two points",
+                
+                "answer3": "c. Number of electrons in a conductor",
+                
+                "answer4": "d. Conductor resistance"
+
+                    },
+        "questionT_2answer":{
+        
+                "answer1": "a. Current - potential difference between two points",
+                
+                "answer2": "b. Current - the number of electrons in a conductor",
+                
+                "answer3": "c. Current - magnetic field strength",
+                
+                "answer4": "d. Current - gravitational force of electrons"
+
+},
+        "questionT_3answer":{
+        
+                "answer1": "a. Temperature and humidity",
+                
+                "answer2": "b. Conductor length and cross-section",
+                
+                "answer3": "c. Ligh intensity",
+                
+                "answer4": "d. Conductor color"
+
+},
+        "questionT_4answer":{
+        
+                "answer1": "a. Mikhail Lomonosov, in the context of atomic physics",
+                
+                "answer2": "b. Alexander Volt, in the context of electrodynamics",
+                
+                "answer3": "c. Georg Ohm, in the context of electrical circuits",
+                
+                "answer4": "d. Nikola Tesla, in the context of alternative energy"
+
+},
+
+        "questionT_5answer":{
+        
+                "answer1": "a. Specific work done by the electric field",
+                
+                "answer2": "b. Sum of all resistances in the circuit",
+                
+                "answer3": "c. The amount of electricity in the conductor",
+                
+                "answer4": "d. Maximum circuit current"
+
+},
+
+        "questionT_6answer":{
+        
+                "answer1": "a. Volts",
+                
+                "answer2": "b. Amps",
+                
+                "answer3": "c. Kilowatts",
+                
+                "answer4": "d. Ohms"
+
+},
+
+        "questionT_7answer":{
+        
+                "answer1": "a. Instantaneous voltage is twice the amplitude voltage",
+                
+                "answer2": "b. Instantaneous voltage equals peak voltage",
+                
+                "answer3": "c. Instantaneous voltage is equal to half the amplitude",
+                
+                "answer4": "d. Instantaneous voltage is equal to the square of the amplitude"
+
+},
+        "questionT_8answer":{
+        
+                "answer1": "a. Voltage varies depending on the time of day",
+                
+                "answer2": "b. Standard voltage in home networks is 220 V",
+                
+                "answer3": "c. Voltage depends on the phase of the moon",
+                
+                "answer4": "d. Voltage is constantly changing"
+
+},
+
+        "questionT_9answer":{
+        
+                "answer1": "a. Electron flow in a conductor",
+                
+                "answer2": "b. Potential difference between two points",
+                
+                "answer3": "c. Number of electrons in an atom",
+                
+                "answer4": "d. Change in conductor temperature"
+
+},
+
+        "questionT_10answer":{
+        
+                "answer1": "a. The current depends on the length of the conductor",
+                
+                "answer2": "b. Current is proportional to potential difference",
+                
+                "answer3": "c. Current is inversely proportional to conductor resistance",
+                
+                "answer4": "d. Current independent of voltage"
+
+},
+
+        "questionT_11answer":{
+        
+                "answer1": "a. Amps",
+                
+                "answer2": "b. Volts",
+                
+                "answer3": "c. Ohms",
+                
+                "answer4": "d. Hertz"
+
+},
+
+        "questionT_12answer":{
+        
+                "answer1": "a. Conductor length and material",
+                
+                "answer2": "b. Conductor color and temperature",
+                
+                "answer3": "c. Moon phase and solar activity",
+                
+                "answer4": "d. Conductor cross-sectional area and applied voltage"
+
+},
+
+        "questionT_13answer":{
+        
+                "answer1": "a. Nikola Tesla",
+                
+                "answer2": "b. Alexander Graham Bell",
+                
+                "answer3": "c. Michael Faraday",
+                
+                "answer4": "d. James Clerk Maxwell"
+
+},
+
+        "questionT_14answer":{
+        
+                "answer1": "a. Direct and alternating current",
+                
+                "answer2": "b. Alternative and direct current",
+                
+                "answer3": "c. Cyclic and intermittent current",
+                
+                "answer4": "d. Plasma and ion current"
+
+},
+
+        "questionT_15answer":{
+        
+                "answer1": "a. Volts",
+                
+                "answer2": "b. Amps",
+                
+                "answer3": "c. Kilowatts",
+                
+                "answer4": "d. Ohms"
+
+},
+
+        "questionT_16answer":{
+        
+                "answer1": "a. Current whose frequency varies with time",
+                
+                "answer2": "b. Current, the direction of which does not change with time",
+                
+                "answer3": "c. Current varying periodically over time",
+                
+                "answer4": "d. Current whose driving force is constant"
+
+},
+
+        "questionT_17answer":{
+        
+                "answer1": "a. Device for generating electric current",
+                
+                "answer2": "b. Electrical energy storage device",
+                
+                "answer3": "c. Device for converting mechanical energy into electrical energy",
+                
+                "answer4": "d. Electrical signal cleaning device"
+
+},
+
+        "questionT_18answer":{
+        
+                "answer1": "a. Produces electric current from chemical energy",
+                
+                "answer2": "b. Produces chemical energy from electric current",
+                
+                "answer3": "c. Produces mechanical energy from electric current",
+                
+                "answer4": "d. Produces electric current from mechanical energy"
+
+},
+
+        "questionT_19answer":{
+        
+                "answer1": "a. Anode, cathode, electrolyte",
+                
+                "answer2": "b. Solar panel, inverter, battery",
+                
+                "answer3": "c. Rotor, stator, windings",
+                
+                "answer4": "d. Commutator, brushes, armature"
+
+},
+
+        "questionT_20answer":{
+        
+                "answer1": "a. Lithium, nickel-cadmium, lead-acid",
+                
+                "answer2": "b. Hydrogen, helium, oxygen",
+                
+                "answer3": "c. Silver-zinc, aluminum-iron, copper-nickel",
+                
+                "answer4": "d. Titanium, fluoride, chloride"
+
+},
+
+        "questionT_21answer":{
+        
+                "answer1": "a. Low cost",
+                
+                "answer2": "b. High energy density and low weight",
+                
+                "answer3": "c. High temperature resistance",
+                
+                "answer4": "d. Easy to dispose of"
+
+},
+
+        "questionT_22answer":{
+        
+                "answer1": "a. Ambient temperature and charge level",
+                
+                "answer2": "b. Case color and battery shape",
+                
+                "answer3": "c. Moon phase and solar activity",
+                
+                "answer4": "d. Conductor length and material"
+
+},
+
+        "questionT_23answer":{
+        
+                "answer1": "a. 1-2 years",
+                
+                "answer2": "b. 5-7 years",
+                
+                "answer3": "c. 10-15 years",
+                
+                "answer4": "d. 20-25 years"
+
+},
+
+        "questionT_24answer":{
+        
+                "answer1": "a. Increasing the capacity of electrical networks",
+                
+                "answer2": "b. Increased energy efficiency of devices",
+                
+                "answer3": "c. Increase data transfer speed",
+                
+                "answer4": "d. Increase in operating temperature of devices"
+
+},
+
+        "questionT_25answer":{
+        
+                "answer1": "a. Complete disposal without the possibility of recycling",
+                
+                "answer2": "b. Recycling and reuse of materials",
+                
+                "answer3": "c. Disposal in special landfills",
+                
+                "answer4": "d. Incineration in specialized furnaces"
+
+},
+
+        "questionT_26answer":{
+        
+                "answer1": "a. Never charge batteries",
+                
+                "answer2": "b. Use only original chargers",
+                
+                "answer3": "c. Recharge batteries until completely discharged",
+                
+                "answer4": "d. Do not expose batteries to mechanical damage"
+
+},
+
+
+        "questionT_27answer":{
+        
+                "answer1": "a. Device for heating water using solar radiation",
+                
+                "answer2": "b. Device for converting solar energy into electrical energy",
+                
+                "answer3": "c. Air filtration device using solar rays",
+                
+                "answer4": "d. Device for generating solar heat for space heating"
+
+},
+
+        "questionT_28answer":{
+        
+                "answer1": "a. Converts electrical energy into solar energy",
+                
+                "answer2": "b. Converts mechanical energy into solar energy",
+                
+                "answer3": "c. Converts solar energy into thermal energy",
+                
+                "answer4": "d. Converts solar energy into electrical energy"
+
+},
+
+        "questionT_29answer":{
+        
+                "answer1": "a. Photothermal and photovoltaic",
+                
+                "answer2": "b. Solar and wind generators",
+                
+                "answer3": "c. Passive and active",
+                
+                "answer4": "d. Film and crystalline"
+
+},
+
+        "questionT_30answer":{
+        
+                "answer1": "a. Film ones are more effective in cloudy weather",
+                
+                "answer2": "b. Crystalline are more flexible and easier to install",
+                
+                "answer3": "c. Film produces more electricity in low light",
+                
+                "answer4": "d. Crystalline ones have a longer service life"
+
+},
+
+        "questionT_31answer":{
+        
+                "answer1": "a. Battery type and capacity",
+                
+                "answer2": "b. Ambient temperature and level of solar activity",
+                
+                "answer3": "c. Moon phase and sky color",
+                
+                "answer4": "d. Cable type and length"
+
+},
+
+        "questionT_32answer":{
+        
+                "answer1": "a. Savings on energy costs",
+                
+                "answer2": "b. Reducing emissions of harmful substances into the atmosphere",
+                
+                "answer3": "c. Increased security of electricity supply",
+                
+                "answer4": "d. All of the above"
+
+},
+
+        "questionT_33answer":{
+        
+                "answer1": "a. 5-10 years",
+                
+                "answer2": "b. 15-20 years",
+                
+                "answer3": "c. 25-30 years",
+                
+                "answer4": "d. More than 30 years"
+
+},
+
+        "questionT_34answer":{
+        
+                "answer1": "a. Do not leave solar panels in the rain",
+                
+                "answer2": "b. Fix the solar panels correctly so that they do not fall",
+                
+                "answer3": "c. Avoid short circuits when connecting to the power supply",
+                
+                "answer4": "d. All of the above"
+
+},
+
+        "questionT_35answer":{
+        
+                "answer1": "a. Direction and angle of inclination towards the sun",
+                
+                "answer2": "b. Roof color and visibility from the side",
+                
+                "answer3": "c. Location of electrical networks",
+                
+                "answer4": "d. All of the above"
+
+},
+
+        "questionT_36answer":{
+        
+                "answer1": "a. In city lighting and charging stations for electric vehicles",
+                
+                "answer2": "b. In spacecraft and communications satellites",
+                
+                "answer3": "c. In water supply and autonomous systems",
+                
+                "answer4": "d. All of the above"
+
+}
+
+
+
+
+}
+
+}
+

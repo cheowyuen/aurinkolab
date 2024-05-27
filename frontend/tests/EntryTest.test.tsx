@@ -4,6 +4,9 @@ import EntryTest from '../src/EntryTest';
 import { BrowserRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import allQuestions from '../src/data/questions';
+import { I18nextProvider } from 'react-i18next';
+import i18n from "./../i18nForTests"
+
 
 /** Mock for useNavigate hook */
 const mockNavigate = jest.fn();
@@ -16,12 +19,15 @@ jest.mock('react-router-dom', () => {
     useNavigate: () => mockNavigate,
   };
 });
-
+ 
+/** The componente must be wrap with the i18n module ensure the jest test will read a tranlated component and not just the i18n keys */
 describe("EntryTest Component", () => {
     beforeEach(() => {
         render(
             <BrowserRouter>
-                <EntryTest />
+            < I18nextProvider i18n={i18n}> 
+               <EntryTest/>
+               </I18nextProvider>   
             </BrowserRouter>
         );
     });

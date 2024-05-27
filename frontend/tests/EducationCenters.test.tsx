@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 describe("Education centers page", () => {
     beforeEach(() => {
+        window.scrollTo = jest.fn();
         render(
             <BrowserRouter>
                 <EducationCenters />

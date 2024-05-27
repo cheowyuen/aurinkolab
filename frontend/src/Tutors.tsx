@@ -4,8 +4,10 @@ import { useState, useEffect } from 'react';
 import { Tutor } from "../src/types";
 import { getAllTutors } from '../src/services/tutorService';
 import defaultImage from '../src/assets/boat-icon.png';
+import { useTranslation } from "react-i18next";
 
 const Tutors = () => {
+    const {t} =useTranslation()
     const [tutors, setTutors] = useState<Tutor[]>([]);
 
     const navigate = useNavigate();
@@ -24,7 +26,7 @@ const Tutors = () => {
     return (
         <div className="parent-container">
             <div className='tutors-title' data-testid="event-details-title">
-                <p>Aurinko Tutors</p>
+                <p>{t('Aurinko Tutors')}</p>
             </div>
 
             <div className="flex justify-center mx-auto pt-12 pb-6 bg-gray-100 w-full">
@@ -46,7 +48,7 @@ const Tutors = () => {
                                 </div>
                                 <div className="mt-16">
                                     <h1 className="font-bold text-3xl text-center mb-1 px-6">{tutor.first_name}</h1>
-                                    <p className="text-center text-gray-600 text-base pt-3 font-normal px-6">Completed {tutor.completed_vehicles.toString().replace(".0", "")}{tutor.is_estimate ? "+" : ""} multimodal green energy vehicles.</p>
+                                    <p className="text-center text-gray-600 text-base pt-3 font-normal px-6">{t('Completed')} {tutor.completed_vehicles.toString().replace(".0", "")}{tutor.is_estimate ? "+" : ""} {t('multimodal green energy vehicles')}.</p>
                                     <div className="w-full flex justify-center pt-5 pb-5 px-6 text-base text-gray-600">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#718096" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" className="feather feather-mail mr-2">
                                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
@@ -57,7 +59,7 @@ const Tutors = () => {
                                     {tutor.has_certificate ?
                                         (<div className="text-base certified">
                                             <div className="logo-container"><Logo width="36px" height="36px" /></div>
-                                            certified by AurinkoLab
+                                            {t('certified by AurinkoLab')}
                                         </div>)
                                     :
                                         (<div className="text-base certified-empty">

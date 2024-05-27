@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import {  useState, useEffect, useRef } from 'react';
 import allQuestions from '../src/data/questions';
 import Notification from '../src/Notification';
 import popper from './assets/popper.png';
@@ -6,6 +6,8 @@ import goodTry from './assets/logo_sun.png';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { saveQuiz } from '../src/services/quizService';
+import { useTranslation, withTranslation } from "react-i18next";
+
 
 export interface Question {
     questionId: number;
@@ -34,6 +36,7 @@ const chunkArray = (array: Question[], chunkSize: number): Question[][] => {
 } 
 
 const EntryTest: React.FC = () => {
+    const {t} = useTranslation() /** We call the t function  to set the tranlation keys */
     const [ questions, setQuestions ] = useState<Question[][]>([]); /** Two dimensional array where nested array consists of questions per page */
     const [ pageIndex, setPageIndex ] = useState<number>(0); /** Indicate index of current page */
     const [ participantAnswers, setParticipantAnswers ] = useState<Array<{ questionId: number, answerId: number, isCorrect: boolean }>>([]); /** To store participant's answers */
@@ -49,8 +52,13 @@ const EntryTest: React.FC = () => {
 
     /** On page load, set questions of each page */
     useEffect(() => {
+        
         setQuestions(chunkArray(allQuestions, 6)); /** Second parameter is to set number of questions per page */
-    }, [])
+        return()=>{
+            console.log('calling the questions')
+        }
+    }, [allQuestions])
+
 
     useEffect(() => {
         if (message !== '') { 
@@ -116,9 +124,9 @@ const EntryTest: React.FC = () => {
         if (skippedQuestionsNos.length > 0) {
             setSkippedQuestions(skippedQuestionsNos);
 
-            const totalQuestions = skippedQuestionsNos.length === 1? 'one question' : 'a few questions';
+            const totalQuestions = skippedQuestionsNos.length === 1? t('one question') : t('a few questions');
             const questionsNos = skippedQuestionsNos.join(', ');
-            setMessage(`Your quiz isn't complete, just ${totalQuestions} left: Question no. ${questionsNos}`);
+            setMessage(`${t("Your quiz isn't complete, just")} ${totalQuestions} ${t("left: Question no")} . ${questionsNos}`);
             //setMessage('Please select an answer to proceed.');
         }
         else {
@@ -150,9 +158,9 @@ const EntryTest: React.FC = () => {
     
             /** If no error was thrown, data was saved successfully */
             setResultMessage(grade >= 8.7 ? "Congratulations! You have passed the quiz" : "Close effort! Let's try again.");
-        } catch (error) {
+        } catch {
             /** Handle any errors that might have occurred during saveQuiz */
-            console.error("Error saving quiz result:", error);
+            console.log("Error saving quiz result:");
             setResultMessage("An error occurred while saving quiz result. Please try again.");
         }
         
@@ -170,17 +178,17 @@ const EntryTest: React.FC = () => {
         setScore(0);
         setResultMessage('');
     }
-      
+    
     return (
         <div>
             <div className='quiz-title' data-testid="quiz-page-title">
-                <p>Quiz</p>
+                <p>{t('Quiz')}</p>
             </div>
 
             {!quizCompleted ? (
                 <>
                     <div className='page-number' data-testid="quiz-page-number">
-                        <span>Page {pageIndex +1 }/{questions.length}</span> {/* Show page number */}
+                        <span>{t('Page')} {pageIndex +1 }/{questions.length}</span> {/* Show page number */}
                     </div>
 
                     <Notification ref={notificationRef} message={message} />
@@ -188,14 +196,14 @@ const EntryTest: React.FC = () => {
                     <div className='questions'>
                         {/* Loop through questions of current page */}
                         {questions[pageIndex] ? questions[pageIndex].map((question) => (
-                            <div key={question.questionId} className='individual-question'>
-                                <p>{`${question.questionNo}. ${question.question}`} 
+                            <div key= {question.questionId} className='individual-question'> {/** we have to use the dynamic key to manage the translation of the questions that are in a different file with the object format array */}
+                                <p>{`${question.questionNo}. ${t(`questions_translation.questionT_${question.questionNo}`)}`} 
                                     <span className={`unanswered-question ${(skippedQuestions.includes(question.questionNo) && currentButton === "Submit") ? '' : 'hidden'}`}> 
-                                        {skippedQuestions.includes(question.questionNo) ? 'Unanswered' : '' }
+                                        {skippedQuestions.includes(question.questionNo) ? t('Unanswered') : '' }
                                     </span>
                                 </p>
                                 {/* Loop through answers per question */}
-                                {question.answers.map((answer) => (
+                                {question.answers.map((answer,index) => (
                                     <label key={answer.answerId} className='answers'>
                                         <input 
                                             type="radio" 
@@ -206,23 +214,23 @@ const EntryTest: React.FC = () => {
                                             checked={participantAnswers.some(pa => pa.questionId === question.questionId && pa.answerId === answer.answerId)} 
                                             onChange={(e) => handleAnswerChange(question.questionId, parseInt(e.target.value), answer.isCorrect)} 
                                         /> {/* Save/Update answer on change */}
-                                        <span>{answer.answer}</span>
+                                        <span>{`${t(`answers_translation.questionT_${question.questionNo}answer.answer${index + 1}`)}`}</span> {/** We have to create an index for each answer because i18n does not allow to have multiple keys with the seme name or number */}
                                          {/* Show "Your answer" only if the answer is incorrect and it's selected */}
                                          <span className={`correct-answer ${(!answer.isCorrect 
                                             && participantAnswers.some(pa => pa.questionId === question.questionId && pa.answerId === answer.answerId) 
                                             && currentButton !== "Submit") ? '' : 'hidden'}`}
                                             data-testid={`wrong_answer_${answer.answerId}`}> 
-                                            Your answer
+                                            {t('Your answer')}
                                         </span>
                                         {/* Show which is "Correct answer" if the answer is incorrect */}
                                         <span className={`incorrect-answer ${(answer.isCorrect && currentButton != "Submit") ? '' : 'hidden'}`} data-testid={`correct_answer_${answer.answerId}`}> 
-                                            {answer.isCorrect ? 'Correct answer' : '' }
+                                            {answer.isCorrect ? t('Correct answer')  : '' }
                                         </span>
                                     </label>
                                 ))}
                                 <br/>
                             </div>
-                        )) : <p>Loading questions...</p>} {/* If data is not populated yet */}
+                        )) : <p>{t('Loading questions')}...</p>} {/* If data is not populated yet */}
                     </div>
 
                     <div className='all-buttons'>
@@ -230,13 +238,13 @@ const EntryTest: React.FC = () => {
                             <button className='buttons' onClick={handlePreviousButtonClick}>Previous</button> 
                         )} */}
                         {currentButton === 'Submit' && (
-                            <button className='buttons' data-testid="submit_button" onClick={handleSubmitButtonClick}>Submit</button> 
+                            <button className='buttons' data-testid="submit_button" onClick={handleSubmitButtonClick}>{t('Submit')}</button> 
                         )}
                         {currentButton === 'Next' && (
-                            <button className='buttons' data-testid="next_button" onClick={handleNextButtonClick}>Next</button> 
+                            <button className='buttons' data-testid="next_button" onClick={handleNextButtonClick}>{t('Next')}</button> 
                         )} {/* Show Next button only if it's not the last page */}
                         {currentButton === 'Result' && (
-                            <button className='buttons' data-testid="result_button" onClick={handleResultButtonClick}>Result</button> 
+                            <button className='buttons' data-testid="result_button" onClick={handleResultButtonClick}>{t('Result')}</button> 
                         )} {/* Show Result button on last page */}
                     </div>
 
@@ -244,21 +252,21 @@ const EntryTest: React.FC = () => {
                 </>
             ) : (
                 <div className='page-styling'> {/* Show Quiz Result page after final submit */}
-                    <p className='page-heading'>Quiz Result</p>
+                    <p className='page-heading'>{t('Quiz Result')}</p>
                     <img src={resultMessage.includes("Congratulations") ? popper : goodTry} alt="Result Logo" />
                     <br/>
                     <p className="result">{resultMessage}</p>
                     <br/> 
                     <p className="result">Score: {score}/{allQuestions.length}</p>
                     {resultMessage.includes("Congratulations") && (
-                        <p className="result">Grade: {(score / allQuestions.length * 10).toFixed(1)}</p>
+                        <p className="result">{t('Grade')}: {(score / allQuestions.length * 10).toFixed(1)}</p>
                     )}
                     <br/>
                     {resultMessage.includes("Congratulations") && (
-                        <button className="buttons" onClick={() => navigate('/events')}>Continue</button>
+                        <button className="buttons" onClick={() => navigate('/events')}>{t('Continue')}</button>
                     )}
                     {!resultMessage.includes("Congratulations") && (
-                        <button className="buttons" onClick={handleRetakeQuizButtonClick}>Retake Quiz</button>
+                        <button className="buttons" onClick={handleRetakeQuizButtonClick}>{t('Retake Quiz')}</button>
                     )}
                 </div>
             )}
@@ -266,4 +274,9 @@ const EntryTest: React.FC = () => {
     );
 }
 
-export default EntryTest;
+
+// Export the pure component for testing purposes
+export { EntryTest };
+
+// Default export the component wrapped with the HOC
+export default withTranslation()(EntryTest);

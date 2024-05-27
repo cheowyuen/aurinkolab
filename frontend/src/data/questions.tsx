@@ -1,10 +1,15 @@
+
 import { Question } from "../EntryTest";
+
+
+
 
 const allQuestions: Question[] = [
     {
+        
         questionId: 1,
         questionNo: 1,
-        question: "What is electrical voltage?",
+        question:"What is electrical voltage?",
         answers: [
             {
                 answerId: 1,
@@ -972,7 +977,9 @@ const allQuestions: Question[] = [
                 isCorrect: true
             }
         ]
-    }
+    }, 
+
 ];
+
 
 export default allQuestions;
