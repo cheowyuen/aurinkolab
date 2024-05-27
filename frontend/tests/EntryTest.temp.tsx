@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import allQuestions from '../src/data/questions';
 import { I18nextProvider } from 'react-i18next';
-import i18n from "./../i18nForTests"
+import i18n from "../i18nForTests"
 
 
 /** Mock for useNavigate hook */
@@ -68,5 +68,48 @@ describe("EntryTest Component", () => {
         }
     })
 
-    
+    test('fails quiz', async () => {
+        window.scrollTo = jest.fn();
+
+        const user = userEvent.setup(); 
+        const questionsPerPage = 6;
+        const totalPages = allQuestions.length / questionsPerPage;
+
+        /** Select answers */
+        for (let i = 0; i < totalPages; i++) {
+            for (let j = 0; j < questionsPerPage; j++) {
+                const answerId = `answer_${allQuestions[j + i * questionsPerPage].answers[0].answerId}`;
+                const radioButton = screen.getByTestId(answerId);
+                await user.click(radioButton);
+            }
+
+            const submitButton = screen.getByTestId('submit_button');
+            await user.click(submitButton);
+
+            if (i < totalPages - 1) {
+                const next_button = screen.getByTestId('next_button');
+                await user.click(next_button);
+            }
+        }
+
+        /** Go to result page */
+        const result_button = screen.getByTestId("result_button");
+        await user.click(result_button);
+
+        /** Test quiz result */
+        const quiz_result_title = screen.getByText('Quiz Result');
+        expect(quiz_result_title).toBeDefined();
+        const quiz_result = screen.findByText(/Close effort! Let's try again./);
+        expect(quiz_result).toBeDefined();
+        const score = screen.getByText(/Score:/);
+        expect(score).toBeDefined();
+
+        /** Test quiz result button */
+        const retakeQuizButton = screen.getByText("Retake Quiz")
+        await user.click(retakeQuizButton)
+        const title = screen.getByTestId("quiz-page-title");
+        expect(title).toHaveTextContent("Quiz");
+        const pageNumberElement = screen.getByTestId("quiz-page-number");
+        expect(pageNumberElement).toHaveTextContent(`Page 1/${totalPages}`);
+    })
 })
