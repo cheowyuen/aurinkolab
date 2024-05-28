@@ -1,16 +1,16 @@
-import { News, AllNews } from "../types";
+import { AllNews } from "../types";
 import config from '../../config';
 import axios, { AxiosError } from 'axios';
 
-let baseUrl = `${config.API_BASE_URL}/news`;
+const baseUrl = `${config.API_BASE_URL}/news`;
 
 export const addNews = async (
     title: string, image: string, news_text: string
-    ): Promise<News> => {
+    ): Promise<AllNews> => {
 
     try {
-        baseUrl = baseUrl + '/add';
-        const response = await axios.post(baseUrl, {title, image, news_text});
+        const url = `${baseUrl}/add`;
+        const response = await axios.post(url, {title, image, news_text});
         if (response.status === 201) {
             console.log('News added successfully:', response.data.message);
             return response.data;
@@ -42,3 +42,4 @@ export const getNews = async (id: string): Promise<AllNews>  => {
         throw error; 
     }
 }
+

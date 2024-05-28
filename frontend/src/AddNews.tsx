@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import Notification from '../src/Notification';
-import { addNews } from '../src/services/newsService';
+import { useNews } from './utils/useNews'
 
 const AddNews = () => {
+    const { createNews } = useNews();
     const [errorMessage, setErrorMessage] = useState("");
     const [submitCount, setSubmitCount] = useState(0);
     const [notificationType, setNotificationType] = useState("");
@@ -63,7 +64,7 @@ const AddNews = () => {
         }
 
         try {
-            await addNews(
+            await createNews(
                 fields.title, 
                 fields.image, 
                 fields.news_text
@@ -71,6 +72,14 @@ const AddNews = () => {
 
             setErrorMessage(`News successfully added`);
             setNotificationType("admin-success-notification");
+
+            /** Reset fields after successful submission */
+            setFields({
+                title: "",
+                image: "",
+                news_text: ""
+            });
+
             setTimeout(() => {
                 setErrorMessage("");
                 setNotificationType("");
@@ -84,13 +93,6 @@ const AddNews = () => {
                 return;
             }
         }
-
-        /** Reset fields after successful submission */
-        setFields({
-            title: "",
-            image: "",
-            news_text: ""
-        });
     };
 
     return (

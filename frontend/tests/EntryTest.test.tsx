@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import allQuestions from '../src/data/questions';
 import { I18nextProvider } from 'react-i18next';
-import i18n from "./../i18nForTests"
+import i18n from "../i18nForTests"
 
 
 /** Mock for useNavigate hook */

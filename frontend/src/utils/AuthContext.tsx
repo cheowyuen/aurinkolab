@@ -22,10 +22,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         if (userToken) {
             const loggedUser = JSON.parse(userToken);
             setUserRole(loggedUser.role);
-            console.log('role',userRole)
-        } else {
-            console.log('No user token found');
-        }
+        } 
     }, [userRole]);
 
 

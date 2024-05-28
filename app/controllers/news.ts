@@ -6,10 +6,10 @@ const newsController = {
         try {
             const { title, image, news_text } = req.body;
 
-            const query = `INSERT INTO news (title, image, news_text, date_added) VALUES ($1, $2, $3, NOW());`;
+            const query = `INSERT INTO news (title, image, news_text, date_added) VALUES ($1, $2, $3, NOW()) RETURNING *;`;
             const result = await pool.query(query, [title, image, news_text]);
             if (result.rowCount && result.rowCount > 0) {
-                res.status(201).json({ message: `News added successfully` });
+                res.status(201).json(result.rows[0]);
             } else {
                 throw new Error(`Adding news failed`);
             }
@@ -22,7 +22,7 @@ const newsController = {
     getAll: async (req: Request, res: Response) => {
         try {
           const { rows } = await pool.query(
-            `SELECT id, title, image, news_text, TO_CHAR(date_added, 'YYYY-MM-DD') AS date_added FROM news;`
+            `SELECT n.id, n.title, n.image, n.news_text, TO_CHAR(date_added, 'YYYY-MM-DD') AS date_added FROM news n ORDER BY n.date_added DESC;`
           );
           res.json(rows);
         } catch (error) {
