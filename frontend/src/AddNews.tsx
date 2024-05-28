@@ -21,6 +21,7 @@ const AddNews = () => {
 
     const notificationRef = useRef<HTMLDivElement | null>(null); /** Create a ref */
 
+    /** scroll to notification */
     useEffect(() => {
         if (errorMessage !== '') { 
             if (notificationRef.current) {
@@ -34,6 +35,7 @@ const AddNews = () => {
         }
       }, [errorMessage, submitCount]);
 
+    /** set value of input box */
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target as { name: string, value: string };
         setFields(prev => ({ ...prev, [name]: value }));
@@ -64,6 +66,7 @@ const AddNews = () => {
         }
 
         try {
+            /** add news to database */
             await createNews(
                 fields.title, 
                 fields.image, 
@@ -80,6 +83,7 @@ const AddNews = () => {
                 news_text: ""
             });
 
+            /** hide notification after 2s */
             setTimeout(() => {
                 setErrorMessage("");
                 setNotificationType("");

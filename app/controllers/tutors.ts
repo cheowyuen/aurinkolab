@@ -4,6 +4,7 @@ import { Request, Response } from 'express';
 const tutorsController = {
   getAll: async (req: Request, res: Response) => {
     try {
+      /** select all tutors that are approved to be displayed on website */
       const { rows } = await pool.query(
         `SELECT id, first_name, email, has_certificate, image, completed_vehicles, is_estimate 
         FROM tutors 

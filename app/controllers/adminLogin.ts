@@ -8,12 +8,14 @@ const adminLoginController = {
     try {
       const { username, password} = req.body;
 
+      /** check if username exists */
       const accountQuery = `SELECT * FROM admin WHERE username=$1`;
       const { rows } = await pool.query(accountQuery, [username]);
 
       if (rows.length === 0) {
         res.status(401).json({ message: "Invalid username or password" });
       } else {
+        /** verify if password entered is correct */
         const passwordCorrect = await bcrypt.compare(password, rows[0].password);
 
         if (passwordCorrect) {
@@ -24,8 +26,10 @@ const adminLoginController = {
                 throw new Error('SECRET environment variable not set');
             }
 
+            /** use user id to generate token */
             const token = jsonwebtoken.sign(userForToken, process.env.SECRET)
            
+            /** send back user info */
             res
                 .status(200)
                 .send({ token, role: "admin", id })

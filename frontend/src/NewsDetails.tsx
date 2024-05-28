@@ -7,6 +7,7 @@ const NewsDetails = () => {
     const { newsId } = useParams(); 
     const [ news, setNews ] = useState<AllNews>({id: 0, title: "", image: "", news_text: "", date_added: ""});
 
+    /** get news details */
     useEffect(() => {
         if (newsId) {
             getNews(newsId).then(data => {

@@ -4,6 +4,7 @@ import transporter from '../utils/mailer';
 import jsonwebtoken from 'jsonwebtoken';
 
 const getTokenFrom = (request: Request) => {
+    /** extract token from header */
     const authorization = request.get('authorization')
     if (authorization && authorization.startsWith('Bearer ')) {
         return authorization.substring(7);
@@ -15,15 +16,17 @@ const applyEventController = {
     applyEvent: async (req: Request, res: Response) => {
         try {
             const { userId, role, eventId, max_participants  } = req.body;
-            const dbColumn = (role === "tutor" ? "tutor_id" : "student_id");
+            const dbColumn = (role === "tutor" ? "tutor_id" : "student_id"); 
 
-            const token = getTokenFrom(req);
+            const token = getTokenFrom(req); 
             if (!token) {
                 return res.status(401).json({ error: 'No token provided' });
             }
 
+            /** verify token */
             const decodedToken = jsonwebtoken.verify(token, process.env.SECRET || '');
             if (typeof decodedToken !== 'string' && 'id' in decodedToken) {
+                /** check if user has registered for the event */
                 const query = `SELECT * FROM events_students WHERE event_id = $1 AND ${dbColumn} = $2;`;
                 const result = await pool.query(query, [eventId, userId])
 
@@ -33,22 +36,27 @@ const applyEventController = {
                 else {
                     let maxReached = false;
                     if (role === "student") {
+                        /** get number of participants currently registered for the event */
                         const maxQuery = `SELECT COUNT(*) AS total FROM events_students WHERE event_id = $1 AND student_id IS NOT NULL`
                         const maxResult = await pool.query(maxQuery, [eventId]);
 
+                        /** check if maximum paritcipants is reached */
                         if (maxResult.rowCount && maxResult.rowCount > 0) {
                             maxReached = maxResult.rows[0].total >= max_participants;
                         }
                     }
 
+                    /** if maximum participants is reached, register user to waiting list, else register user to event */
                     const dbTable = (maxReached ? "waiting_list" : "events_students");
                     const insertQuery = `INSERT INTO ${dbTable} (event_id, ${dbColumn}, registration_time, registered) VALUES ($1, $2, NOW(), ${!maxReached});`;
                     const insertResult = await pool.query(insertQuery, [eventId, userId]);
 
                     if (insertResult.rowCount && insertResult.rowCount > 0) {
+                        /** get event info */
                         const eventQuery = `SELECT * FROM events WHERE id = $1;`;
                         const eventResult = await pool.query(eventQuery, [eventId]);
 
+                        /** send out registration confirmation/waiting list email */
                         if (eventResult.rowCount && eventResult.rowCount > 0) {
                             const eventDetails = eventResult.rows[0];
                             const title = maxReached ? "Waiting List" : "Event Registration Confirmation";

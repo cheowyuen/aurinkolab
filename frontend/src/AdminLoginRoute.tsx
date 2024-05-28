@@ -4,6 +4,7 @@ import { useAuth } from '../src/utils/useAuth';
 const AdminLoginRoute = ({ children }: { children: React.ReactNode }) => {
     const { isAuthenticated } = useAuth();
 
+    /** redirect user if authenticated */
     if (isAuthenticated) {
         const loggedUser = sessionStorage.getItem('userToken');
         if (loggedUser) {

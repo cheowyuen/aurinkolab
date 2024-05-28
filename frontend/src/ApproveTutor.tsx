@@ -11,6 +11,7 @@ const ApprroveTutor = () => {
     const [message, setMessage] = useState("");
     const notificationRef = useRef<HTMLDivElement | null>(null); /** Create a ref */
 
+    /** get all tutors pending approval */
     useEffect(() => {
         getAllTutors().then(data => {
           setTutors(data);
@@ -21,11 +22,10 @@ const ApprroveTutor = () => {
         setChecked(new Array(tutors.length).fill(false));
     }, [tutors]);
 
+    /** scroll to notification */
     useEffect(() => {
         if (message !== '') { 
             if (notificationRef.current) {
-                //const topPosition = notificationRef.current.getBoundingClientRect().top + window.scrollY - 100; /** Subtract 100 pixels to account for the navbar height */
-                
                 window.scrollTo({
                     top: 10,
                     behavior: 'smooth',
@@ -34,6 +34,7 @@ const ApprroveTutor = () => {
         }
       }, [message]);
 
+    /** select all tutors */
     const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
         const isChecked = event.target.checked;
         setChecked(new Array(tutors.length).fill(isChecked));
@@ -43,15 +44,16 @@ const ApprroveTutor = () => {
         const id = Number(event.target.value);
         const isChecked = event.target.checked;
 
+        /** get index of checked/unchecked item */
         const updatedCheckedState = checked.map((item, index) =>
             index === position ? !item : item
         );
         setChecked(updatedCheckedState);
 
         if (isChecked) {
-            setIds([...ids, Number(id)]);
+            setIds([...ids, Number(id)]); /** add checked item to ID list */
         } else {
-            const updatedIds = ids.filter(item => item !== id)
+            const updatedIds = ids.filter(item => item !== id) /** remove unchecked item from ID list */
             setIds(updatedIds)
         }
     };
@@ -59,12 +61,15 @@ const ApprroveTutor = () => {
     const handleSubmit = async (action: string) => {
         try {
             if (ids.length > 0) {
+                /** approve/reject tutor based on action type */
                 await approveTutor(ids, action);
 
+                /** update tutors list */
                 const updatedTutors = await getAllTutors();
                 setTutors(updatedTutors);
                 setIds([]);
                 
+                /** display messsage for 2s */
                 const status = (action === "approve" ? "approved" : "rejected")
                 setMessage(`Tutors successfully ${status}`);
                 setTimeout(() => {

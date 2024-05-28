@@ -7,10 +7,12 @@ const verifyEmailController = {
       const { token, role } = req.body;
       const dbTable = (role === "tutor" ? "tutors" : "students");
 
+      /** verify token is valid */
       const query = `SELECT * FROM ${dbTable} WHERE verification_token = $1 AND token_expiration > NOW() AND verified = false;`;
  
       const result = await pool.query(query, [token]);
       if (result.rowCount && result.rowCount > 0) {
+        /** set tutor/student as verified */
         const verifiedQuery = `UPDATE ${dbTable} SET verified = true, token_expiration = NOW() WHERE verification_token = $1;`;
         const verifiedResult = await pool.query(verifiedQuery, [token]);
         if (verifiedResult.rowCount && verifiedResult.rowCount > 0) {

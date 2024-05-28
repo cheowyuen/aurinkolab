@@ -4,6 +4,7 @@ import { Request, Response } from 'express';
 const tutorsController = {
   getAll: async (req: Request, res: Response) => {
     try {
+      /** get all tutors pending approval */
       const { rows } = await pool.query(
         `SELECT t.id, t.first_name || ' ' || t.last_name AS tutor_name, t.email, t.contact_no, e.name as education_center, t.role 
         FROM tutors t
@@ -21,8 +22,9 @@ const tutorsController = {
   approveTutor: async (req: Request, res: Response) => {
     try {
       const { id, action } = req.body;
-
       const fieldName = (action === "approve" ? "is_approved" : "is_rejected")
+
+      /** set tutor as approved/rejected */
       const query = `UPDATE tutors SET ${fieldName} = true WHERE id = ANY($1::int[]);`;
       const result = await pool.query(query, [id]);
       if (result.rowCount && result.rowCount > 0) {

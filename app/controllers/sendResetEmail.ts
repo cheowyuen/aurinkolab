@@ -6,15 +6,17 @@ import transporter from '../utils/mailer';
 const sendResetEmailController = {
   saveData: async (req: Request, res: Response) => {
     try {
+      /** create token */
       const token = crypto.randomBytes(48).toString('hex');
       const { email, role } = req.body;
       const dbTable = (role === "tutor" ? "tutors" : "students");
 
+      /** check if email exists */
       const emailQuery = `SELECT * FROM ${dbTable} WHERE email=$1`;
       const { rows } = await pool.query(emailQuery, [email]);
 
       if (rows.length > 0) {
-        /** Email exists */
+        /** update token */
         const query = `
           UPDATE ${dbTable} 
           SET reset_password_token = $1, 
@@ -23,6 +25,7 @@ const sendResetEmailController = {
           console.log(query)
         const result = await pool.query(query, [token, email.trim()]);
 
+        /** send reset password email */
         if (result.rowCount && result.rowCount > 0) {
           const resetPasswordLink = `http://localhost:5173/reset-password?token=${token}&role=${role}`
         

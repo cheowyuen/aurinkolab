@@ -38,6 +38,7 @@ const Signup = () => {
     const queryParams = new URLSearchParams(useLocation().search);
     const regRole = queryParams.get('role') || "student";
     
+    /** get all education centers */
     useEffect(() => {
         getAllEducationCenters().then(data => {
           setEducationCenters(data);
@@ -47,6 +48,7 @@ const Signup = () => {
         })
     }, [])
 
+    /** scroll to notification */
     useEffect(() => {
         if (errorMessage !== '') { 
             if (notificationRef.current) {
@@ -60,30 +62,36 @@ const Signup = () => {
         }
       }, [errorMessage, submitCount]);
 
+    /** set value of input box */
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target as { name: string, value: string };
         setFields(prev => ({ ...prev, [name]: value }));
     };
 
+    /** validate email */
     const validateEmail = (email: string) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     };
 
+    /** validate contact no. */
     const validateContactNo = (number: string) => {
         /** Allows optional country code, spaces, dashes, and parentheses */
         const phoneRegex = /^(\+?\d{1,3})?[-. ]?(\(?\d{1,3}\)?)?[-. ]?\d{3}[-. ]?\d{4}$/;
         return phoneRegex.test(number);
     };   
 
+    /** set value of privacy policy checkbox */
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setIsAgreed(event.target.checked);
     };
 
+    /** set valueu of display on website checkbox */
     const displayOnWebsiteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setDisplay_on_website(event.target.checked);
     };
 
+    /** set value of education center */
     const educationCenterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setEducationCenterId(Number(event.target.value));
     };
@@ -156,7 +164,7 @@ const Signup = () => {
         }
 
         try {
-            /** Save tutor data */
+            /** Save user data */
             await saveTutorSignup(
                 fields.firstName, 
                 fields.lastName, 

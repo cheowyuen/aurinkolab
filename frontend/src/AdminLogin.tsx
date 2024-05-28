@@ -22,6 +22,7 @@ const Login = () => {
     const notificationRef = useRef<HTMLDivElement | null>(null); /** Create a ref */
     const { login: userLogin } = useAuth();
 
+    /** scroll to notification */
     useEffect(() => {
         if (errorMessage !== '') { 
             if (notificationRef.current) {
@@ -35,6 +36,7 @@ const Login = () => {
         }
       }, [errorMessage, submitCount]);
 
+    /** set value of input box */
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target as { name: string, value: string };
         setFields(prev => ({ ...prev, [name]: value }));
@@ -69,8 +71,8 @@ const Login = () => {
                 fields.password
             );
             
-            //sessionStorage.setItem("userToken", JSON.stringify(user));
-            userLogin(JSON.stringify(user));
+            /** set user as authenticated */
+            userLogin(JSON.stringify(user)); 
         } catch (error) {
             /** Handle any errors that might have occurred*/
             console.error(`Error logging in`, error);

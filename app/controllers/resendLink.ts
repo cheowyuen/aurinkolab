@@ -17,13 +17,14 @@ const transporter = nodemailer.createTransport({
 const resendLinkController = {
   resendLink: async (req: Request, res: Response) => {
     try {
-      const new_token = uuidv4();
+      const new_token = uuidv4(); /** create new token */
       const { token, email, role } = req.body;
       const dbTable = (role === "tutor" ? "tutors" : "students");
       let query = "";
       let result: QueryResult;
 
       if (email === "") {
+          /** update new token based on current token  */
           query = `UPDATE ${dbTable} 
           SET verification_token = $1, 
               token_expiration = NOW() + INTERVAL '1 day'
@@ -31,6 +32,7 @@ const resendLinkController = {
           result = await pool.query(query, [new_token, token]);
       }
       else {
+          /** update new token based on email */
           query = `UPDATE ${dbTable} 
           SET verification_token = $1, 
               token_expiration = NOW() + INTERVAL '1 day'
@@ -39,6 +41,7 @@ const resendLinkController = {
       }
       
 
+      //send verification email
       if (result.rowCount && result.rowCount > 0) {
           const verificationLink = `http://localhost:5173/confirmemail?token=${new_token}&role=${role}`
 

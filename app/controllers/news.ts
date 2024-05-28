@@ -6,6 +6,7 @@ const newsController = {
         try {
             const { title, image, news_text } = req.body;
 
+            /** add news */
             const query = `INSERT INTO news (title, image, news_text, date_added) VALUES ($1, $2, $3, NOW()) RETURNING *;`;
             const result = await pool.query(query, [title, image, news_text]);
             if (result.rowCount && result.rowCount > 0) {
@@ -21,6 +22,7 @@ const newsController = {
 
     getAll: async (req: Request, res: Response) => {
         try {
+          /** get all news */
           const { rows } = await pool.query(
             `SELECT n.id, n.title, n.image, n.news_text, TO_CHAR(date_added, 'YYYY-MM-DD') AS date_added FROM news n ORDER BY n.date_added DESC;`
           );
@@ -34,6 +36,8 @@ const newsController = {
     getOne: async (req: Request, res: Response) => {
       try {
         const id = req.params.id;
+
+        /** get news info */
         const query = `SELECT id, title, image, news_text, TO_CHAR(date_added, 'YYYY-MM-DD') AS date_added FROM news WHERE id = $1;`;
         const { rows } = await pool.query(query, [id]);
   
