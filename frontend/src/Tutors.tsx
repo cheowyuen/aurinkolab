@@ -12,11 +12,7 @@ const Tutors = () => {
 
     const navigate = useNavigate();
 
-    /*const tutors = [
-        {image: "/src/assets/tony.jpeg", name: "Tony", email: "tony.poppel@gmail.com", completedVehicles: "300", isEstimate: true, isCertified: true, tutorId: 1},
-        {image: "/src/assets/olga.jpeg", name: "Olga", email: "olgakairova@gmail.com", completedVehicles: "2", isEstimate: false, isCertified: true, tutorId: 2},
-    ]*/
-
+    /** get all tutors */
     useEffect(() => {
         getAllTutors().then(data => {
           setTutors(data);

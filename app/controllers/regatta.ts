@@ -21,9 +21,11 @@ const regattaController = {
                 const result = await pool.query(query, [event_id, vehicle_name.trim(), team_leader.trim(), email.trim(), contact_no.trim()]);
             
                 if (result.rowCount && result.rowCount > 0) {
+                    /** get event info */
                     const eventQuery = `SELECT * FROM events WHERE id = $1;`;
                     const eventResult = await pool.query(eventQuery, [event_id]);
 
+                    /** send out registration confirmation email */
                     if (eventResult.rowCount && eventResult.rowCount > 0) {
                         const eventDetails = eventResult.rows[0];
                         await transporter.sendMail({

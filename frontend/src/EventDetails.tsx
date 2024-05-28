@@ -34,6 +34,7 @@ const EventDetails = () => {
 
     useEffect(() => {
         if (eventId) {
+            /** get event details */
             getEvent(eventId).then(data => {
                 setEvent(data);
             }).catch(error => {
@@ -48,6 +49,8 @@ const EventDetails = () => {
         const loggedUser = sessionStorage.getItem('userToken');
         if (loggedUser && event.event_type) {
             const user = JSON.parse(loggedUser);
+
+            /** if user is student, hide button to apply masterclas or if user is tutor, hide button to apply hackathon */
             if ((user.role === "student" && event.event_type === "masterclass") || (user.role === "tutor" && event.event_type === "hackathon") || user.role === "admin") {
                 setIsVisible(false);
             }
@@ -68,13 +71,14 @@ const EventDetails = () => {
     }
     const {t} =useTranslation()
 
+    /** set visibility for regatta form */
     const handleRegistrationChange = (value: boolean) => {
-        setRegistration(value);
+        setRegistration(value); 
     };
 
     const handleSubmit = async () => {
         if (event.event_type === "regatta") {
-            setRegistration(true);
+            setRegistration(true); /** set visibility of regatta form */
             setTimeout(() => {  /** Adding a timeout to ensure the component is rendered */
                 if (regattaRef.current) {
                     const topPosition = regattaRef.current.getBoundingClientRect().top + window.scrollY - 100;
@@ -86,22 +90,26 @@ const EventDetails = () => {
                 }
             }, 0);
         } else {
+            /** for events other than regatta */
             if (isAuthenticated) {
-                setConfirmation(true);
+                setConfirmation(true); /** set visibility of confirmation button */
             } else {
-                navigate("/login");
-                //setEventType(event.event_type);
+                navigate("/login"); /** redirect user to login page if not authenticated   */
             } 
         }
     }
 
+    /** confirmation of event application, for events other than regatta */
     const handleConfirmation = async () => {
         const loggedUserJSON = sessionStorage.getItem('userToken');
         if (loggedUserJSON) {
             try {
                 const user = JSON.parse(loggedUserJSON)
+
+                /** register user to event in database */
                 const info = await applyEvent(user.id, user.role, Number(eventId), user.token, Number(event.max_participants));
 
+                /** inform user if added to waiting list */
                 if (info.message === "Added to waiting list") {
                     setMessage("Thank you for your interest in the event. Currently, we are at full capacity, but we have added you to our waiting list. We will notify you as soon as a spot becomes available.");
                 }
@@ -111,6 +119,7 @@ const EventDetails = () => {
             }
             catch (error) {
                 if (error instanceof Error) {
+                    /** user is already registered */
                     if (error.message === "It looks like you're already registered for this event. We look forward to your participation.") {
                         setRegistered(true);
                         setConfirmation(false);
@@ -127,6 +136,7 @@ const EventDetails = () => {
         }
     }
 
+    /** cancel event application, for events other than regatta */
     const handleCancellation = () => {
         setConfirmation(false);
     }

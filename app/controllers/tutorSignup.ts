@@ -8,12 +8,14 @@ import transporter from '../utils/mailer';
 const tutorSignupController = {
   saveData: async (req: Request, res: Response) => {
     try {
+      /** create token */
       const token = uuidv4();
       const { first_name, last_name, email, contact_no, password, education_center_id, role, display_on_website, regRole } = req.body;
       const dbTable = (regRole === "tutor" ? "tutors" : "students");
       const columns = (regRole === "tutor" ? ", role, display_on_website" : "");
       const values = (regRole === "tutor" ? ", $8, $9" : "");
 
+      /** check if email exists */
       const emailQuery = `SELECT * FROM ${dbTable} WHERE email=$1`;
       const { rows } = await pool.query(emailQuery, [email]);
 
@@ -21,6 +23,7 @@ const tutorSignupController = {
         /** Email exists, cannot proceed with registration */
         res.status(409).json({ message: "Email already in use" });
       } else {
+        /** encrypt password */
         const passwordHash = await bcrypt.hash(password, 10);
 
         /** Insert new tutor details into the database */
@@ -34,9 +37,11 @@ const tutorSignupController = {
         } else {
           result = await pool.query(query, [first_name.trim(), last_name.trim(), email.trim(), contact_no.trim(), passwordHash, education_center_id, token]);
         }
+
         if (result.rowCount && result.rowCount > 0) {
           const verificationLink = `http://localhost:5173/confirmemail?token=${token}&role=${regRole}`
 
+          /** send verification email */
           const info = await transporter.sendMail({
             from: '"Aurinko Lab" <admin@aurinkolab.fi>', 
             to: "cheowyuen@gmail.com", 
@@ -56,6 +61,7 @@ const tutorSignupController = {
           if (display_on_website && regRole === "tutor") {
             const approvalLink = `http://localhost:5173/admin`
 
+            /** send mail to admin for tutor approval to be displayed on website */
             const approvalRequest = await transporter.sendMail({
               from: '"Aurinko Lab" <admin@aurinkolab.fi>', 
               to: "admin@aurinkolab.fi", 

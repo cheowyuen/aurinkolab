@@ -20,6 +20,7 @@ const SendResetEmail = () => {
 
     const notificationRef = useRef<HTMLDivElement | null>(null); /** Create a ref */
 
+    /** scroll to notification */
     useEffect(() => {
         if (errorMessage !== '') { 
             if (notificationRef.current) {
@@ -33,16 +34,19 @@ const SendResetEmail = () => {
         }
       }, [errorMessage, submitCount]);
 
+    /** set value of input box */
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target as { name: string, value: string };
         setFields(prev => ({ ...prev, [name]: value }));
     };
 
+    /** set selected radio button as student */
     const studentRadioChange = () => {
         setStudent(true);
         setTutor(false);
     };
 
+    /** set selected radio button as tutor */
     const tutorRadioChange = () => {
         setTutor(true);
         setStudent(false);
@@ -70,7 +74,7 @@ const SendResetEmail = () => {
         }
 
         try {
-            
+            /** send reset password email */
             await sendEmail(
                 fields.email,
                 student ? "student" : "tutor"

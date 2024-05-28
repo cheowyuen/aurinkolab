@@ -4,6 +4,7 @@ import { Request, Response } from 'express';
 const educationCentersController = {
   getAll: async (req: Request, res: Response) => {
     try {
+      /** get all education centers */
       const { rows } = await pool.query(
         `SELECT id, name from education_centers ORDER BY name DESC;`
       );

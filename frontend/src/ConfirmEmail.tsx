@@ -15,6 +15,7 @@ const ConfirmEmail = () => {
 
     useEffect(() => {
         if (token) {
+            /** set email as verified if token is valid */
             verifyEmail(token, role) 
                 .then(response => {
                     if (response.message === "Email verification is successful") {
@@ -34,8 +35,8 @@ const ConfirmEmail = () => {
 
     const handleResendLink = async () => {
         if (token) {
+            /** resend verification email */
             await resendLink(token, "", role);
-            //alert("Verification link is resent. Please check your email.");
             setShowButton(false);
         }
     }

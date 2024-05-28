@@ -25,6 +25,7 @@ const ResetPassword = () => {
     const token = query.get('token');
     const role = query.get('role') || "student";
 
+    /** scroll to notification */
     useEffect(() => {
         if (errorMessage !== '') { 
             if (notificationRef.current) {
@@ -46,10 +47,11 @@ const ResetPassword = () => {
     }, [token]);
 
     if (shouldRedirect) {
-        /** Redirect */
+        /** Redirect to homepage if token is invalid */
         return <Navigate to="/" />;
     }
 
+    /** set value of input box */
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target as { name: string, value: string };
         setFields(prev => ({ ...prev, [name]: value }));
@@ -76,6 +78,7 @@ const ResetPassword = () => {
             setErrorMessage('');
         }
 
+        /** check if passwords match */
         if (fields.password !== fields.confirmPassword) {
             setErrorMessage('Passwords do not match.');
             return;
@@ -85,6 +88,7 @@ const ResetPassword = () => {
 
         try {
             if (token) {
+                /** reset password */
                 await resetPassword(token, role, fields.password);
                 setPasswordReset(true);
             }

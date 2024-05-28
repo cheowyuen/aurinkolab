@@ -8,16 +8,20 @@ const AllEvents = () => {
     const [events, setEvents] = useState<Event[]>([]);
     const navigate = useNavigate();
 
+    /** get all events */
     useEffect(() => {
         getAllEvents().then(data => {
           setEvents(data);
         })
     }, [])
 
+    /** navigate to event details */
     const handleEventClick = (eventId: number) => {
         navigate(`/events/${eventId}`);
     };
+
     const {t} =useTranslation()
+    
     return (
         <div>
             <div className='events-title' data-testid="events-page-title">

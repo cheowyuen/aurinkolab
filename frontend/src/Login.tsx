@@ -27,6 +27,7 @@ const Login = () => {
     const notificationRef = useRef<HTMLDivElement | null>(null); /** Create a ref */
     const { login: userLogin, isAuthenticated } = useAuth();
 
+    /** scroll to notification */
     useEffect(() => {
         if (errorMessage !== '') { 
             if (notificationRef.current) {
@@ -48,20 +49,23 @@ const Login = () => {
     }, [isAuthenticated]);
 
     if (shouldRedirect) {
-        /** Redirect */
+        /** Redirect to events if authenticated */
         navigate('/events');
     }
 
+    /** set value of input box */
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target as { name: string, value: string };
         setFields(prev => ({ ...prev, [name]: value }));
     };
 
+    /** set selected radio button as student */
     const studentRadioChange = () => {
         setStudent(true);
         setTutor(false);
     };
 
+    /** set selected radio button as tutor */
     const tutorRadioChange = () => {
         setTutor(true);
         setStudent(false);
@@ -90,14 +94,14 @@ const Login = () => {
         }
 
         try {
-            /** Save tutor data */
+            /** verify email and password */
             const user = await login(
                 fields.email, 
                 fields.password,
                 student ? "student" : "tutor"
             );
             
-            //sessionStorage.setItem("userToken", JSON.stringify(user));
+            /** set user as auuthenticated */
             userLogin(JSON.stringify(user));
         } catch (error) {
             /** Handle any errors that might have occurred*/
@@ -125,6 +129,7 @@ const Login = () => {
         setStudent(true);
         setTutor(false);
 
+        /** redirect to events after login */
         navigate('/events');
     };
 

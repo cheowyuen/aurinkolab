@@ -8,6 +8,7 @@ const News = () => {
     const [filter, setFilter] = useState("");
     const navigate = useNavigate();
 
+    /** get all news */
     useEffect(() => {
         setUpdatedNews(news);
     }, [news])
@@ -16,12 +17,16 @@ const News = () => {
         window.scrollTo(0, 0);
     }, []);
 
+    /** navigate to news details */
     const handleEventClick = (newsId: number) => {
         navigate(`/news/${newsId}`);
     };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        /** set value of input box */
         const { value } = e.target as { value: string };
+
+        /** filter news */
         setFilter(value);
         const filteredNews = news.filter(n => n.title.toLowerCase().includes(value.toLowerCase()));
         setUpdatedNews(filteredNews);

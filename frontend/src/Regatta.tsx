@@ -30,6 +30,7 @@ const Regatta = ({ onRegistrationChange, eventId }: RegattaProps) => {
 
     const notificationRef = useRef<HTMLDivElement | null>(null); /** Create a ref */
 
+    /** scroll to notification */
     useEffect(() => {
         if (errorMessage !== '') { 
             if (notificationRef.current) {
@@ -43,22 +44,26 @@ const Regatta = ({ onRegistrationChange, eventId }: RegattaProps) => {
         }
       }, [errorMessage, submitCount]);
 
+    /** set value of input box */
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target as { name: string, value: string };
         setFields(prev => ({ ...prev, [name]: value }));
     };
 
+    /** validate email */
     const validateEmail = (email: string) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     };
 
+    /** validate contact no. */
     const validateContactNo = (number: string) => {
         /** Allows optional country code, spaces, dashes, and parentheses */
         const phoneRegex = /^(\+?\d{1,3})?[-. ]?(\(?\d{1,3}\)?)?[-. ]?\d{3}[-. ]?\d{4}$/;
         return phoneRegex.test(number);
     };  
     
+    /** get image (currently not in use) */
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         if (files && files.length > 0) {
@@ -74,6 +79,8 @@ const Regatta = ({ onRegistrationChange, eventId }: RegattaProps) => {
         }
     };
 
+
+    /** cancel regatta registration */
     const handleCancel = () => {
         onRegistrationChange(false);
     }
@@ -119,7 +126,7 @@ const Regatta = ({ onRegistrationChange, eventId }: RegattaProps) => {
         }
 
         try {
-            /** Save tutor data */
+            /** Save regatta registration data */
             await applyRegatta(
                 eventId,
                 fields.vehicleName, 

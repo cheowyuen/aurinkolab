@@ -4,6 +4,7 @@ import { Request, Response } from 'express';
 const eventsController = {
   getAll: async (req: Request, res: Response) => {
     try {
+      /** select all events (events are categorized by start date and end date) */
       const { rows } = await pool.query(
         `SELECT 
           id, name, place, date, image,  
@@ -28,6 +29,8 @@ const eventsController = {
   getOne: async (req: Request, res: Response) => {
     try {
       const id = req.params.id;
+
+      /** get event info, including number of available spots (maximum participants - current participants registered for event) */
       const query = `
         SELECT 
           e.id, e.name, e.date, e.place, e.vehicle, e.engine, e.image, e.event_type, COALESCE(e.max_participants, 0) AS max_participants,
