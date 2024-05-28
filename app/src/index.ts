@@ -14,6 +14,7 @@ import resetPasswordRouter from "../routes/resetPassword";
 import applyEventRouter from "../routes/applyEvent";
 import regattaRouter from "../routes/regatta";
 import adminLoginRouter from "../routes/adminLogin";
+import partnersRouter from "../routes/parnersRegistration";
 import newsRouter from "../routes/news";
 
 const app = express();
@@ -25,6 +26,7 @@ app.use("/events", eventsRouter);
 app.use("/tutors", tutorsRouter);
 app.use("/quiz", quizRouter);
 app.use("/signup", tutorSignupRouter);
+app.use("/partnersregistration", partnersRouter );
 app.use("/educationCenters", educationCentersRouter);
 app.use("/confirmemail", verifyEmailRouter);
 app.use("/resendLink", resendLinkRouter);
