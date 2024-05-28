@@ -1,8 +1,10 @@
 import emailIcon from './assets/email-verification.png';
 import { useLocation, Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useTranslation } from "react-i18next";
 
 const VerifyEmail = () => {
+    const {t} =useTranslation()
     const location = useLocation();
     const [shouldRedirect, setShouldRedirect] = useState(false);
     const { email } = location.state || {};
@@ -28,14 +30,14 @@ const VerifyEmail = () => {
 
                 <div className="text-lg page-font-color">
                     <p className="title-font text-2xl text-center mb-8">
-                        Great, thansks for resquesting the presentation for partnerships opportunities.
+                    {t('confirmation-partners-paragraph-1')}   
                     </p>
                     <img className="email-icon" src={emailIcon} alt="Email Icon" />
                     <p className="text-base text-center mt-8">
-                        We've sent a information to <b>{email}</b>. Please do not hesitate to ask for more information.
+                    {t('confirmation-partners-paragraph-2')}<b>{email}</b>. {t('confirmation-partners-paragraph-3')} 
                     </p>
                     <p className="text-base text-center mt-8">
-                        <b>Can't find the email?</b> It might be in your junk mail.
+                        <b>{t('confirmation-partners-paragraph-4')}</b> {t('confirmation-partners-paragraph-5')} 
                     </p>
                 </div>
             </div>

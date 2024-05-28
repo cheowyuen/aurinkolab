@@ -2,6 +2,7 @@ import i18n from "i18next"
 import {initReactI18next} from 'react-i18next'
 import ChainedBackend from "i18next-chained-backend";
 import  tranEn from './public/locales/en/translation.json'
+import  tranEs from './public/locales/es/translation.json'
 import Backend from 'i18next-http-backend'
 
 /* 
@@ -24,6 +25,9 @@ i18n
     resources: {
       en: {
         translation: tranEn, /** retrieving the json file with the translations.*/
+      },
+      es: {
+        translation: tranEs, /** retrieving the json file with the translations.*/
       },
     },
 
