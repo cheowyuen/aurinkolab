@@ -19,7 +19,7 @@ export const savePartnersData = async (
     } catch (error) {
         const e = error as AxiosError;
         if (e.response && e.response.status === 409) {
-            throw new Error('Email already request the presentation'); 
+            throw new Error('Email has already requested the presentation'); 
         } else {
             throw new Error('An unexpected error occurred: ' + (e.message || 'Unknown error'));
         }

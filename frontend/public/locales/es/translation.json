@@ -108,6 +108,8 @@
     "box-text":"l marcar esta casilla, acepta que su información se muestre en el sitio web.",
     "box-text-2":"Al crear una cuenta, aceptas las",
     "box-text-3":"Política de privacidad",
+
+    "emailError":"El correo electrónico ya ha solicitado la presentación.",
     
 
 

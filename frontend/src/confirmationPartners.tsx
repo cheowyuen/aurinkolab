@@ -34,7 +34,7 @@ const VerifyEmail = () => {
                     </p>
                     <img className="email-icon" src={emailIcon} alt="Email Icon" />
                     <p className="text-base text-center mt-8">
-                    {t('confirmation-partners-paragraph-2')}<b>{email}</b>. {t('confirmation-partners-paragraph-3')} 
+                    {t('confirmation-partners-paragraph-2')} <b>{email}</b>. {t('confirmation-partners-paragraph-3')} 
                     </p>
                     <p className="text-base text-center mt-8">
                         <b>{t('confirmation-partners-paragraph-4')}</b> {t('confirmation-partners-paragraph-5')} 

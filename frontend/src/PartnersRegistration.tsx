@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
+
     
 const partnersRegistration = () => {
     const {t} =useTranslation()
@@ -97,10 +98,10 @@ const partnersRegistration = () => {
         } catch (error) {
             /** Handle any errors that might have occurred during saveQuiz */
             console.error(`Error registering :`, error);
-            console.log("estes es el error>>>",error)
+            console.log(error)
             if (error instanceof Error) { 
-                if (error.message == "The email address has already requested the presentation.") {
-                    setErrorMessage(error.message); 
+                if (error.message == "Email has already requested the presentation") {
+                    setErrorMessage(t('emailError')); 
                     return;
                 } else {
                     setErrorMessage("An error occurred during submission. Please try again."); 
