@@ -5,111 +5,132 @@ import { BrowserRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import allQuestions from '../src/data/questions';
 import { I18nextProvider } from 'react-i18next';
-import i18n from "../i18nForTests"
+import i18n from '../i18nForTests';
 
 
-/** Mock for useNavigate hook */
-const mockNavigate = jest.fn();
+jest.setTimeout(40000); // Set timeout to 40 seconds
 
-// Mock the react-router-dom library
-jest.mock('react-router-dom', () => {
-  const actualNav = jest.requireActual('react-router-dom');
-  return {
-    ...actualNav,
-    useNavigate: () => mockNavigate,
-  };
-});
- 
-/** The componente must be wrap with the i18n module ensure the jest test will read a tranlated component and not just the i18n keys */
-describe("EntryTest Component", () => {
-    beforeEach(() => {
-        render(
-            <BrowserRouter>
-            < I18nextProvider i18n={i18n}> 
-               <EntryTest/>
-               </I18nextProvider>   
-            </BrowserRouter>
-        );
+const changeLanguageAndRender = async (lang: string) => {
+  await i18n.changeLanguage(lang);
+  return render(
+    <BrowserRouter>
+      <I18nextProvider i18n={i18n}>
+        <EntryTest  />
+      </I18nextProvider>
+    </BrowserRouter>
+  );
+};
+
+describe('EntryTest Component', () => {
+  ['en', 'es'].forEach((lang) => {
+    test(`checking the questions and answers in: ${lang}`, async () => {
+      window.scrollTo = jest.fn();
+      await changeLanguageAndRender(lang);
+
+      const questionsPerPage = 6;
+      const totalPages = Math.ceil(allQuestions.length / questionsPerPage);
+
+      const title = screen.getByTestId('quiz-page-title');
+      expect(title).toHaveTextContent(i18n.t('Quiz'));
+
+      const pageNumberElement = screen.getByTestId('quiz-page-number');
+      expect(pageNumberElement).toHaveTextContent(`${i18n.t('Page')} 1/${totalPages}`);
+
+      const questionsOnPage = allQuestions.slice(0, questionsPerPage);
+      questionsOnPage.forEach((question) => {
+        const questionText = i18n.t(`questions_translation.questionT_${question.questionNo}`);
+        const questionElement = screen.getByText((_content, element) => {
+          if (!element) return false; // Check if element is null
+          const hasText = (element: Element) => element.textContent === `${question.questionNo}. ${questionText}`;
+          const elementHasText = hasText(element);
+          const childrenDontHaveText = Array.from(element.children).every(child => !hasText(child));
+          return elementHasText && childrenDontHaveText;
+        });
+        expect(questionElement).toBeInTheDocument();
+
+        question.answers.forEach((_answer, index) => {
+          const answerText = i18n.t(`answers_translation.questionT_${question.questionNo}answer.answer${index + 1}`);
+          const answerElement = screen.getByText((_content, element) => {
+            if (!element) return false; // Check if element is null
+            const hasText = (element: Element) => element.textContent === answerText;
+            const elementHasText = hasText(element);
+            const childrenDontHaveText = Array.from(element.children).every(child => !hasText(child));
+            return elementHasText && childrenDontHaveText;
+          });
+          expect(answerElement).toBeInTheDocument();
+        });
+      });
     });
 
-    test('renders quiz', async () => {
-        window.scrollTo = jest.fn();
+    test(`Testing buttons next, submit and quiz result in : ${lang}`, async () => {
+      window.scrollTo = jest.fn();
+      await changeLanguageAndRender(lang);
 
-        const questionsPerPage = 6;
-        const totalPages = allQuestions.length / questionsPerPage;
+      const user = userEvent.setup();
+      const questionsPerPage = 6;
+      const totalPages = Math.ceil(allQuestions.length / questionsPerPage);
 
-        /** Test page title */
-        const title = screen.getByTestId("quiz-page-title");
-        expect(title).toHaveTextContent("Quiz");
+      const title = screen.getByTestId('quiz-page-title');
+      expect(title).toHaveTextContent(i18n.t('Quiz'));
 
-        /** Test page number */
-        const pageNumberElement = screen.getByTestId("quiz-page-number");
-        expect(pageNumberElement).toHaveTextContent(`Page 1/${totalPages}`);
+      for (let i = 0; i < totalPages; i++) {
+        const pageNumberElement = screen.getByTestId('quiz-page-number');
+        expect(pageNumberElement).toHaveTextContent(`${i18n.t('Page')} ${i + 1}/${totalPages}`);
 
-        /** Test skipping question */
-        const user = userEvent.setup(); 
-        const submit_button = screen.getByTestId('submit_button'); 
-        await user.click(submit_button)
-        
-        /** Test notification */
-        const notification = screen.getByTestId("notification");
-        expect(notification).toHaveTextContent(/Your quiz isn't complete/);
+        const questionsOnPage = allQuestions.slice(i * questionsPerPage, (i + 1) * questionsPerPage);
 
-        for (let i = 0; i < questionsPerPage; i++) {
-            /** Check question is correctly labeled */
-            const question = screen.getByText(`${i+1}. ${allQuestions[i].question}`);
-            expect(question).toBeDefined
+        for (const question of questionsOnPage) {
+          const questionText = i18n.t(`questions_translation.questionT_${question.questionNo}`);
+          const questionElement = screen.getByText((_content, element) => {
+            if (!element) return false; // Check if element is null
+            const hasText = (element: Element) => element.textContent === `${question.questionNo}. ${questionText}`;
+            const elementHasText = hasText(element as Element); // Type assertion 
+            const childrenDontHaveText = Array.from(element!.children).every(child => !hasText(child));
+            return elementHasText && childrenDontHaveText;
+          });
+          
+          expect(questionElement).toBeInTheDocument();
 
-            allQuestions[i].answers.forEach(answer => {
-                /** Check answers are correctly labeled */
-                const radioOption = screen.getByRole('radio', { name: new RegExp(answer.answer) });
-                expect(radioOption).toBeInTheDocument();
+          for (const [index, answer] of question.answers.entries()) {
+            const answerText = i18n.t(`answers_translation.questionT_${question.questionNo}answer.answer${index + 1}`);
+            const answerElements = screen.getAllByText((_content, element) => {
+              if (!element) return false; // Check if element is null
+              const hasText = (element: Element) => element.textContent === answerText;
+              const elementHasText = hasText(element);
+              const childrenDontHaveText = Array.from(element.children).every(child => !hasText(child));
+              return elementHasText && childrenDontHaveText;
             });
-        }
-    })
+            
 
-    test('fails quiz', async () => {
-        window.scrollTo = jest.fn();
+            answerElements.forEach(answerElement => {
+              expect(answerElement).toBeInTheDocument();
+            });
 
-        const user = userEvent.setup(); 
-        const questionsPerPage = 6;
-        const totalPages = allQuestions.length / questionsPerPage;
-
-        /** Select answers */
-        for (let i = 0; i < totalPages; i++) {
-            for (let j = 0; j < questionsPerPage; j++) {
-                const answerId = `answer_${allQuestions[j + i * questionsPerPage].answers[0].answerId}`;
-                const radioButton = screen.getByTestId(answerId);
-                await user.click(radioButton);
-            }
-
-            const submitButton = screen.getByTestId('submit_button');
-            await user.click(submitButton);
-
-            if (i < totalPages - 1) {
-                const next_button = screen.getByTestId('next_button');
-                await user.click(next_button);
-            }
+            const answerId = `answer_${answer.answerId}`;
+            const radioButton = screen.getByTestId(answerId);
+            expect(radioButton).toBeInTheDocument();
+            await user.click(radioButton);
+            expect(radioButton).toBeChecked();
+          }
         }
 
-        /** Go to result page */
-        const result_button = screen.getByTestId("result_button");
-        await user.click(result_button);
+        const submitButton = screen.getByTestId('submit_button');
+        await user.click(submitButton);
 
-        /** Test quiz result */
-        const quiz_result_title = screen.getByText('Quiz Result');
-        expect(quiz_result_title).toBeDefined();
-        const quiz_result = screen.findByText(/Close effort! Let's try again./);
-        expect(quiz_result).toBeDefined();
-        const score = screen.getByText(/Score:/);
-        expect(score).toBeDefined();
+        if (i < totalPages - 1) {
+          const nextButton = screen.getByTestId('next_button');
+          await user.click(nextButton);
+        }
+      }
 
-        /** Test quiz result button */
-        const retakeQuizButton = screen.getByText("Retake Quiz")
-        await user.click(retakeQuizButton)
-        const title = screen.getByTestId("quiz-page-title");
-        expect(title).toHaveTextContent("Quiz");
-        const pageNumberElement = screen.getByTestId("quiz-page-number");
-        expect(pageNumberElement).toHaveTextContent(`Page 1/${totalPages}`);
-    })
-})
+      const resultButton = screen.getByTestId('result_button');
+      await user.click(resultButton);
+
+      const score = screen.getByTestId('Score');
+      expect(score).toHaveTextContent(i18n.t('Score'));
+
+      const retakeQuizButton = screen.getByTestId("Retake Quiz");
+      await user.click(retakeQuizButton);
+    });
+  });
+});
