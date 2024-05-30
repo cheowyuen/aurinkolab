@@ -1,0 +1,42 @@
+services:
+  app:
+    container_name: backend
+    build: ./app
+    ports:
+      - 3001:3001
+    depends_on:
+      - database
+    env_file:
+      - project.env
+
+  database:
+    container_name: aurinkolab-database
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - project.env
+
+  frontend:
+    container_name: frontend
+    build: 
+      context: /frontend 
+      dockerfile: Dockerfile.production
+    ports:
+      - "80:80"  
+      - "443:443"
+    
+      
+
+  flyway:
+    image: flyway/flyway:7.3.0-alpine
+    env_file:
+      - project.env
+    depends_on:
+      - database
+    volumes:
+      - ./flyway/sql:/flyway/sql
+    command: -connectRetries=60 -baselineOnMigrate=true migrate
+
+volumes:
+  postgres_data:
