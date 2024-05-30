@@ -20,11 +20,12 @@ function AboutAurinkoLabSection() {
           <img src={boatImage} alt="Boat" className="boat-image" />
           <div className="description-text">
             <p>
-              <span>{t('AurinkoLab')} :</span><br /><br />
+              <span data-testid="AurinkoLab">{t('AurinkoLab')} :</span><br /><br />
               ⏱️{' '}
               <span
                 onClick={() => toggleVisibility(setHackathonVisible)}
                 style={{ cursor: 'pointer' }}
+                data-testid="20-Hour Engineering Hackathon"
               >
                 {t('20-Hour Engineering Hackathon')}
               </span>
@@ -42,6 +43,7 @@ function AboutAurinkoLabSection() {
               <span
                 onClick={() => toggleVisibility(setChampionshipVisible)}
                 style={{ cursor: 'pointer' }}
+                data-testid="Final Championship"
               >
                 {t('Final Championship')}
               </span>
@@ -59,6 +61,7 @@ function AboutAurinkoLabSection() {
               <span
                 onClick={() => toggleVisibility(setTalentHubVisible)}
                 style={{ cursor: 'pointer' }}
+                data-testid="AurinkoLab Engineering Talent Hub"
               >
                 {t('AurinkoLab Engineering Talent Hub')}
               </span>
@@ -76,6 +79,7 @@ function AboutAurinkoLabSection() {
               <span
                 onClick={() => toggleVisibility(setResourceHubVisible)}
                 style={{ cursor: 'pointer' }}
+                data-testid="AurinkoLab Resource Hub"
               >
                 {t('AurinkoLab Resource Hub')}
               </span>

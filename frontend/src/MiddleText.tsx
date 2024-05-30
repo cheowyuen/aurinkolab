@@ -5,7 +5,7 @@ const MiddleText = () => {
   return (
     <div className="middle">
       <div className="middle-text">
-        <p>{t('middle-text')}</p>
+        <p data-testid="middle-text">{t('middle-text')}</p>
       </div>
     </div>
   );

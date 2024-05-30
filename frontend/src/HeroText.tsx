@@ -18,7 +18,7 @@ function HeroText() {
             <motion.div variants={reveal} initial="hiddenVariant" animate="revealedVariant" transition={{ delay: animationStart + 1, duration: 0.5 }} className="flex flex-col text-2vw <md:text-24px font-bold mb-30px pt-100px ">
                 <span className="aurinkolab-text">{t('hero-paragraph-1')}</span>
             </motion.div>
-            <motion.span variants={reveal} initial="hiddenVariant" animate="revealedVariant" transition={{ delay: animationStart + 1, duration: 0.5 }} className="description-herotext">
+            <motion.span variants={reveal} initial="hiddenVariant" animate="revealedVariant" transition={{ delay: animationStart + 1, duration: 0.5 }} className="description-herotext"data-testid="hero-paragraph-2">
               {t('hero-paragraph-2')} <br />
             </motion.span>
         </motion.div>

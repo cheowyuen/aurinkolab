@@ -6,7 +6,7 @@ import goodTry from './assets/logo_sun.png';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { saveQuiz } from '../src/services/quizService';
-import { useTranslation, withTranslation } from "react-i18next";
+import { useTranslation} from "react-i18next";
 
 
 export interface Question {
@@ -257,7 +257,7 @@ const EntryTest: React.FC = () => {
                     <br/>
                     <p className="result">{resultMessage}</p>
                     <br/> 
-                    <p className="result">Score: {score}/{allQuestions.length}</p>
+                    <p className="result" data-testid="Score">{t('Score')}: {score}/{allQuestions.length}</p>
                     {resultMessage.includes("Congratulations") && (
                         <p className="result">{t('Grade')}: {(score / allQuestions.length * 10).toFixed(1)}</p>
                     )}
@@ -266,7 +266,7 @@ const EntryTest: React.FC = () => {
                         <button className="buttons" onClick={() => navigate('/events')}>{t('Continue')}</button>
                     )}
                     {!resultMessage.includes("Congratulations") && (
-                        <button className="buttons" onClick={handleRetakeQuizButtonClick}>{t('Retake Quiz')}</button>
+                        <button className="buttons" data-testid="Retake Quiz" onClick={handleRetakeQuizButtonClick}>{t('Retake Quiz')}</button>
                     )}
                 </div>
             )}
@@ -276,7 +276,7 @@ const EntryTest: React.FC = () => {
 
 
 // Export the pure component for testing purposes
-export { EntryTest };
+
 
 // Default export the component wrapped with the HOC
-export default withTranslation()(EntryTest);
+export default EntryTest

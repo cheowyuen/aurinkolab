@@ -23,7 +23,7 @@ function PartnersSection(): JSX.Element {
     const navigate = useNavigate();
     return (
     <div id="partners-container" className= "partners-div"> 
-        <div className="header-content"><p>{t('Aurinko Partners')} :</p></div>
+        <div className="header-content"><p data-testid="Aurinko Partners">{t('Aurinko Partners')} :</p></div>
             <div id="partners-section" className="partners-section">
                 <div>
                     <a ><Elvene /></a>

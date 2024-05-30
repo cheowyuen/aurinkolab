@@ -12,14 +12,14 @@ function ContactSection(): JSX.Element {
     </div>
     <div className="contact-us-section">
         <span className="contact-text">
-          {t('Contacts')}:<br/>
-          {t('email')}: <a href={`mailto:${email}`}>{email}</a><br/><br/>
+          <p data-testid="Contacts">{t('Contacts')}:</p><br/>
+          <p data-testid="email">{t('email')}</p>: <a href={`mailto:${email}`}>{email}</a><br/><br/>
           Maria Rohnonen<br/>
-          {t('phone')}: {phoneNumber}.<br/>
-          {t('email')}: <a href={`mailto:${"maria@aurinkolab.fi"}`}>{"maria@aurinkolab.fi"}</a><br/>
+          <p data-testid="phone">{t('phone')}</p>: {phoneNumber}.<br/>
+          <p data-testid="email">{t('email')}</p>: <a href={`mailto:${"maria@aurinkolab.fi"}`}>{"maria@aurinkolab.fi"}</a><br/>
         </span>
         <div className="schedule-meeting-text">
-          <p> {t('meeting')}:</p>
+          <p data-testid="meeting"> {t('meeting')}:</p>
           <iframe
             src={calendlyLink}
             width="100%"
