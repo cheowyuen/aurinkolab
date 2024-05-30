@@ -4,8 +4,10 @@ import { saveTutorSignup } from '../src/services/tutorSignupService';
 import { getAllEducationCenters } from '../src/services/educationCenterService';
 import { EducationCenter } from "../src/types";
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 
 const Signup = () => {
+    const {t} =useTranslation()
     const [errorMessage, setErrorMessage] = useState("");
     const [submitCount, setSubmitCount] = useState(0);
     const [isAgreed, setIsAgreed] = useState(false);
@@ -215,12 +217,12 @@ const Signup = () => {
         <div className="flex justify-center items-center min-h-screen"> 
             <div className="w-full max-w-4xl p-6 bg-white rounded">
                 <div className="signup-title">
-                    <p>{regRole === "tutor" ? "Tutor" : "Student"} Registration</p>
+                    <p>{regRole === "tutor" ? "Tutor" : "Student"} {t('Registration')}</p>
                 </div>   
 
                 <div className="p-5 text-lg page-font-color">
                     <p className="title-font text-base text-center">
-                        Already have an account? <a href="/login" className="lightblue hover:underline">Log in</a>
+                    {t('Already have an account?')} <a href="/login" className="lightblue hover:underline">{t('Login')}</a>
                     </p>
 
                     <Notification ref={notificationRef} message={errorMessage} />
@@ -229,13 +231,13 @@ const Signup = () => {
                         <div className="flex flex-wrap -mx-3 mb-6">
                             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                                 <label className="block tracking-wide mb-2">
-                                    First Name*
+                                {t('First Name')}*
                                 </label>
                                 <input onChange={handleInputChange} value={fields.firstName} className={`appearance-none block w-full border ${errors.firstName ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="firstName" type="text" />
                             </div>
                             <div className="w-full md:w-1/2 px-3">
                                 <label className="block tracking-wide text mb-2">
-                                    Last Name*
+                                {t('Last Name')}*
                                 </label>
                                 <input onChange={handleInputChange} value={fields.lastName} className={`appearance-none block w-full border ${errors.lastName ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="lastName" type="text" />
                             </div>
@@ -243,13 +245,13 @@ const Signup = () => {
                         <div className="flex flex-wrap -mx-3 mb-6">
                             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                                 <label className="block tracking-wide mb-2">
-                                    Email*
+                                {t('Email')}*
                                 </label>
                                 <input onChange={handleInputChange} value={fields.email} className={`appearance-none block w-full border ${errors.email || errorMessage.includes("email") ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="email" type="email" />
                             </div>
                             <div className="w-full md:w-1/2 px-3">
                                 <label className="block tracking-wide text mb-2">
-                                    Contact No.*
+                                {t('Contact No.')}*
                                 </label>
                                 <input onChange={handleInputChange} value={fields.contact_no} className={`appearance-none block w-full border ${errors.contact_no || errorMessage.includes("contact") ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="contact_no" type="text" />
                             </div>
@@ -257,13 +259,13 @@ const Signup = () => {
                         <div className="flex flex-wrap -mx-3 mb-6">
                             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                                 <label className="block tracking-wide mb-2">
-                                    Password*
+                                {t('Password')}*
                                 </label>
                                 <input onChange={handleInputChange} value={fields.password} className={`appearance-none block w-full border ${errors.password || errorMessage.includes("Passwords") ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="password" type="password" />
                             </div>
                             <div className="w-full md:w-1/2 px-3">
                                 <label className="block tracking-wide text mb-2">
-                                    Confirm Password*
+                                {t('Confirm Password')}*
                                 </label>
                                 <input onChange={handleInputChange} value={fields.confirmPassword} className={`appearance-none block w-full border ${errorMessage.includes("Passwords") ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="confirmPassword" type="password" />
                             </div>
@@ -271,7 +273,7 @@ const Signup = () => {
                         <div className="flex flex-wrap -mx-3 mb-6">
                             <div className="w-full px-3">
                                 <label className="block tracking-wide mb-2">
-                                    Education Center*
+                                {t('Education Center')}*
                                 </label>
                                 <select onChange={educationCenterChange} value={educationCenterId} className="block w-full border border-gray-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="education_center">
                                     {educationCenters.map((center) => (
@@ -284,7 +286,7 @@ const Signup = () => {
                             <div className="flex flex-wrap -mx-3 mb-6">
                                 <div className="w-full px-3">
                                     <label className="block tracking-wide mb-2">
-                                        Role*
+                                    {t('Role')}*
                                     </label>
                                     <input onChange={handleInputChange} value={fields.role} className={`appearance-none block w-full border ${errors.role ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="role" type="text" />
                                 </div>
@@ -295,19 +297,19 @@ const Signup = () => {
                                 {regRole === "tutor" && (
                                     <label className="block tracking-wide mb-2">
                                         <input type="checkbox" name="display_on_website" className="mr-3" checked={display_on_website} onChange={displayOnWebsiteChange} />
-                                        By checking this box, you agree to have your information displayed on the website.
+                                        {t('box-text')}   
                                     </label>
                                 )}
                                 <label className="block tracking-wide mb-2">
                                     <input type="checkbox" name="privacy_policy" className="mr-3" checked={isAgreed} onChange={handleCheckboxChange} />
-                                    By creating an account, you agree to the <a href="" className="underline">Privacy Policy</a>.
+                                    {t('box-text-2')} <a href="" className="underline"> {t('box-text-3')}</a>.
                                 </label>
                             </div>
                         </div>
                         <div className="flex flex-wrap -mx-3 mb-6">
                             <div className="w-full px-3 text-center">
                                 <button className="shadow focus:shadow-outline focus:outline-none text-white py-4 px-8 rounded-3xl bg-lightblue" type="submit">
-                                    Submit
+                                {t('Submit')} 
                                 </button>
                             </div>
                         </div>

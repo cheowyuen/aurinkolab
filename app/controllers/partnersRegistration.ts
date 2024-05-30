@@ -17,7 +17,7 @@ const partnersController = {
       if (rows.length > 0) {
         console.log(rows)
         /** Email exists, cannot proceed with registration */
-        res.status(409).json({ message: "Email already request the presentation" });
+        res.status(409).json({ message: "Email has already requested the presentation" });
       } else {
         
         /** Insert new tutor details into the database */

@@ -6,9 +6,6 @@ import TiktokLogo from "./LogoTiktok";
 import { Link as RouterLink, useLocation } from 'react-router-dom'; //Imported Link to route to Test page
 import { useState, useEffect } from 'react';
 import { useAuth } from '../src/utils/useAuth';
-
-
-
 import { useTranslation } from "react-i18next";
 
 interface Language {

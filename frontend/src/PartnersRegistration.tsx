@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 
 
+
+
     
 const partnersRegistration = () => {
     const {t} =useTranslation()
@@ -96,10 +98,10 @@ const partnersRegistration = () => {
         } catch (error) {
             /** Handle any errors that might have occurred during saveQuiz */
             console.error(`Error registering :`, error);
-            console.log("estes es el error>>>",error)
+            console.log(error)
             if (error instanceof Error) { 
-                if (error.message == "The email address has already requested the presentation.") {
-                    setErrorMessage(error.message); 
+                if (error.message == "Email has already requested the presentation") {
+                    setErrorMessage(t('emailError')); 
                     return;
                 } else {
                     setErrorMessage("An error occurred during submission. Please try again."); 
@@ -133,8 +135,8 @@ const partnersRegistration = () => {
                 <div className="signup-title">
                     <p>{t('Sponsorship Opportunities')}</p>
                 </div>
-                <div>
-                    <p className="text-center"> {t('partner-description')}</p>
+                <div >
+                    <p className="text-center" data-testid="partner-description"> {t('partner-description')}</p>
                     
                 </div>   
 
@@ -145,13 +147,13 @@ const partnersRegistration = () => {
                     <form noValidate className="w-full max-w-4xl pt-10" onSubmit={handleSubmit}>
                         <div className="flex flex-wrap -mx-3 mb-6">
                             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                <label className="block tracking-wide mb-2">
+                                <label className="block tracking-wide mb-2" data-testid="Company Name">
                                 {t('Company Name')}*
                                 </label>
                                 <input onChange={handleInputChange} value={fields.companyName} className={`appearance-none block w-full border ${errors.companyName ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="companyName" type="text" />
                             </div>
                             <div className="w-full md:w-1/2 px-3">
-                                <label className="block tracking-wide text mb-2">
+                                <label className="block tracking-wide text mb-2" data-testid="Email Address">
                                 {t('Email Address')}*
                                 </label>
                                 <input onChange={handleInputChange} value={fields.emailAddress} className={`appearance-none block w-full border ${errors.emailAddress ? 'border-red' : 'border-gray-300'} rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500`} name="emailAddress" type="text" />
@@ -164,7 +166,7 @@ const partnersRegistration = () => {
            
                         <div className="flex flex-wrap -mx-3 mb-6">
                             <div className="w-full px-3 text-center">
-                                <button className="shadow focus:shadow-outline focus:outline-none text-white py-4 px-8 rounded-3xl bg-lightblue" type="submit">
+                                <button className="shadow focus:shadow-outline focus:outline-none text-white py-4 px-8 rounded-3xl bg-lightblue" type="submit" data-testid="Send me the presentation    ">
                                     {t('Send me the presentation')}
                                 </button>
                             </div>
